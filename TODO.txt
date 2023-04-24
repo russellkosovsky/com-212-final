@@ -33,9 +33,9 @@ Project Structure:
 
    Admin and User Interaction:
     
-        a. Create separate methods for admin and user functionalities, such as adding, updating, and deleting movies and customers.
+        a. Create separate methods for admin and user functionalities... adding, updating, and deleting movies and customers.
       
-        b. Implement a command-line interface for testing purposes, assuming the person using the program has the required permissions.
+        b. Implement command-line interface for testing purposes, assuming the person using the program has the required permissions.
 
     
     
