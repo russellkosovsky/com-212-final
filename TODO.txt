@@ -1,31 +1,22 @@
 
-Project Structure:
-
-          1. Customer Management
-
-          2. Movie Management
-
-          3. Admin and User Interaction
-          
-
-
+        
    Customer Management:
     
-        a. Create a Customer class with the following attributes: name, credit card number, email address, and wishlist.
+        X - a. Create a Customer class with the following attributes: name, credit card number, email address, and wishlist.
       
-        b. Use a Hashtable to store customer records, with credit card numbers as keys for fast access (average O(1) time complexity).
+        X - b. Use a Hashtable to store customer records, with credit card numbers as keys for fast access (average O(1) time complexity).
       
-        c. Implement methods for adding, updating, and deleting customers.
+        X - c. Implement methods for adding, updating, and deleting customers.
       
-        d. For the wishlist, use a Queue data structure to efficiently manage movie access, deletion, and addition in constant time.
+        X - d. For the wishlist, use a Queue data structure to efficiently manage movie access, deletion, and addition in constant time.
 
    Movie Management:
     
-        a. Create a Movie class with the following attributes: title, release date, unique ID, Rotten Tomatoes score, and availability status.
+        X - a. Create a Movie class with the following attributes: title, release date, unique ID, Rotten Tomatoes score, and availability status.
       
-        b. Implement a custom Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
+        X - b. Implement a custom Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
       
-        c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
+        X - c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
       
         d. Maintain a PriorityQueue for the least rated available movies, ensuring constant time access and less than O(n) time for add/delete operations.
       
