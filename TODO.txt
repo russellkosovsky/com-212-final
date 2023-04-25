@@ -23,7 +23,7 @@ Project Structure:
     
         a. Create a Movie class with the following attributes: title, release date, unique ID, Rotten Tomatoes score, and availability status.
       
-        b. Implement a custom Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
+        b. Implement a custom Binary Search Tree to store movie records sorted by tomato score, ensuring less than O(n) access time.
       
         c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
       
