@@ -66,7 +66,7 @@ public class Login implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String user = userText.getText();
-        String password = passwordText.getText();
+        String password = String.valueOf(passwordText.getPassword());
         System.out.println(user + ", " + password);
 
         if (user.equals("username") && password.equals("password")) {
