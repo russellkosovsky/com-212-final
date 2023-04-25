@@ -14,7 +14,7 @@
     
         X - a. Create a Movie class with the following attributes: title, release date, unique ID, Rotten Tomatoes score, and availability status.
       
-        X - b. Implement a custom Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
+        X - b. Implement a Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
       
         X - c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
       
@@ -26,16 +26,17 @@
     
         a. Create separate methods for admin and user functionalities... adding, updating, and deleting movies and customers.
       
-        b. Implement command-line interface for testing purposes, assuming the person using the program has the required permissions.
+        b. Implement command-line interface for testing.
 
+   Make GUI look nice  
     
+   Class that Puts everything together
+   
+   Making the GUI funcional
     
     For future features:
-    
-        a. Implement a login system to authenticate users and admins, with separate menus for each role.
       
-        b. Add a "have watched" list for each customer, which could be implemented using a LinkedList or a HashSet, depending on the specific requirements and desired operations.
-        
+        a. Add a "have watched" list for each customer, which could probably be implemented using a LinkedList.
         
         
         
