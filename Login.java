@@ -8,6 +8,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 
 
@@ -18,7 +21,6 @@ public class Login implements ActionListener {
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton loginBTN;
-    private static JLabel success;
 
 
     public static void main(String[] args) {
@@ -28,37 +30,54 @@ public class Login implements ActionListener {
         frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
-        panel.setLayout(null);
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         // create jlabel that is a title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Welcome to Camel Films");
         title.setBounds(10, 0, 300, 25);
-        panel.add(title);
+        c.fill = GridBagConstraints.NONE;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        panel.add(title, c);
         
         userLabel = new JLabel("Username");
         userLabel.setBounds(10, 30, 80, 25);
-        panel.add(userLabel);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        panel.add(userLabel, c);
 
         userText = new JTextField(20);
         userText.setBounds(100, 30, 165, 25);
-        panel.add(userText);
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        panel.add(userText, c);
 
         passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(10, 60, 80, 25);
-        panel.add(passwordLabel);
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        panel.add(passwordLabel, c);
 
         passwordText = new JPasswordField(20);
         passwordText.setBounds(100, 60, 165, 25);
-        panel.add(passwordText);
+        c.gridx = 1;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        panel.add(passwordText, c);
 
         loginBTN = new JButton("Login");
         loginBTN.setBounds(10, 100, 80, 25);
         loginBTN.addActionListener(new Login());
-        panel.add(loginBTN);
-
-        success = new JLabel(""); 
-        success.setBounds(10, 130, 300, 25);
-        panel.add(success);
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        panel.add(loginBTN, c);
 
         frame.setVisible(true);
     }
@@ -70,10 +89,10 @@ public class Login implements ActionListener {
         System.out.println(user + ", " + password);
 
         if (user.equals("username") && password.equals("password")) {
-            success.setText("Login successful!");
+            loginBTN.setText("Login successful!");
         }
         else {
-            success.setText("Login failed!");
+            loginBTN.setText("Login failed!");
         }
     }
 }
