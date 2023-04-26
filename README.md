@@ -1,6 +1,6 @@
-COM/212.final
+	COM/212.final
 
-Brooke Jay Russell Miles
+	Brooke Jay Russell Miles
 
 Customer.java
 
