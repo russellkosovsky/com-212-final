@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.awt.Image;
 
 
-public class Welcome extends JFrame {
+public class WelcomeGUI extends JFrame {
 
     public static void main(String[] args) {
 
