@@ -16,7 +16,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 
 
-public class Login implements ActionListener {
+public class AdminLoginGUI implements ActionListener {
 
     private static JLabel userLabel;
     private static JTextField userText;
@@ -24,9 +24,7 @@ public class Login implements ActionListener {
     private static JPasswordField passwordText;
     private static JButton loginBTN;
 
-
-    public static void main(String[] args) {
-
+    public AdminLoginGUI(){
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
@@ -36,7 +34,7 @@ public class Login implements ActionListener {
         GridBagConstraints c = new GridBagConstraints();
 
         // create jlabel that is a title that says "Welcome to Camel Films"
-        JLabel title = new JLabel("Welcome to Camel Films");
+        JLabel title = new JLabel("Administrator Login");
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
         c.insets = new Insets(5, 5, 5, 5);
@@ -75,13 +73,27 @@ public class Login implements ActionListener {
 
         loginBTN = new JButton("Login");
         loginBTN.setBounds(10, 100, 80, 25);
-        loginBTN.addActionListener(new Login());
+        loginBTN.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String user = userText.getText();
+            String password = String.valueOf(passwordText.getPassword());
+            System.out.println(user + ", " + password);
+
+            if (user.equals("username") && password.equals("password")) {
+                loginBTN.setText("Login successful!");
+            }
+            else {
+                loginBTN.setText("Login failed!");
+            }
+                }
+        });
         c.gridx = 0;
         c.gridy = 3;
         c.gridwidth = 2;
         panel.add(loginBTN, c);
 
         frame.setVisible(true);
+
     }
 
     public void actionPerformed(ActionEvent e) {
