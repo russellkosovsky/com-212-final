@@ -1,4 +1,3 @@
-// Russell Kosovsky 4/18/23
 // Hash Table java implementation for storing Customer data
 
 public class HashTable {
