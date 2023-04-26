@@ -1,6 +1,6 @@
-// Russell Kosovsky 4/4/23
 // Queue class implementation using a linked list
 // QueueLL.java
+// for storing userses top 20 movies (a watchlist??)
 
 public class QueueLL {
     private Movie head;
@@ -49,7 +49,6 @@ public class QueueLL {
         return size;
     }
 
-    // printQueue method for QueueLL
     public void printQueue() {
         Movie temp = head;
         while (temp != null) {

@@ -1,4 +1,5 @@
 // Movie.java
+// custom node class to represent the elements of any movie
 
 public class Movie {
     // Instance variables

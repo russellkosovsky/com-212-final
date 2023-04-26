@@ -1,14 +1,17 @@
+// rn this is essentially just a mini test class for CustomerHashTable 
+
 public class CustomerRecords {
     public static void main(String[] args) {
-        // Create a HashTable to store customer records
+        
+        // HashTable to store customer records
         HashTable customerTable = new HashTable(13);
 
-        // Create some Customer instances
+        // Create some Customers
         Customer customer1 = new Customer("Alice", "1234567890123456", "alice@example.com");
         Customer customer2 = new Customer("Bob", "2345678901234567", "bob@example.com");
         Customer customer3 = new Customer("Charlie", "3456789012345678", "charlie@example.com");
 
-        // Add customers to the HashTable
+        // to the HashTable
         customerTable.add(customer1);
         customerTable.add(customer2);
         customerTable.add(customer3);
@@ -21,7 +24,7 @@ public class CustomerRecords {
             System.out.println("Customer not found");
         }
 
-        // Remove a customer from the HashTable
+        // Remove customer from HashTable
         customerTable.remove("2345678901234567");
 
         // Check if the customer was removed
@@ -32,7 +35,7 @@ public class CustomerRecords {
             System.out.println("Customer not found");
         }
 
-        // Print the current state of the HashTable
+        // Print the current HashTable
         customerTable.printTable();
     }
 }

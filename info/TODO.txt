@@ -14,9 +14,9 @@
     
         X - a. Create a Movie class with the following attributes: title, release date, unique ID, Rotten Tomatoes score, and availability status.
       
-        X - b. Implement a Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
+        b. Implement a Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
       
-        X - c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
+        c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
       
         d. Maintain a PriorityQueue for the least rated available movies, ensuring constant time access and less than O(n) time for add/delete operations.
       

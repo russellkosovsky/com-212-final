@@ -1,4 +1,6 @@
 // LOGIN GUI
+// technichally extra credit but we will get it looking nice
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
