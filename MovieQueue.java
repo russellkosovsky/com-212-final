@@ -2,12 +2,12 @@
 // QueueLL.java
 // for storing userses top 20 movies (a watchlist??)
 
-public class QueueLL {
+public class MovieQueue {
     private Movie head;
     private Movie tail;
     private int size;
 
-    public QueueLL() {
+    public MovieQueue() {
         head = null;
         tail = null;
         size = 0;

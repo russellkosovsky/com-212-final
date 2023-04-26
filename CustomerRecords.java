@@ -4,7 +4,7 @@ public class CustomerRecords {
     public static void main(String[] args) {
         
         // HashTable to store customer records
-        HashTable customerTable = new HashTable(13);
+        CustomerHashTable customerTable = new CustomerHashTable(13);
 
         // Create some Customers
         Customer customer1 = new Customer("Alice", "1234567890123456", "alice@example.com");

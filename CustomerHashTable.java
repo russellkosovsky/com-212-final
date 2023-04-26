@@ -1,13 +1,13 @@
 // Hash Table java implementation for storing Customer data
 
-public class HashTable {
+public class CustomerHashTable {
     // INSTANCE
     private static final int TABLE_SIZE = 67;
     private Customer[] table;
     private int prime;
     
     //CONSTRUCTOR
-    public HashTable(int size) {
+    public CustomerHashTable(int size) {
         table = new Customer[size];
         prime = getPrime(size);
     }

@@ -7,14 +7,14 @@ public class Customer {
     private String name;
     private String creditCardNumber;
     private String emailAddress;
-    private QueueLL wishlist;
+    private MovieQueue wishlist;
 
     // Constructor
     public Customer(String name, String creditCardNumber, String emailAddress) {
         this.name = name;
         this.creditCardNumber = creditCardNumber;
         this.emailAddress = emailAddress;
-        this.wishlist = new QueueLL();
+        this.wishlist = new MovieQueue();
     }
 
     // Getters and Setters
@@ -42,7 +42,7 @@ public class Customer {
         this.emailAddress = emailAddress;
     }
 
-    public QueueLL getWishlist() {
+    public MovieQueue getWishlist() {
         return wishlist;
     }
 
