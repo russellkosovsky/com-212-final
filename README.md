@@ -3,7 +3,7 @@
 # Brooke Jay Russell Miles
 
 
-Customer.java
+## Customer.java
 
 	- Custom node implementation to represent any given customer as a node
 
