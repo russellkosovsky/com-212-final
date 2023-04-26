@@ -1,6 +1,4 @@
-# COM/212.final
-
-# Brooke Jay Russell Miles
+# COM/212.Final --- Brooke, Jay, Russell, Miles
 
 
 ### Customer.java
