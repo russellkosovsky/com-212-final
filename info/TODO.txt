@@ -1,43 +1,26 @@
 
         
-    Customer Management:
     
-            X customer.java X --- a. Create a Customer class with the following attributes: name, credit card number, email address, and wishlist.
-      
-            X CustomerHashTable.java X --- b. Use a Hashtable to store customer records, with credit card numbers as keys for fast access (average O(1) time complexity).
-      
-            X MovieQueue.java X --- d. For the wishlist, use a Queue data structure to efficiently manage movie access, deletion, and addition in constant time.
-
-   
-    Movie Management:
-    
-            X Movie.java X --- a. Create a Movie class with the following attributes: title, release date, unique ID, Rotten Tomatoes score, and availability status.
-      
-        b. Implement a Binary Search Tree to store movie records sorted by release date, ensuring less than O(n) access time.
-      
-        c. Use a Hashtable to store movies by ID, allowing quick access in less than O(n) runtime.
-      
-        d. Maintain a PriorityQueue for the least rated available movies, ensuring constant time access and less than O(n) time for add/delete operations.
-      
-        e. Implement a LinkedList to store all movies in order of release date for printing.
 
    
     Admin and User Interaction:
+
+	finish terminal interface
     
         a. Create separate methods for admin and user functionalities... adding, updating, and deleting movies and customers.
       
         b. Implement command-line interface for testing.
 
-   
-    For future features:
-        
-        a. Make GUI look nicer  
     
+    GUI:
+
+        a. Make GUI look nicer  
         b. Class that Puts everything together
-   
-        c. Making the GUI funcional with everything working
-   
-        d. Add a "have watched" list for each customer, which could probably be implemented using a LinkedList.
+
+
+    For future features:
+           
+        a. Add a "have watched" list for each customer, which could probably be implemented using a LinkedList.
    
     
    
