@@ -21,6 +21,7 @@ public class Movie {
         this.isAvailable = isAvailable1;
         this.left = null;
         this.right = null;
+        this.next = null;
     }
 
     // Getters and Setters
@@ -79,5 +80,13 @@ public class Movie {
     public void setRight(Movie right) {
         this.right = right;
     }
+    public Movie getNext() {
+        return next;
+    }
+
+    public void setNext(Movie next) {
+        this.next = next;
+    }
 }
+
 
