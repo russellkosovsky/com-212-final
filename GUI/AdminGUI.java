@@ -15,8 +15,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 
-import java.lang.Thread;
-
 public class AdminGUI implements ActionListener {
 
     private static JLabel userLabel;
