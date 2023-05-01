@@ -34,38 +34,38 @@ public class CustomerHashTable {
     }
     
     public void add(Customer customer) {
-        int key = customer.getCreditCardNumber();
-        int index = hash1(key);
-        int step = hash2(key);
-        int originalIndex = index;
-        while (table[index] != null) {
+        long key = customer.getCreditCardNumber();
+        long index = hash1(key);
+        long step = hash2(key);
+        long originalIndex = index;
+        while (table[(int)index] != null) {
             index = (index + step) % TABLE_SIZE;
             if (index == originalIndex) {
                 System.out.println("Table is full.");
                 return;
             }
         }
-        table[index] = customer;
+        table[(int)index] = customer;
     }
     
-    public Customer lookUp(int key) {
-        int index = hash1(key);
-        int step = hash2(key);
-        while (table[index] != null) {
-            if (table[index].getCreditCardNumber() == key) {
-                return table[index];
+    public Customer lookUp(long key) {
+        long index = hash1(key);
+        long step = hash2(key);
+        while (table[(int)index] != null) {
+            if (table[(int)index].getCreditCardNumber() == key) {
+                return table[(int)index];
             }
             index = (index + step) % TABLE_SIZE;
         }
         return null;
     }
     
-    public void remove(int key) {
-        int index = hash1(key);
-        int step = hash2(key);
-        while (table[index] != null) {
-            if (table[index].getCreditCardNumber() == key) {
-                table[index] = null;
+    public void remove(long key) {
+        long index = hash1(key);
+        long step = hash2(key);
+        while (table[(int)index] != null) {
+            if (table[(int)index].getCreditCardNumber() == key) {
+                table[(int)index] = null;
                 return;
             }
             index = (index + step) % TABLE_SIZE;
@@ -91,11 +91,11 @@ public class CustomerHashTable {
         }
     }
     
-    private int hash1(int key) {
+    private long hash1(long key) {
         return key % TABLE_SIZE;
     }
     
-    private int hash2(int key) {
+    private long hash2(long key) {
         return prime - (key % prime);
     }
 }

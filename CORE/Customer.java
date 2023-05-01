@@ -1,19 +1,26 @@
 // Customer.java
 // Customer *nodetype? ... idk what to call. custom nodes
 
-
 public class Customer {
     // Instance variables
     private String name;
-    private int creditCardNumber;
+    private long creditCardNumber;
     private String emailAddress;
     private MovieQueue wishlist;
+    private int key;
 
     // Constructor
-    public Customer(String name, int creditCardNumber, String emailAddress, MovieQueue wishlist) {
+    public Customer(String name, long creditCardNumber, String emailAddress, MovieQueue wishlist) {
         this.name = name;
         this.creditCardNumber = creditCardNumber;
+        this.wishlist = wishlist;
+        this.key = (int)creditCardNumber%100000;
+    }
 
+    public Customer(String name, long creditCardNumber, String emailAddress) {
+        this.name = name;
+        this.creditCardNumber = creditCardNumber;
+        this.key = (int)creditCardNumber%100000;
     }
 
     // Getters and Setters
@@ -25,7 +32,7 @@ public class Customer {
         this.name = name;
     }
 
-    public int getCreditCardNumber() {
+    public long getCreditCardNumber() {
         return creditCardNumber;
     }
 
@@ -71,5 +78,9 @@ public class Customer {
 
     public void printWishlist() {
         wishlist.printQueue();
+    }
+
+    public int getKey() {
+        return key;
     }
 }
