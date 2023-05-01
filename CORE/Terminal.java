@@ -208,6 +208,74 @@ public class Terminal implements java.io.Serializable{
             int card = scanner.nextInt(); //users input for credit card
             Customer customer = Customers.lookUp(card);
             System.out.println(customer);
+
+        Scanner userInput = new Scanner(System.in);
+        boolean exit = false;
+        
+        // Welcome message
+        System.out.println("Welcome to the Camel Film Database!");
+        
+        while (!exit) {
+            // Main menu
+            System.out.println("\nPlease select an option:");
+            System.out.println("1. Add a movie to wishlist");
+            System.out.println("2. Show your wishlist");
+            System.out.println("3. List movies");
+            System.out.println("4. Look up a movie");
+            System.out.println("5. Exit");
+            
+            // Read user input
+            String input = userInput.nextLine();
+            
+            // Parse user input
+            try {
+                int option = Integer.parseInt(input);
+                switch (option) {
+                    case 1:
+                        System.out.println("You have selected option 1.");
+                        System.out.println("Please enter the name of the movie:");
+                        String movieName = userInput.nextLine();
+                        wishlist.add(movieName);
+                        System.out.println("The movie \"" + movieName + "\" has been added to your wishlist.");
+                        break;
+                    case 2:
+                        System.out.println("You have selected option 2.");
+                        if (wishlist.isEmpty()) {
+                            System.out.println("Your wishlist is empty.");
+                        } else {
+                            System.out.println("Your wishlist contains the following movies:");
+                            for (String movie : wishlist) {
+                                System.out.println("- " + movie);
+                            }
+                        }
+                        break;
+                    case 3:
+                        System.out.println("You have selected option 3.");
+                        System.out.println("The available movies are:");
+                        // TODO: Implement functionality to list movies
+                        break;
+                    case 4:
+                        System.out.println("You have selected option 4.");
+                        System.out.println("Please enter the name of the movie:");
+                        // TODO: Implement functionality to look up a movie
+                        break;
+                    case 5:
+                        System.out.println("You have selected option 5. Goodbye!");
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please select a number from 1 to 5.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number from 1 to 5.");
+            }
+        }
+        
+        userInput.close();
+    }
+}
+
         }
 
         //if user is a new customer and its not the first time the program has been run
