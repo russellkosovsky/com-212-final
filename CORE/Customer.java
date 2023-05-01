@@ -21,6 +21,7 @@ public class Customer {
         this.name = name;
         this.creditCardNumber = creditCardNumber;
         this.key = (int)creditCardNumber%100000;
+        this.wishlist = new MovieQueue();
     }
 
     // Getters and Setters
