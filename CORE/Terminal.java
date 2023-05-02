@@ -204,10 +204,10 @@ public class Terminal implements java.io.Serializable{
 
             System.out.println("Welcome Back!");
             //the program remebers existing users by their credit card number
-            System.out.println("Enter credit card number.");
-            int card = scanner.nextInt(); //users input for credit card
-            Customer customer = Customers.lookUp(card);
-            System.out.println(customer);
+           // System.out.println("Enter credit card number.");
+           // int card = scanner.nextInt(); //users input for credit card
+           // Customer customer = Customers.lookUp(card);
+           // System.out.println(customer);
 
         Scanner userInput = new Scanner(System.in);
         boolean exit = false;
@@ -225,29 +225,17 @@ public class Terminal implements java.io.Serializable{
             System.out.println("5. Exit");
             
             // Read user input
-            String input = userInput.nextLine();
+            String lickma = userInput.nextLine();
             
             // Parse user input
             try {
-                int option = Integer.parseInt(input);
+                int option = Integer.parseInt(lickma);
                 switch (option) {
                     case 1:
                         System.out.println("You have selected option 1.");
-                        System.out.println("Please enter the name of the movie:");
-                        String movieName = userInput.nextLine();
-                        wishlist.add(movieName);
-                        System.out.println("The movie \"" + movieName + "\" has been added to your wishlist.");
                         break;
                     case 2:
                         System.out.println("You have selected option 2.");
-                        if (wishlist.isEmpty()) {
-                            System.out.println("Your wishlist is empty.");
-                        } else {
-                            System.out.println("Your wishlist contains the following movies:");
-                            for (String movie : wishlist) {
-                                System.out.println("- " + movie);
-                            }
-                        }
                         break;
                     case 3:
                         System.out.println("You have selected option 3.");
@@ -270,13 +258,11 @@ public class Terminal implements java.io.Serializable{
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number from 1 to 5.");
             }
-        }
         
-        userInput.close();
-    }
-}
+        scanner.close();
 
         }
+    }
 
         //if user is a new customer and its not the first time the program has been run
         else if (choice == 2){
