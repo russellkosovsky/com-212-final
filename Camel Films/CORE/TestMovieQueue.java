@@ -1,6 +1,6 @@
 // Gary Parker
 // Test for the Linked-List Queue
-
+package CORE;
 public class TestMovieQueue {
     public static void main(String[] args){
         MovieQueue a = new MovieQueue();

@@ -1,5 +1,5 @@
 // TestMovieBinarySearchTree.java
-
+package CORE;
 public class TestMBST {
     public static void main(String[] args) {
         MovieBinarySearchTree movieBST = new MovieBinarySearchTree();

@@ -1,5 +1,5 @@
 // Hash Table java implementation for storing Customer data
-
+package CORE;
 public class CustomerHashTable {
     // INSTANCE
     private static final int TABLE_SIZE = 67;

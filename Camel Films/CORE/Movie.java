@@ -1,6 +1,6 @@
 // Movie.java
 // custom node class to represent the elements of any movie
-
+package CORE;
 public class Movie {
     // Instance variables
     private String title;

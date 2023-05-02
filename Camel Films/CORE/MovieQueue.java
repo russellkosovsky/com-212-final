@@ -1,7 +1,7 @@
 // Queue class implementation using a linked list
 // QueueLL.java
 // for storing userses top 20 movies (a watchlist??)
-
+package CORE;
 public class MovieQueue {
     private Movie head;
     private Movie tail;

@@ -1,6 +1,6 @@
 // Customer.java
 // Customer *nodetype? ... idk what to call. custom nodes
-
+package CORE;
 public class Customer {
     // Instance variables
     private String name;

@@ -1,7 +1,7 @@
-// MovieBinarySearchTree.java
+package CORE;
 
 public class MovieBinarySearchTree {
-    private Movie root;
+    public Movie root;
 
     public MovieBinarySearchTree() {
         root = null;

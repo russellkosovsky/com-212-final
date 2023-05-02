@@ -1,5 +1,5 @@
 // rn this is essentially just a mini test class for CustomerHashTable 
-
+package CORE;
 public class CustomerRecords {
     public static void main(String[] args) {
         
