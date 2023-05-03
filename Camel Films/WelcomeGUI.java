@@ -168,12 +168,13 @@ public class WelcomeGUI extends JFrame {
         }
         catch(IOException i){
             i.printStackTrace();
-            return null;
+            MoviesByScoreL = new MoviePQ();
+            return MoviesByScoreL;
         }
         catch(ClassNotFoundException v){
             System.out.println("MoviePQ class not found");
             v.printStackTrace();
-            return null;
+             return null;
         }
     }
     //function to load the movies in the database for the user
@@ -192,7 +193,8 @@ public class WelcomeGUI extends JFrame {
         }
         catch(IOException i){
             i.printStackTrace();
-            return null;
+            MoviesByDateL = new MovieBinarySearchTree();
+            return MoviesByDateL;
         }
         catch(ClassNotFoundException v){
             System.out.println("MoviesByDate class not found");
@@ -217,7 +219,8 @@ public class WelcomeGUI extends JFrame {
         }
         catch(IOException i){
             i.printStackTrace();
-            return null;
+            Customers = new CustomerHashTable(7);
+            return CustomersL;
         }
         catch(ClassNotFoundException v){
             System.out.println("Customers class not found");
