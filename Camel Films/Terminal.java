@@ -1,8 +1,10 @@
 // Command Line Interface
 //
-package CORE;
 import java.io.*;
 import java.util.Scanner;
+
+import CORE.*;
+
 import java.util.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
