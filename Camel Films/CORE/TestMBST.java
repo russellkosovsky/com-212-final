@@ -4,10 +4,10 @@ public class TestMBST {
     public static void main(String[] args) {
         MovieBinarySearchTree movieBST = new MovieBinarySearchTree();
 
-        Movie movieA = new Movie("Movie A", 2001, 00001, 85, true);
-        Movie movieB = new Movie("Movie B", 1999, 00002, 70, true);
-        Movie movieC = new Movie("Movie C", 2005, 00003, 95, true);
-        Movie movieD = new Movie("Movie D", 2003, 00004, 80, true);
+        Movie movieA = new Movie("Movie A", 2001, 00001, 85);
+        Movie movieB = new Movie("Movie B", 1999, 00002, 70);
+        Movie movieC = new Movie("Movie C", 2005, 00003, 95);
+        Movie movieD = new Movie("Movie D", 2003, 00004, 80);
 
         movieBST.insert(movieA);
         movieBST.insert(movieB);

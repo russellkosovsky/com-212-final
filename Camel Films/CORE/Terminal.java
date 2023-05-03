@@ -278,16 +278,16 @@ public class Terminal implements java.io.Serializable{
 
             //creates movies for the user to begin with
             MoviesByScore.setMovie(MoviesByDate);
-            Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 00001, 75, true);
-            Movie movie2 = new Movie("The Dark Knight", 20080114, 00002, 94, true);
-            Movie movie3 = new Movie("Jurassic Park", 19931229, 00003, 91, false);
-            Movie movie4 = new Movie("The Godfather", 19720817, 00004, 98, true);
-            Movie movie5 = new Movie("Inception", 20100527, 00005, 87, true);
-            Movie movie6 = new Movie("Avatar", 20090320, 00006, 82, true);
-            Movie movie7 = new Movie("The Shawshank Redemption", 19940911, 00007, 91, false);
-            Movie movie8 = new Movie("Pulp Fiction", 19940105, 10008, 94, false);
-            Movie movie9 = new Movie("Forrest Gump", 19940621, 10009, 72, true);
-            Movie movie10 = new Movie("The Matrix", 19991115, 00010, 87, true);
+            Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 00001, 75);
+            Movie movie2 = new Movie("The Dark Knight", 20080114, 00002, 94);
+            Movie movie3 = new Movie("Jurassic Park", 19931229, 00003, 91);
+            Movie movie4 = new Movie("The Godfather", 19720817, 00004, 98);
+            Movie movie5 = new Movie("Inception", 20100527, 00005, 87);
+            Movie movie6 = new Movie("Avatar", 20090320, 00006, 82);
+            Movie movie7 = new Movie("The Shawshank Redemption", 19940911, 00007, 91);
+            Movie movie8 = new Movie("Pulp Fiction", 19940105, 10008, 94);
+            Movie movie9 = new Movie("Forrest Gump", 19940621, 10009, 72);
+            Movie movie10 = new Movie("The Matrix", 19991115, 00010, 87);
 
             //inserts movies for the admin
             MoviesByScore.insert(movie1);
@@ -342,16 +342,16 @@ public class Terminal implements java.io.Serializable{
 
             //creates some sample movies for the user
             MoviesByScore.setMovie(MoviesByDate);
-            Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 00001, 75, true);
-            Movie movie2 = new Movie("The Dark Knight", 20080114, 00002, 94, true);
-            Movie movie3 = new Movie("Jurassic Park", 19931229, 00003, 91, false);
-            Movie movie4 = new Movie("The Godfather", 19720817, 00004, 98, true);
-            Movie movie5 = new Movie("Inception", 20100527, 00005, 87, true);
-            Movie movie6 = new Movie("Avatar", 20090320, 00006, 82, true);
-            Movie movie7 = new Movie("The Shawshank Redemption", 19940911, 00007, 91, false);
-            Movie movie8 = new Movie("Pulp Fiction", 19940105, 10008, 94, false);
-            Movie movie9 = new Movie("Forrest Gump", 19940621, 10009, 72, true);
-            Movie movie10 = new Movie("The Matrix", 19991115, 00010, 87, true);
+            Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 00001, 75);
+            Movie movie2 = new Movie("The Dark Knight", 20080114, 00002, 94);
+            Movie movie3 = new Movie("Jurassic Park", 19931229, 00003, 91);
+            Movie movie4 = new Movie("The Godfather", 19720817, 00004, 98);
+            Movie movie5 = new Movie("Inception", 20100527, 00005, 87);
+            Movie movie6 = new Movie("Avatar", 20090320, 00006, 82);
+            Movie movie7 = new Movie("The Shawshank Redemption", 19940911, 00007, 91);
+            Movie movie8 = new Movie("Pulp Fiction", 19940105, 10008, 94);
+            Movie movie9 = new Movie("Forrest Gump", 19940621, 10009, 72);
+            Movie movie10 = new Movie("The Matrix", 19991115, 00010, 87);
 
             //inserts movies for the admin
             MoviesByScore.insert(movie1);
