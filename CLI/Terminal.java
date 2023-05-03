@@ -394,8 +394,7 @@ public class Terminal implements java.io.Serializable{
                 else if (custchoice1 == 2){ //then the user views all movies in order of release date
                     //print all movies in order of release date(BST)
                     System.out.println("Here is all the movies on record in order of release date.");
-                    //MoviesByDate.traverse(); //list the movies in order of release date
-                    MoviesByDate.printTree();
+                    MoviesByDate.traverse(); //list the movies in order of release date
                 }
                 else if (custchoice1 == 3){ //then the user wants to delete a movie
                     //gets next movie in list for the user to watch
