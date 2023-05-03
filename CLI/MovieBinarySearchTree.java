@@ -8,58 +8,63 @@ public class MovieBinarySearchTree implements java.io.Serializable{
 
 	public MovieBinarySearchTree() {
     root = null;
-		t = null;
+	t = null;
 	}
+	
+    public void insert(Movie node) {
+        root = insert2(root, node);
+    }
+    private Movie insert2(Movie root, Movie node) {
+        if (root == null) {
+            root = node;
+            return root;
+        }
+        if (node.getReleaseDate() < root.getReleaseDate()) {
+            root.setLeft(insert2(root.getLeft(), node));
+        } else if (node.getReleaseDate() > root.getReleaseDate()) {
+            root.setRight(insert2(root.getRight(), node));
+        }
+        return root;
+    }
+    public void delete(Movie node) {
+        root = deleter(root, node.getReleaseDate());
+    }
+    private Movie deleter(Movie root, int key) {
+        if (root == null) {
+            return root;
+        }
+        if (key < root.getReleaseDate()) {
+            root.setLeft(deleter(root.getLeft(), key));
+        } else if (key > root.getReleaseDate()) {
+            root.setRight(deleter(root.getRight(), key));
+        } else {
+            if (root.getLeft() == null) {
+                return root.getRight();
+            } else if (root.getRight() == null) {
+                return root.getLeft();
+            }
+            root.setReleaseDate(minValue(root.getRight()));
+            root.setRight(deleter(root.getRight(), root.getReleaseDate()));
+        }
+        return root;
+        
+    private int minValue(Movie root) {
+        int minValue = root.getReleaseDate();
+        while (root.getLeft() != null) {
+            minValue = root.getLeft().getReleaseDate();
+            root = root.getLeft();
+        }
+        return minValue;
 
-  //adds new movie to the database
-  public Movie insert(Movie p) {
-    //set root
-		if (t == null){
-			t = p;
-			root = t;
-		}
-		else {
-			insert2(t, p);
-		}
-		return t;
-	}
-
-	private void insert2(Movie t, Movie p){
-		//go left
-		if (p.getReleaseDate() < t.getReleaseDate()){
-			if (t.getLeft() == null){
-				t.setLeft(p);
-			}
-			else{
-				insert2(t.getLeft(), p);
-			}
-		}
-		//go right
-		else {
-			if (t.getRight() == null){
-				t.setRight(p);
-			}
-			else {
-				insert2(t.getRight(), p);
-			}
-		}
-  }
-
-  public void traverse(){ //prints the movie archive
-		if (t != null){
-			traverse2(t.getLeft());
-			System.out.println(t.getTitle() + " " + t.getReleaseDate());
-			traverse2(t.getRight());
-		}
-	}
-
-	private void traverse2(Movie t){
-		if (t != null){
-			traverse2(t.getLeft());
-			System.out.println(t.getTitle() + " " + t.getReleaseDate());
-			traverse2(t.getRight());
-		}
-	}
+    public void traverse() {
+        traverse2(root);
+        System.out.println();
+    }
+    private void traverse2(Movie node) {
+        if (node != null) {
+            traverse2(node.getLeft());
+            System.out.print(node.getReleaseDate() + " ");
+            traverse2(node.getRight());
 
   public Movie searchBST(int date){ //search the movie by the release date
     if (t == null){
@@ -154,18 +159,6 @@ public class MovieBinarySearchTree implements java.io.Serializable{
 			printMovies2(tree.getRight());
 		}
 	}
-  public void delete(Movie p){
-    if (isEmptyTree() == false){
-      //if root is p, delete
-      if (root.getReleaseDate() == p.getReleaseDate()){
-        deleteRoot(p);
-      }
-      //delete other node in bst
-      else {
-        delete2(root, p);
-      }
-    }
-  }
 
   //return parent node of delete node
   private Movie findParent(Movie p){
