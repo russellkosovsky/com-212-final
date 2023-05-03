@@ -1,5 +1,5 @@
 //This program creates the movie archive
-
+import java.io.Serializable;
 //serializes the movie archive
 public class MovieBinarySearchTree implements java.io.Serializable{
 

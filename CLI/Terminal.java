@@ -400,13 +400,13 @@ public class Terminal implements java.io.Serializable{
                     //gets next movie in list for the user to watch
                     //ask user if they would like to delete this movie
                     Movie next = CurrCustomer.getWishlist().front();
-                    System.out.println("Here is the next movie in your wishlist: " + next.getTitle());
+                    System.out.println("Removing the next movie in your wishlist: " + next.getTitle());
                     
                     System.out.println("Would you like to delete this movie now?");
-                    System.out.println("y. Yes");
-                    System.out.println("n. No");
-                    String del = scanner.nextLine();
-                    if (del == "y"){ //if the user would like to delete the movie
+                    System.out.println("1. Yes");
+                    System.out.println("2. No");
+                    int del = scanner.nextInt();
+                    if (del == 1){ //if the user would like to delete the movie
                         //searches for the movie by ID in order to delete it
                         CurrCustomer.getWishlist().dequeue();
                     }
