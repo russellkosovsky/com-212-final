@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class MoviePQ implements java.io.Serializable{
+public class MoviePQ implements Serializable{
 
 	private int n;
 	private Movie s [];

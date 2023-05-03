@@ -1,13 +1,13 @@
 //This program creates the movie archive
 import java.io.Serializable;
 //serializes the movie archive
-public class MovieBinarySearchTree implements java.io.Serializable{
+public class MovieBinarySearchTree implements Serializable{
 
   private Movie t;
 	private Movie root;
 
 	public MovieBinarySearchTree() {
-    root = null;
+  root = null;
 	t = null;
 	}
 	
@@ -47,6 +47,7 @@ public class MovieBinarySearchTree implements java.io.Serializable{
             root.setRight(deleter(root.getRight(), root.getReleaseDate()));
         }
         return root;
+    }
         
     private int minValue(Movie root) {
         int minValue = root.getReleaseDate();
@@ -55,6 +56,7 @@ public class MovieBinarySearchTree implements java.io.Serializable{
             root = root.getLeft();
         }
         return minValue;
+      }
 
     public void traverse() {
         traverse2(root);
@@ -65,6 +67,8 @@ public class MovieBinarySearchTree implements java.io.Serializable{
             traverse2(node.getLeft());
             System.out.print(node.getReleaseDate() + " ");
             traverse2(node.getRight());
+        }
+      }
 
   public Movie searchBST(int date){ //search the movie by the release date
     if (t == null){
@@ -103,38 +107,38 @@ public class MovieBinarySearchTree implements java.io.Serializable{
   }
 
   public Movie searchID(int id){ //searches for the movie by its id
-    if (t == null){
+    if (root == null){
       return null;
     }
     //key is found
-    else if (id == t.getUniqueID()){ //id is found
-      return t;
+    else if (id == root.getUniqueID()){ //id is found
+      return root;
     }
     //search left for key
-    else if (id < t.getUniqueID()){
-      return searchID2(t.getLeft(), id);
+    else if (id < root.getUniqueID()){
+      return searchID2(root.getLeft(), id);
     }
     //search right for key
     else {
-      return searchID2(t.getRight(), id);
+      return searchID2(root.getRight(), id);
     }
   }
 
-  private Movie searchID2(Movie t, int id){
-    if (t == null){
+  private Movie searchID2(Movie root, int id){
+    if (root == null){
       return null;
     }
     //key is found
-    else if (id == t.getUniqueID()){
-      return t;
+    else if (id == root.getUniqueID()){
+      return root;
     }
     //search left for key
-    else if (id < t.getUniqueID()){
-      return searchID2(t.getLeft(), id);
+    else if (id < root.getUniqueID()){
+      return searchID2(root.getLeft(), id);
     }
     //search right for key
     else {
-      return searchID2(t.getRight(), id);
+      return searchID2(root.getRight(), id);
     }
   }
 

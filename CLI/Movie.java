@@ -44,7 +44,7 @@ public class Movie implements Serializable{
     }
 
     public int getUniqueID() {
-        return uniqueID;
+        return this.uniqueID;
     }
 
     public void setUniqueID(int uniqueID) {

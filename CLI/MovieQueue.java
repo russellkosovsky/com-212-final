@@ -20,7 +20,7 @@ public class MovieQueue implements Serializable{
             head = newMovie;
             tail = newMovie;
         } else {
-            tail.setRight(newMovie);
+            tail.setNext(newMovie);
             tail = newMovie;
         }
         size++;
@@ -31,7 +31,7 @@ public class MovieQueue implements Serializable{
             return null;
         }
         Movie temp = head;
-        head = head.getRight();
+        head = head.getNext();
         if (head == null) {
             tail = null;
         }
@@ -53,9 +53,12 @@ public class MovieQueue implements Serializable{
 
     public void printQueue() {
         Movie temp = head;
+        if (size == 0) {
+            System.out.println("Wishlist is Empty");
+        }
         while (temp != null) {
             System.out.println(temp.getTitle());
-            temp = temp.getRight();
+            temp = temp.getNext();
         }
     }
 }
