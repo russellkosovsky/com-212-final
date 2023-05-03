@@ -51,15 +51,54 @@ public class AdminGUI extends JFrame{
         c.gridwidth = 4;
         panel.add(title, c);
 
+        JTextArea lowMovie = new JTextArea("", 2, 5);
+        lowMovie.setBounds(0, 0, 160, 25);
+        lowMovie.setLineWrap(false);
+        lowMovie.setEditable(false);
+        try{
+            lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+            } catch (NullPointerException v) {
+                lowMovie.setText("No Movies");
+            }
+        c.gridx=0;
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridy=1;
+        c.gridwidth=2;
+        panel.add(lowMovie, c);
+
+        JButton RemMovie = new JButton("Remove Movie");
+        RemMovie.setBounds(0, 45, 80, 25);
+        RemMovie.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Movie temp = MoviesByScore.findMin();
+                MoviesByDate.delete(temp);
+                MoviesByScore.deleteMin();
+                try{
+                    lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                    } catch (NullPointerException v) {
+                        lowMovie.setText("No Movies");
+                    }
+                textArea.setText("");
+                treeToText();
+            }
+        });
+        c.gridx = 0;
+        c.anchor = GridBagConstraints.SOUTH;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        panel.add(RemMovie, c);
+        c.anchor = GridBagConstraints.CENTER;
+
+
         textArea = new JTextArea("", 10, 20);
         textArea.setLineWrap(false);
         textArea.setPreferredSize(new Dimension(100, 100));
         scrollText = new JScrollPane(textArea);
         textArea.setEditable(false);
         scrollText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        c.gridx = 0;
+        c.gridx = 2;
         c.gridy = 1;
-        c.gridwidth = 4;
+        c.gridwidth = 2;
         treeToText();
         scrollText.setViewportView(textArea);
         panel.add(scrollText, c);
@@ -95,6 +134,11 @@ public class AdminGUI extends JFrame{
                 System.out.println("Added Movie");
                 textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "\n");
                 ID++;
+                try{
+                    lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                    } catch (NullPointerException v) {
+                        lowMovie.setText("No Movies");
+                    }
             }
         });
         c.gridx = 3;
