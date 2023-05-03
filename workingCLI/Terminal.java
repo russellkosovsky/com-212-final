@@ -312,19 +312,19 @@ public class Terminal implements java.io.Serializable{
             MoviesByScore.insert(movie8);
             MoviesByScore.insert(movie9);
             MoviesByScore.insert(movie10);
-            // //insertmovies for user
-            // System.out.println("Inserting more Movies...");
-            // MoviesByDate.insert(movie1);
+            //insertmovies for user
+            //System.out.println("Inserting more Movies...");
+             //MoviesByDate.insert(movie1);
             // MoviesByDate.insert(movie2);
-            // MoviesByDate.insert(movie3);
-            // MoviesByDate.insert(movie3);
-            // MoviesByDate.insert(movie4);
-            // MoviesByDate.insert(movie5);
-            // MoviesByDate.insert(movie6);
-            // MoviesByDate.insert(movie7); 
-            // MoviesByDate.insert(movie8);
-            // MoviesByDate.insert(movie9);
-            // MoviesByDate.insert(movie10);
+             //MoviesByDate.insert(movie3);
+             //MoviesByDate.insert(movie3);
+             //MoviesByDate.insert(movie4);
+             //MoviesByDate.insert(movie5);
+             //MoviesByDate.insert(movie6);
+             //MoviesByDate.insert(movie7); 
+             //MoviesByDate.insert(movie8);
+             //MoviesByDate.insert(movie9);
+             //MoviesByDate.insert(movie10);
             //insert 3 movies to users wishlist by default
             System.out.println("Adding Movies To Wishlist...");
             Wishlist.enqueue(movie2);
