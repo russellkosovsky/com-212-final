@@ -2,7 +2,8 @@
 // QueueLL.java
 // for storing userses top 20 movies (a watchlist??)
 package CORE;
-public class MovieQueue {
+import java.io.Serializable;
+public class MovieQueue implements Serializable{
     private Movie head;
     private Movie tail;
     private int size;

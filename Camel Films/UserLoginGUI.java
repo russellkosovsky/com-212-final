@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import CORE.*;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
@@ -23,8 +26,15 @@ public class UserLoginGUI implements ActionListener {
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton loginBTN;
+    private MoviePQ MoviesByScore;
+    private CustomerHashTable Customers;
+    private MovieBinarySearchTree MoviesByDate;
 
-    public UserLoginGUI(){
+    public UserLoginGUI(CustomerHashTable Customers, MovieBinarySearchTree MoviesByDate, MoviePQ MoviesByScore){
+        this.MoviesByDate = MoviesByDate;
+        this.Customers = Customers;
+        this.MoviesByScore = MoviesByScore;
+        
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);

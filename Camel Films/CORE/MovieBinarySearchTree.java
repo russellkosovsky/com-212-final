@@ -1,6 +1,10 @@
 package CORE;
 
-public class MovieBinarySearchTree {
+import java.io.Serializable;
+
+import CORE.Movie;
+
+public class MovieBinarySearchTree implements Serializable{
     public Movie root;
 
     public MovieBinarySearchTree() {
@@ -47,6 +51,7 @@ public class MovieBinarySearchTree {
         } else {
             parent.setRight(movie);
         }
+        printTree();
     }
 
     public void printTree() {

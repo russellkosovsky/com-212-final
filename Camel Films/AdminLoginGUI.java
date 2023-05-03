@@ -14,6 +14,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import CORE.*;
 
 
 public class AdminLoginGUI implements ActionListener {
@@ -23,8 +24,15 @@ public class AdminLoginGUI implements ActionListener {
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton loginBTN;
+    private MoviePQ MoviesByScore;
+    private CustomerHashTable Customers;
+    private MovieBinarySearchTree MoviesByDate;
 
-    public AdminLoginGUI(){
+    public AdminLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
+        this.MoviesByDate = MoviesByDate1;
+        this.Customers = Customers1;
+        this.MoviesByScore = MoviesByScore1;
+        
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
@@ -36,7 +44,7 @@ public class AdminLoginGUI implements ActionListener {
         // create jlabel that is a title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Administrator Login");
         title.setBounds(10, 0, 300, 25);
-        c.fill = GridBagConstraints.NONE;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 0;
         c.gridy = 0;
@@ -81,7 +89,7 @@ public class AdminLoginGUI implements ActionListener {
 
                 if (user.equals("username") && password.equals("password")) {
                     loginBTN.setText("Login successful!");
-                    new AdminGUI();
+                    new AdminGUI(Customers, MoviesByDate, MoviesByScore);
                     frame.setVisible(false);
                 }
                 else {

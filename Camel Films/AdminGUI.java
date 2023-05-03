@@ -5,62 +5,33 @@ import javax.swing.*;
 import CORE.*;
 
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.*;
+import java.lang.Integer;
 
-public class AdminGUI {
-    private static JTextArea textArea;
-    private static JScrollPane scrollText;
-    private static JButton back;
-    private static MovieBinarySearchTree a;
+public class AdminGUI extends JFrame{
+    private JTextArea textArea;
+    private JScrollPane scrollText;
+    private JButton back;
+    private JButton submit;
+    private JTextField movieTitle;
+    private JTextField date;
+    private JTextField tomatos;
+    private int ID;
+    private MoviePQ MoviesByScore;
+    private CustomerHashTable Customers;
+    private MovieBinarySearchTree MoviesByDate;
 
-    public AdminGUI(){
+    public AdminGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
 
-        a = new MovieBinarySearchTree();
-        Movie movieA = new Movie("Movie A", 2001, 1, 85, true);
-        Movie movieB = new Movie("Movie B", 1999, 2, 70, true);
-        Movie movieC = new Movie("Movie C", 2005, 3, 95, true);
-        Movie movieD = new Movie("Movie D", 2003, 4, 80, true);
-        Movie movieE = new Movie("Movie E", 2007, 5, 85, true);
-        Movie movieF = new Movie("Movie F", 1995, 6, 70, true);
-        Movie movieG = new Movie("Movie G", 2004, 7, 95, true);
-        Movie movieH = new Movie("Movie H", 2007, 8, 80, true);
-        Movie movieI = new Movie("Movie I", 2002, 9, 85, true);
-        Movie movieJ = new Movie("Movie J", 1923, 10, 70, true);
-        Movie movieK = new Movie("Movie K", 2053, 11, 95, true);
-        Movie movieL = new Movie("Movie L", 2013, 12, 80, true);
-        Movie movieM = new Movie("Movie M", 2074, 13, 85, true);
-        Movie movieN = new Movie("Movie N", 1932, 14, 70, true);
-        Movie movieO = new Movie("Movie O", 2075, 15, 95, true);
-        Movie movieP = new Movie("Movie P", 2053, 16, 80, true);
-        Movie movieQ = new Movie("Movie Q", 2036, 17, 85, true);
-        Movie movieR = new Movie("Movie R", 1946, 18, 70, true);
-        Movie movieS = new Movie("Movie S", 2034, 19, 95, true);
-        Movie movieT = new Movie("Movie T", 2064, 20, 80, true);
-
-        a.insert(movieA);
-        a.insert(movieB);
-        a.insert(movieC);
-        a.insert(movieD);
-        a.insert(movieE);
-        a.insert(movieF);
-        a.insert(movieG);
-        a.insert(movieH);
-        a.insert(movieI);
-        a.insert(movieJ);
-        a.insert(movieK);
-        a.insert(movieL);
-        a.insert(movieM);
-        a.insert(movieN);
-        a.insert(movieO);
-        a.insert(movieP);
-        a.insert(movieQ);
-        a.insert(movieR);
-        a.insert(movieS);
-        a.insert(movieT);
-
+        this.MoviesByDate = MoviesByDate1;
+        this.Customers = Customers1;
+        this.MoviesByScore = MoviesByScore1;
+        loadID();
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
@@ -69,57 +40,144 @@ public class AdminGUI {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // create jlabel that is a title that says "Welcome to Camel Films"
+        // create jlabel that is MoviesByDate title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Administrator Control Panel");
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
+        c.weightx = 0.5;
         c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 2;
+        c.gridwidth = 4;
         panel.add(title, c);
 
         textArea = new JTextArea("", 10, 20);
         textArea.setLineWrap(false);
+        textArea.setPreferredSize(new Dimension(100, 100));
         scrollText = new JScrollPane(textArea);
         textArea.setEditable(false);
         scrollText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         c.gridx = 0;
         c.gridy = 1;
-        c.gridwidth = 2;
+        c.gridwidth = 4;
         treeToText();
         scrollText.setViewportView(textArea);
         panel.add(scrollText, c);
+
+        movieTitle = new JTextField("Movie Title",20);
+        movieTitle.setBounds(0, 0, 65, 25);
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        panel.add(movieTitle, c);
+
+        date = new JTextField("Movie Date",20);
+        date.setBounds(0, 0, 65, 25);
+        c.gridx = 1;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        panel.add(date, c);
+        
+        tomatos = new JTextField("Tomato Score",20);
+        tomatos.setBounds(0, 0, 65, 25);
+        c.gridx = 2;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        panel.add(tomatos, c);
+
+        submit = new JButton("Submit");
+        submit.setBounds(0, 0, 80, 25);
+        submit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Movie newMovie = new Movie(movieTitle.getText(), Integer.parseInt(date.getText()), ID, Integer.parseInt(tomatos.getText()));
+                MoviesByDate.insert(newMovie);
+                MoviesByScore.insert(newMovie);
+                System.out.println("Added Movie");
+                textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "\n");
+                ID++;
+            }
+        });
+        c.gridx = 3;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        panel.add(submit, c);
 
         back = new JButton("Logout");
         back.setBounds(10, 100, 80, 25);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                WelcomeGUI menu = new WelcomeGUI();
+                menu.saveByDate(MoviesByDate);
+                menu.saveByScore(MoviesByScore);
+                menu.saveCustomers(Customers);
+                System.exit(0);
             }
         });
         c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 2;
+        c.gridy = 3;
+        c.gridwidth = 4;
         panel.add(back, c);
 
+        frame.pack();
         frame.setVisible(true);
-    }
 
-        public static void main(String[] args) {
-
-        new AdminGUI();
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                WelcomeGUI menu = new WelcomeGUI();
+                menu.saveByDate(MoviesByDate);
+                menu.saveByScore(MoviesByScore);
+                menu.saveCustomers(Customers);
+                saveID(ID);
+                System.exit(0);
+            }
+        });
     }
 
     public void treeToText() {
-        printTree2(a.root);
+        try{
+        printTree2(MoviesByDate.root);
+        System.out.println("Updated Movies Successfully");
+        } catch (NullPointerException e) {
+            System.out.println("Updated Movies Failed");
+            e.printStackTrace();
+            textArea.setText("No Movies :(");
+        }
     }
 
     private void printTree2(Movie movie) {
         if (movie != null) {
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") \n");
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "ID: " + movie.getUniqueID() + "\n");
             printTree2(movie.getLeft());
             printTree2(movie.getRight());
         }
     }
+
+    public void saveID(int ID){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("CurrentID.txt");
+            OutputStreamWriter out = new OutputStreamWriter(fileOut);
+            out.write(ID);
+            out.close();
+            fileOut.close();
+            System.out.println("Saved Current ID To File");
+        } 
+        catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+    
+    //function to load the AdminPG so that we have the necessary info
+    public void loadID(){
+        try{
+            BufferedReader in = new BufferedReader(new FileReader("CurrentID.txt"));
+            ID = Integer.valueOf(in.readLine());
+            in.close();
+        }
+        catch(IOException i){
+            i.printStackTrace();
+        }
+    }
+
+    
 }

@@ -1,6 +1,9 @@
 // Hash Table java implementation for storing Customer data
 package CORE;
-public class CustomerHashTable {
+
+import java.io.Serializable;
+
+public class CustomerHashTable implements Serializable {
     // INSTANCE
     private static final int TABLE_SIZE = 67;
     private Customer[] table;
