@@ -17,7 +17,7 @@ public class TestMBST {
         movieBST.printTree();
 
         int searchReleaseDate = 2001;
-        Movie foundMovie = movieBST.search(searchReleaseDate);
+        Movie foundMovie = movieBST.searchBST(searchReleaseDate);
         if (foundMovie != null) {
             System.out.println("Found movie with release date " + searchReleaseDate + ": " + foundMovie.getTitle());
         } else {

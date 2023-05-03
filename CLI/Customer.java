@@ -1,8 +1,9 @@
 // Customer.java
 // Customer *nodetype? ... idk what to call. custom nodes
 
+import java.io.Serializable;
 
-public class Customer {
+public class Customer implements Serializable{
     // Instance variables
     private String name;
     private int creditCardNumber;

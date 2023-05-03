@@ -1,7 +1,9 @@
 // Movie.java
 // custom node class to represent the elements of any movie
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable{
     // Instance variables
     private String title;
     private int releaseDate;
