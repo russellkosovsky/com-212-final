@@ -5,7 +5,7 @@ import java.io.Serializable;
 import CORE.Movie;
 
 public class MovieBinarySearchTree implements Serializable{
-    public Movie root;
+    private Movie root;
 
     public MovieBinarySearchTree() {
         root = null;
@@ -126,5 +126,10 @@ public class MovieBinarySearchTree implements Serializable{
             System.out.print(movie.getTitle() + " (" + movie.getReleaseDate() + ")," );
             traverser(movie.getRight());
         }
+    }
+
+    
+    public Movie getRoot(){
+        return root;
     }
 }

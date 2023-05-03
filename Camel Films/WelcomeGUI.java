@@ -28,10 +28,9 @@ public class WelcomeGUI extends JFrame {
     }
 
     public WelcomeGUI(){
-
-        MoviesByScore = this.loadByScore();
-        MoviesByDate = this.loadByDate();
-        Customers = this.loadCustomers();
+        MoviesByScore = loadByScore();
+        MoviesByDate = loadByDate();
+        Customers = loadCustomers();
 
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
@@ -155,14 +154,17 @@ public class WelcomeGUI extends JFrame {
     
     //function to load the AdminPG so that we have the necessary info
     public MoviePQ loadByScore(){
-        MoviePQ MoviesByScore = null;
+        MoviePQ MoviesByScoreL = null;
         try{
             FileInputStream fileIn = new FileInputStream("MoviePQ.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            MoviesByScore = (MoviePQ) in.readObject();
+            MoviesByScoreL = (MoviePQ) in.readObject();
+            if (MoviesByScoreL == null){
+                MoviesByScoreL = new MoviePQ();
+            }
             in.close();
             fileIn.close();
-            return MoviesByScore;
+            return MoviesByScoreL;
         }
         catch(IOException i){
             i.printStackTrace();
@@ -176,14 +178,17 @@ public class WelcomeGUI extends JFrame {
     }
     //function to load the movies in the database for the user
     public MovieBinarySearchTree loadByDate(){
-        MovieBinarySearchTree MoviesByDate = null;
+        MovieBinarySearchTree MoviesByDateL = null;
         try{
             FileInputStream fileIn = new FileInputStream("MoviesByDate.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            MoviesByDate = (MovieBinarySearchTree) in.readObject();
+            MoviesByDateL = (MovieBinarySearchTree) in.readObject();
+            if (MoviesByDateL == null){
+                MoviesByDateL = new MovieBinarySearchTree();
+            }
             in.close();
             fileIn.close();
-            return MoviesByDate;
+            return MoviesByDateL;
         }
         catch(IOException i){
             i.printStackTrace();
@@ -198,14 +203,17 @@ public class WelcomeGUI extends JFrame {
 
     //funcion to load the customers within the database that have created an account
     public CustomerHashTable loadCustomers(){
-        CustomerHashTable Customers = null;
+        CustomerHashTable CustomersL = null;
         try{
             FileInputStream fileIn = new FileInputStream("Customers.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            Customers = (CustomerHashTable) in.readObject();
+            CustomersL = (CustomerHashTable) in.readObject();
+            if (CustomersL == null){
+                Customers = new CustomerHashTable(7);
+            }
             in.close();
             fileIn.close();
-            return Customers;
+            return CustomersL;
         }
         catch(IOException i){
             i.printStackTrace();

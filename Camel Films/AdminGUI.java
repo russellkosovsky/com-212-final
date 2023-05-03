@@ -111,6 +111,7 @@ public class AdminGUI extends JFrame{
                 menu.saveByDate(MoviesByDate);
                 menu.saveByScore(MoviesByScore);
                 menu.saveCustomers(Customers);
+                saveID(ID);
                 System.exit(0);
             }
         });
@@ -136,7 +137,7 @@ public class AdminGUI extends JFrame{
 
     public void treeToText() {
         try{
-        printTree2(MoviesByDate.root);
+        printTree2(MoviesByDate.getRoot());
         System.out.println("Updated Movies Successfully");
         } catch (NullPointerException e) {
             System.out.println("Updated Movies Failed");
@@ -155,11 +156,10 @@ public class AdminGUI extends JFrame{
 
     public void saveID(int ID){
         try {
-            FileOutputStream fileOut = new FileOutputStream("CurrentID.txt");
-            OutputStreamWriter out = new OutputStreamWriter(fileOut);
-            out.write(ID);
+            PrintWriter out = new PrintWriter(new FileOutputStream("CurrentID.txt", false));
+            out.write(String.valueOf(ID));
             out.close();
-            fileOut.close();
+            out.close();
             System.out.println("Saved Current ID To File");
         } 
         catch(IOException i) {

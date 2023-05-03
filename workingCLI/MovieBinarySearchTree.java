@@ -140,4 +140,8 @@ public class MovieBinarySearchTree {
             traverser(movie.getRight());
         }
     }
+
+    public Movie getRoot(){
+        return root;
+    }
 }
