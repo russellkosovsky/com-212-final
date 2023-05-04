@@ -136,6 +136,7 @@ public class AdminGUI extends JFrame{
                 ID++;
                 try{
                     lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                    System.out.println(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
                     } catch (NullPointerException v) {
                         lowMovie.setText("No Movies");
                     }

@@ -84,7 +84,7 @@ public class MoviePQ implements Serializable{
 
 	//find findParent of Movie
 	private int findParent(int x){
-		int findParent = (n-1)/2;
+		int findParent = (x-1)/2;
 		return findParent;
 	}
 
