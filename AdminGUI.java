@@ -91,7 +91,7 @@ public class AdminGUI extends JFrame{
 
 
         textArea = new JTextArea("", 10, 20);
-        textArea.setLineWrap(false);
+        textArea.setLineWrap(true);
         textArea.setPreferredSize(new Dimension(200, 100));
         scrollText = new JScrollPane(textArea);
         textArea.setEditable(false);
@@ -195,7 +195,7 @@ public class AdminGUI extends JFrame{
 
     private void printTree2(Movie movie) {
         if (movie != null) {
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n");
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n\n");
             printTree2(movie.getLeft());
             printTree2(movie.getRight());
         }

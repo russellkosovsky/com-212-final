@@ -36,6 +36,9 @@ public class UserLoginGUI implements ActionListener {
         frame.add(panel);
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
+        MovieQueue wishlist = new MovieQueue();
+        Customer temp = new Customer("Test", 1234, "Test", wishlist);
+        Customers.add(temp);
 
         // create jlabel that is a title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Welcome User, Please Login");
