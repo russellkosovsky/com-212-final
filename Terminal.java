@@ -232,7 +232,7 @@ public class Terminal implements java.io.Serializable{
             int card = scanner.nextInt();
 
             Customer customer = new Customer(name, card, email, Wishlist);
-            Customers.add(customer);
+            Customers.insert(customer);
         }
         
         else if (choice == 3){
@@ -295,7 +295,7 @@ public class Terminal implements java.io.Serializable{
             int cardNUM = scanner.nextInt();
 
             Customer customer = new Customer(name, cardNUM, email, Wishlist);
-            Customers.add(customer);
+            Customers.insert(customer);
 
         }
         else if (choice == 0){

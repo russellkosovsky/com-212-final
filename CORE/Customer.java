@@ -10,6 +10,7 @@ public class Customer implements Serializable{
     private int creditCardNumber;
     private String emailAddress;
     private MovieQueue wishlist;
+    private Customer next;
 
     // Constructor
     public Customer(String name, int creditCardNumber, String emailAddress, MovieQueue wishlist) {
@@ -75,5 +76,13 @@ public class Customer implements Serializable{
 
     public void printWishlist() {
         wishlist.printQueue();
+    }
+
+    public Customer getNext() {
+        return next;
+    }
+
+    public void setNext(Customer x) {
+        next = x;
     }
 }

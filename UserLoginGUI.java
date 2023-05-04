@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.*;
 
 import CORE.*;
 
@@ -13,22 +14,30 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.JMenu;
 
+public class UserLoginGUI extends JFrame implements ActionListener {
 
-public class UserLoginGUI implements ActionListener {
-
+    private static JMenuBar menuBar;
+    private static JMenu menu;
     private static JLabel userLabel;
     private static JTextField userText;
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton loginBTN;
+    private static JMenuItem newUserMenu;
+    private MoviePQ MoviesByScore;
+    private CustomerHashTable Customers;
+    private MovieBinarySearchTree MoviesByDate;
 
-    public UserLoginGUI(CustomerHashTable Customers, MovieBinarySearchTree MoviesByDate, MoviePQ MoviesByScore){
+    public UserLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
         
+        this.MoviesByDate = MoviesByDate1;
+        this.Customers = Customers1;
+        this.MoviesByScore = MoviesByScore1;
+
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
@@ -38,7 +47,20 @@ public class UserLoginGUI implements ActionListener {
         GridBagConstraints c = new GridBagConstraints();
         MovieQueue wishlist = new MovieQueue();
         Customer temp = new Customer("Test", 1234, "Test", wishlist);
-        Customers.add(temp);
+        Customers.insert(temp);
+
+        menuBar = new JMenuBar();
+        menu = new JMenu("New User Form");
+        newUserMenu = new JMenuItem("Add User");
+        newUserMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new addUserGUI(Customers);
+            }
+        });
+        menu.add(newUserMenu);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);
 
         // create jlabel that is a title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Welcome User, Please Login");

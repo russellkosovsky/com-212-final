@@ -63,6 +63,7 @@ public class WelcomeGUI extends JFrame {
         loginBTN.setBounds(0, 0, 80, 25);
         loginBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println(Customers);
                 new UserLoginGUI(Customers, MoviesByDate, MoviesByScore);
                 frame.setVisible(false);
             }
@@ -211,15 +212,16 @@ public class WelcomeGUI extends JFrame {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             CustomersL = (CustomerHashTable) in.readObject();
             if (CustomersL == null){
-                Customers = new CustomerHashTable(7);
+                CustomersL = new CustomerHashTable(128);
             }
             in.close();
             fileIn.close();
+            System.out.println(CustomersL);
             return CustomersL;
         }
         catch(IOException i){
             i.printStackTrace();
-            Customers = new CustomerHashTable(7);
+            Customers = new CustomerHashTable(128);
             return CustomersL;
         }
         catch(ClassNotFoundException v){

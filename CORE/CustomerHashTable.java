@@ -5,100 +5,42 @@ import java.io.Serializable;
 
 public class CustomerHashTable implements Serializable{
     // INSTANCE
-    private static final int TABLE_SIZE = 67;
-    private Customer[] table;
-    private int prime;
+    private List[] table;
+    private int hash;
     
     //CONSTRUCTOR
     public CustomerHashTable(int size) {
-        table = new Customer[size];
-        prime = getPrime(size);
-    }
-    
-    private int getPrime(int size) {
-        for (int i = size - 1; i >= 1; i--) {
-            if (isPrime(i)) {
-                return i;
-            }
-        }
-        return 1;
-    }
-    
-    private boolean isPrime(int num) {
-        if (num <= 1) {
-            return false;
-        }
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    public void add(Customer customer) {
-        int key = customer.getCreditCardNumber();
-        int index = hash1(key);
-        int step = hash2(key);
-        int originalIndex = index;
-        while (table[index] != null) {
-            index = (index + step) % TABLE_SIZE;
-            if (index == originalIndex) {
-                System.out.println("Table is full.");
-                return;
-            }
-        }
-        table[index] = customer;
-    }
-    
-    public Customer lookUp(int key) {
-        int index = hash1(key);
-        int step = hash2(key);
-        while (table[index] != null) {
-            if (table[index].getCreditCardNumber() == key) {
-                return table[index];
-            }
-            index = (index + step) % TABLE_SIZE;
-        }
-        return null;
-    }
-    
-    public void remove(int key) {
-        int index = hash1(key);
-        int step = hash2(key);
-        while (table[index] != null) {
-            if (table[index].getCreditCardNumber() == key) {
-                table[index] = null;
-                return;
-            }
-            index = (index + step) % TABLE_SIZE;
+        table = new List[size];
+        hash = size;
+        for (int i=0; i < size; i++){
+            table[i] = new List();
         }
     }
     
-    public boolean isEmptyHash() {
-        for (int i = 0; i < TABLE_SIZE; i++) {
-            if (table[i] != null) {
-                return false;
-            }
+    public void insert(Customer customer){
+        table[customer.getCreditCardNumber()%hash].insert(customer);
+    }
+
+    public Customer lookUp(int key){
+        return table[key%hash].searchReturn(key);
+    }
+
+    public Customer delete(int key){
+        return table[key%hash].searchRemove(key);
+    }
+
+    public boolean isEmpty(){
+        for (int i=0; i < 7; i++){
+            if (!table[i].isEmptyList()) return false;
         }
         return true;
     }
-    
-    public void printTable() {
-        for (int i = 0; i < TABLE_SIZE; i++) {
-            if (table[i] != null) {
-                System.out.println("Index: " + i + " -> " + table[i].getName() + " : " + table[i].getCreditCardNumber());
-            } else {
-                System.out.println("Index: " + i + " -> null");
-            }
+
+    public void printHash(){
+        System.out.println("Dict Contents:");
+        for (int i=0; i < 7; i++){
+            table[i].printList();
         }
-    }
-    
-    private int hash1(int key) {
-        return key % TABLE_SIZE;
-    }
-    
-    private int hash2(int key) {
-        return prime - (key % prime);
+        System.out.println("End Dict Contents");
     }
 }
