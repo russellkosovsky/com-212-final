@@ -8,8 +8,8 @@ public class MovieBinarySearchTree implements Serializable{
 	private Movie root;
 
 	public MovieBinarySearchTree() {
-  root = null;
-	t = null;
+        root = null;
+	    t = null;
 	}
 	
     public void insert(Movie node) {

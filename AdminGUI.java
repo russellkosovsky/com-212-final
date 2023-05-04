@@ -92,7 +92,7 @@ public class AdminGUI extends JFrame{
 
         textArea = new JTextArea("", 10, 20);
         textArea.setLineWrap(false);
-        textArea.setPreferredSize(new Dimension(100, 100));
+        textArea.setPreferredSize(new Dimension(200, 100));
         scrollText = new JScrollPane(textArea);
         textArea.setEditable(false);
         scrollText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -132,13 +132,15 @@ public class AdminGUI extends JFrame{
                 MoviesByDate.insert(newMovie);
                 MoviesByScore.insert(newMovie);
                 System.out.println("Added Movie");
-                textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "\n");
+                //textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "Score: " + newMovie.getRottenTomatoesScore() + "\n");
                 ID++;
                 try{
                     lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
                     } catch (NullPointerException v) {
                         lowMovie.setText("No Movies");
                     }
+                textArea.setText("");
+                treeToText();
             }
         });
         c.gridx = 3;
@@ -192,7 +194,7 @@ public class AdminGUI extends JFrame{
 
     private void printTree2(Movie movie) {
         if (movie != null) {
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "ID: " + movie.getUniqueID() + "\n");
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n");
             printTree2(movie.getLeft());
             printTree2(movie.getRight());
         }
