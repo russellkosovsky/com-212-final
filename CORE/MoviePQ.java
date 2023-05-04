@@ -16,39 +16,53 @@ public class MoviePQ implements Serializable{
 		return s[0];
 	}
 
-	public void insert(Movie x){ //inserts the movie into the movie list
-		if (n==255){ //max of 255 movies in the database
-			System.out.println("Cannot add movie due to lack of space.");
+	public Movie insert(Movie Movie){
+		int temp = n;
+		s[n++] = Movie;
+		while (s[temp].getRottenTomatoesScore() < s[findParent(temp)].getRottenTomatoesScore()) {
+			swap(temp, findParent(temp));
+			temp = findParent(temp);
 		}
-		s[n] = x;
-		n ++; //increments the amount of movies in the database
-		int i = n;
-		//swap node while less than parent
-		while (s[i-1].getRottenTomatoesScore() < s[findParent(i-1)].getRottenTomatoesScore()){
-			i = swap(i-1, findParent(i-1));
-		}
+		return Movie;
 	}
 
-	public Movie deleteMin(){ //deletes the least rated movie
-		int i = 0;
-		n --;
-		i = swap(i, n);
-		//check if greater than children
-		while (s[i].getRottenTomatoesScore() > s[2*i+1].getRottenTomatoesScore() || s[i].getRottenTomatoesScore() > s[2*i+2].getRottenTomatoesScore()){
-			if (s[2*i+1] != null || s[2*i+2] != null ){
-				//check which child is smaller
-				if (s[2*i+1].getRottenTomatoesScore() < s[2*i+2].getRottenTomatoesScore()){
-					//swap left child
-					i = swap(i, 2*i+1);
-				}
-				else {
-					//swap right child
-					i = swap(i, 2*i+2);
+	public Movie deleteMin(){
+		Movie temp = s[0];
+		s[0] = s[--n];
+		deleteCheck(0);
+		return temp;
+	}
+		
+		
+	private void deleteCheck(int temp){
+		if (isLeaf(temp) == false){
+			int nextLow = temp;
+			if (rightChild(temp) <= n) {
+				nextLow = s[leftChild(temp)].getRottenTomatoesScore() < s[rightChild(temp)].getRottenTomatoesScore() ? leftChild(temp):rightChild(temp);
+			} else nextLow = leftChild(temp);
+			if (s[nextLow] != null){
+				if (s[nextLow].getRottenTomatoesScore() < s[temp].getRottenTomatoesScore()) {
+					swap(temp, nextLow);
+					temp = nextLow;
+					deleteCheck(temp);
 				}
 			}
 		}
-		return s[n];
 	}
+
+	private boolean isLeaf(int target) { return (target > n/2); }
+
+	private int leftChild(int findParent) { 
+		if (findParent != 0) { 
+			return (findParent*2);
+		} else return 1;
+		}
+		
+		private int rightChild(int findParent) { 
+		if (findParent != 0) { 
+			return (findParent*2+1);
+		} else return 2;
+		}
 
 	//check if empty
 	public boolean isEmptySet(){
@@ -60,7 +74,7 @@ public class MoviePQ implements Serializable{
 		}
 	}
 
-	//swap position of two nodes, return new position of swapped node
+	//swap position of two Movies, return new position of swapped Movie
 	private int swap(int one, int two){
 		Movie temp = s[one];
 		s[one] = s[two];
@@ -68,10 +82,10 @@ public class MoviePQ implements Serializable{
 		return one;
 	}
 
-	//find parent of node
+	//find findParent of Movie
 	private int findParent(int x){
-		int parent = (n-1)/2;
-		return parent;
+		int findParent = (n-1)/2;
+		return findParent;
 	}
 
 	//creates print method
