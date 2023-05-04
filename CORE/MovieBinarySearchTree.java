@@ -1,3 +1,4 @@
+package CORE;
 //This program creates the movie archive
 import java.io.Serializable;
 //serializes the movie archive
@@ -291,7 +292,7 @@ public class MovieBinarySearchTree implements Serializable{
         successor(p);
       }
   }
-
+  
   public boolean isEmptyTree(){ //returns if the movie archive is empty or not
     if (t == null){
       return true;
@@ -299,5 +300,9 @@ public class MovieBinarySearchTree implements Serializable{
     else{
       return false;
     }
+  }
+
+  public Movie getRoot() {
+    return root;
   }
 }

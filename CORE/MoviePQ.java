@@ -1,5 +1,6 @@
 package CORE;
-public class MoviePQ implements java.io.Serializable{
+import java.io.Serializable;
+public class MoviePQ implements Serializable{
 
 	private int n;
 	private Movie s [];
@@ -13,21 +14,6 @@ public class MoviePQ implements java.io.Serializable{
 	//return root
 	public Movie findMin(){ //finds the least rated movie
 		return s[0];
-	}
-
-	public void setMovie(MovieBinarySearchTree x){
-		o = x;
-	}
-
-	public Movie findMovieBST(){ //finds the movies in the database
-		Movie min = findMin();
-		min.setAvailablility(false);
-		Movie minDate = o.search(min.getReleaseDate());
-		minDate.setAvailablility(false);
-		min.setNext(minDate); //orders movie by release date
-		o.delete(minDate);
-		deleteMin();
-		return min;
 	}
 
 	public void insert(Movie x){ //inserts the movie into the movie list

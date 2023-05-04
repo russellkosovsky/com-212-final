@@ -1,3 +1,4 @@
+package CORE;
 // Customer.java
 // Customer *nodetype? ... idk what to call. custom nodes
 

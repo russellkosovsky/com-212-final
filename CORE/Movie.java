@@ -1,7 +1,9 @@
+package CORE;
 // Movie.java
 // custom node class to represent the elements of any movie
-package CORE;
+
 import java.io.Serializable;
+
 public class Movie implements Serializable{
     // Instance variables
     private String title;
@@ -14,12 +16,12 @@ public class Movie implements Serializable{
     private Movie next;
 
     // Constructor
-    public Movie(String title1, int releaseDate1, int uniqueID1, int rottenTomatoesScore1, boolean available) {
+    public Movie(String title1, int releaseDate1, int uniqueID1, int rottenTomatoesScore1, boolean isAvailable1) {
         this.title = title1;
         this.releaseDate = releaseDate1;
         this.uniqueID = uniqueID1;
         this.rottenTomatoesScore = rottenTomatoesScore1;
-        this.isAvailable = available;
+        this.isAvailable = isAvailable1;
         this.left = null;
         this.right = null;
         this.next = null;
@@ -43,7 +45,7 @@ public class Movie implements Serializable{
     }
 
     public int getUniqueID() {
-        return uniqueID;
+        return this.uniqueID;
     }
 
     public void setUniqueID(int uniqueID) {
