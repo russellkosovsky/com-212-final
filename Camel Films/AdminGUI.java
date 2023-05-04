@@ -128,7 +128,7 @@ public class AdminGUI extends JFrame{
         submit.setBounds(0, 0, 80, 25);
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Movie newMovie = new Movie(movieTitle.getText(), Integer.parseInt(date.getText()), ID, Integer.parseInt(tomatos.getText()));
+                Movie newMovie = new Movie(movieTitle.getText(), Integer.parseInt(date.getText()), ID, Integer.parseInt(tomatos.getText()), true);
                 MoviesByDate.insert(newMovie);
                 MoviesByScore.insert(newMovie);
                 System.out.println("Added Movie");

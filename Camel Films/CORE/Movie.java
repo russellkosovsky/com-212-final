@@ -14,12 +14,12 @@ public class Movie implements Serializable{
     private Movie next;
 
     // Constructor
-    public Movie(String title1, int releaseDate1, int uniqueID1, int rottenTomatoesScore1) {
+    public Movie(String title1, int releaseDate1, int uniqueID1, int rottenTomatoesScore1, boolean available) {
         this.title = title1;
         this.releaseDate = releaseDate1;
         this.uniqueID = uniqueID1;
         this.rottenTomatoesScore = rottenTomatoesScore1;
-        this.isAvailable = true;
+        this.isAvailable = available;
         this.left = null;
         this.right = null;
         this.next = null;
