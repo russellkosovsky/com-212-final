@@ -26,14 +26,8 @@ public class UserLoginGUI implements ActionListener {
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JButton loginBTN;
-    private MoviePQ MoviesByScore;
-    private CustomerHashTable Customers;
-    private MovieBinarySearchTree MoviesByDate;
 
     public UserLoginGUI(CustomerHashTable Customers, MovieBinarySearchTree MoviesByDate, MoviePQ MoviesByScore){
-        this.MoviesByDate = MoviesByDate;
-        this.Customers = Customers;
-        this.MoviesByScore = MoviesByScore;
         
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
@@ -86,16 +80,16 @@ public class UserLoginGUI implements ActionListener {
         loginBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String user = userText.getText();
-            String password = String.valueOf(passwordText.getPassword());
-            System.out.println(user + ", " + password);
+                String password = String.valueOf(passwordText.getPassword());
+                System.out.println(user + ", " + password);
 
-            if (user.equals("username") && password.equals("password")) {
-                loginBTN.setText("Login successful!");
-            }
-            else {
-                loginBTN.setText("Login failed!");
-            }
+                if (user.equals("username") && password.equals("password")) {
+                    loginBTN.setText("Login successful!");
                 }
+                else {
+                    loginBTN.setText("Login failed!");
+                }
+            }
         });
         c.gridx = 0;
         c.gridy = 3;

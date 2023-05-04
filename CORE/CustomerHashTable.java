@@ -1,9 +1,9 @@
-// Hash Table java implementation for storing Customer data
 package CORE;
+// Hash Table java implementation for storing Customer data
 
 import java.io.Serializable;
 
-public class CustomerHashTable implements Serializable {
+public class CustomerHashTable implements Serializable{
     // INSTANCE
     private static final int TABLE_SIZE = 67;
     private Customer[] table;
@@ -37,38 +37,38 @@ public class CustomerHashTable implements Serializable {
     }
     
     public void add(Customer customer) {
-        long key = customer.getCreditCardNumber();
-        long index = hash1(key);
-        long step = hash2(key);
-        long originalIndex = index;
-        while (table[(int)index] != null) {
+        int key = customer.getCreditCardNumber();
+        int index = hash1(key);
+        int step = hash2(key);
+        int originalIndex = index;
+        while (table[index] != null) {
             index = (index + step) % TABLE_SIZE;
             if (index == originalIndex) {
                 System.out.println("Table is full.");
                 return;
             }
         }
-        table[(int)index] = customer;
+        table[index] = customer;
     }
     
-    public Customer lookUp(long key) {
-        long index = hash1(key);
-        long step = hash2(key);
-        while (table[(int)index] != null) {
-            if (table[(int)index].getCreditCardNumber() == key) {
-                return table[(int)index];
+    public Customer lookUp(int key) {
+        int index = hash1(key);
+        int step = hash2(key);
+        while (table[index] != null) {
+            if (table[index].getCreditCardNumber() == key) {
+                return table[index];
             }
             index = (index + step) % TABLE_SIZE;
         }
         return null;
     }
     
-    public void remove(long key) {
-        long index = hash1(key);
-        long step = hash2(key);
-        while (table[(int)index] != null) {
-            if (table[(int)index].getCreditCardNumber() == key) {
-                table[(int)index] = null;
+    public void remove(int key) {
+        int index = hash1(key);
+        int step = hash2(key);
+        while (table[index] != null) {
+            if (table[index].getCreditCardNumber() == key) {
+                table[index] = null;
                 return;
             }
             index = (index + step) % TABLE_SIZE;
@@ -94,11 +94,11 @@ public class CustomerHashTable implements Serializable {
         }
     }
     
-    private long hash1(long key) {
+    private int hash1(int key) {
         return key % TABLE_SIZE;
     }
     
-    private long hash2(long key) {
+    private int hash2(int key) {
         return prime - (key % prime);
     }
 }

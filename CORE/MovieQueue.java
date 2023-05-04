@@ -1,8 +1,10 @@
+package CORE;
 // Queue class implementation using a linked list
 // QueueLL.java
 // for storing userses top 20 movies (a watchlist??)
-package CORE;
+
 import java.io.Serializable;
+
 public class MovieQueue implements Serializable{
     private Movie head;
     private Movie tail;
@@ -19,7 +21,7 @@ public class MovieQueue implements Serializable{
             head = newMovie;
             tail = newMovie;
         } else {
-            tail.setRight(newMovie);
+            tail.setNext(newMovie);
             tail = newMovie;
         }
         size++;
@@ -30,7 +32,7 @@ public class MovieQueue implements Serializable{
             return null;
         }
         Movie temp = head;
-        head = head.getRight();
+        head = head.getNext();
         if (head == null) {
             tail = null;
         }
@@ -52,9 +54,12 @@ public class MovieQueue implements Serializable{
 
     public void printQueue() {
         Movie temp = head;
+        if (size == 0) {
+            System.out.println("Wishlist is Empty");
+        }
         while (temp != null) {
             System.out.println(temp.getTitle());
-            temp = temp.getRight();
+            temp = temp.getNext();
         }
     }
 }

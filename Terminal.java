@@ -1,14 +1,14 @@
-// Command Line Interface
-//
+
 
 import java.io.*; 
 import java.util.Scanner;
-import java.util.*;
+
+import CORE.*;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 public class Terminal implements java.io.Serializable{
     
@@ -25,12 +25,12 @@ public class Terminal implements java.io.Serializable{
     //function to save the MoviePQ
     public void saveByScore(MoviePQ MoviesByScore){
         try {
-            FileOutputStream fileOut = new FileOutputStream("MoviePQ.txt");
+            FileOutputStream fileOut = new FileOutputStream("MoviePQT.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(MoviesByScore);
             out.close();
             fileOut.close();
-            System.out.println("Serialized object successfully in MoviePQ.txt");
+            System.out.println("Serialized object successfully in MoviePQT.txt");
         } 
         catch(IOException i) {
         i.printStackTrace();
@@ -39,12 +39,12 @@ public class Terminal implements java.io.Serializable{
     //function to save the MoviesByDate database
     public void saveByDate(MovieBinarySearchTree MoviesByDate){
         try {
-            FileOutputStream fileOut = new FileOutputStream("MoviesByDate.txt");
+            FileOutputStream fileOut = new FileOutputStream("MoviesByDateT.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(MoviesByDate);
             out.close();
             fileOut.close();
-            System.out.println("Serialized object successfully in MoviesByDate.txt");
+            System.out.println("Serialized object successfully in MoviesByDateT.txt");
         } 
         catch(IOException i) {
             i.printStackTrace();
@@ -53,12 +53,12 @@ public class Terminal implements java.io.Serializable{
     //function to save each user's wish list
     public void saveWishList(MovieQueue Wishlist){
         try {
-            FileOutputStream fileOut = new FileOutputStream("WishList.txt");
+            FileOutputStream fileOut = new FileOutputStream("WishListT.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(Wishlist);
             out.close();
             fileOut.close();
-            System.out.println("Serialized object successfully in WishList.txt");
+            System.out.println("Serialized object successfully in WishListT.txt");
 
         }
         catch(IOException i) {
@@ -68,12 +68,12 @@ public class Terminal implements java.io.Serializable{
     //function to save the customers that have created an account
     public void saveCustomers(CustomerHashTable Customers){
         try {
-            FileOutputStream fileOut = new FileOutputStream("Customers.txt");
+            FileOutputStream fileOut = new FileOutputStream("CustomersT.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(Customers);
             out.close();
             fileOut.close();
-            System.out.println("Serialized object successfully in Customers.txt");
+            System.out.println("Serialized object successfully in CustomersT.txt");
         } 
         catch(IOException i) {
             i.printStackTrace();
@@ -86,7 +86,7 @@ public class Terminal implements java.io.Serializable{
     public MoviePQ loadByScore(){
         MoviePQ MoviesByScore = null;
         try{
-            FileInputStream fileIn = new FileInputStream("MoviePQ.txt");
+            FileInputStream fileIn = new FileInputStream("MoviePQT.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             MoviesByScore = (MoviePQ) in.readObject();
             in.close();
@@ -107,7 +107,7 @@ public class Terminal implements java.io.Serializable{
     public MovieBinarySearchTree loadByDate(){
         MovieBinarySearchTree MoviesByDate = null;
         try{
-            FileInputStream fileIn = new FileInputStream("MoviesByDate.txt");
+            FileInputStream fileIn = new FileInputStream("MoviesByDateT.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             MoviesByDate = (MovieBinarySearchTree) in.readObject();
             in.close();
@@ -128,7 +128,7 @@ public class Terminal implements java.io.Serializable{
     public MovieQueue loadWishList(){
         MovieQueue Wishlist = null;
         try{
-            FileInputStream fileIn = new FileInputStream("WishList.txt");
+            FileInputStream fileIn = new FileInputStream("WishListT.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Wishlist = (MovieQueue) in.readObject();
             in.close();
@@ -149,7 +149,7 @@ public class Terminal implements java.io.Serializable{
     public CustomerHashTable loadCustomers(){
         CustomerHashTable Customers = null;
         try{
-            FileInputStream fileIn = new FileInputStream("Customers.txt");
+            FileInputStream fileIn = new FileInputStream("CustomersT.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Customers = (CustomerHashTable) in.readObject();
             in.close();
@@ -219,51 +219,6 @@ public class Terminal implements java.io.Serializable{
             MoviesByScore = menu.loadByScore();
             MoviesByDate = menu.loadByDate();
             Customers = menu.loadCustomers();
-            
-            MoviesByScore = new MoviePQ();
-            MoviesByDate = new MovieBinarySearchTree();
-            Wishlist = new MovieQueue();
-
-            //creates movies for the user to begin with
-            Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 11111, 75, true);
-            Movie movie2 = new Movie("The Dark Knight", 20080114, 22222, 94, true);
-            Movie movie3 = new Movie("Jurassic Park", 19931229, 33333, 91, false);
-            Movie movie4 = new Movie("The Godfather", 19720817, 44444, 98, true);
-            Movie movie5 = new Movie("Inception", 20100527, 55555, 87, true);
-            Movie movie6 = new Movie("Avatar", 20090320, 66666, 82, true);
-            Movie movie7 = new Movie("The Shawshank Redemption", 19940911, 77777, 91, false);
-            Movie movie8 = new Movie("Pulp Fiction", 19940105, 88888, 94, false);
-            Movie movie9 = new Movie("Forrest Gump", 19940621, 99999, 72, true);
-            Movie movie10 = new Movie("The Matrix", 19991115, 10000, 87, true);
-
-            //inserts movies for the admin
-            MoviesByScore.insert(movie1);
-            MoviesByScore.insert(movie2);
-            MoviesByScore.insert(movie3);
-            MoviesByScore.insert(movie4);
-            MoviesByScore.insert(movie5);
-            MoviesByScore.insert(movie6);
-            MoviesByScore.insert(movie7);
-            MoviesByScore.insert(movie8);
-            MoviesByScore.insert(movie9);
-            MoviesByScore.insert(movie10);
-            //insertmovies for user
-            MoviesByDate.insert(movie1);
-            MoviesByDate.insert(movie2);
-            MoviesByDate.insert(movie3);
-            MoviesByDate.insert(movie3);
-            MoviesByDate.insert(movie4);
-            MoviesByDate.insert(movie5);
-            MoviesByDate.insert(movie6);
-            MoviesByDate.insert(movie7); 
-            MoviesByDate.insert(movie8);
-            MoviesByDate.insert(movie9);
-            MoviesByDate.insert(movie10);
-            //insert 3 movies to users wishlist by default
-            Wishlist.enqueue(movie2);
-            Wishlist.enqueue(movie5);
-            Wishlist.enqueue(movie10);
-            Wishlist.enqueue(movie7);
 
             //asks new user for their information to create their account
             System.out.println("Welcome To The Camel Film Database!");
@@ -483,6 +438,7 @@ public class Terminal implements java.io.Serializable{
             }
   
         //closing goodbye for the user once they want to exit
+        scanner.close();
         System.out.println("Have a great day and come again soon.\n");
   
         //saves all the information from the other data structures
