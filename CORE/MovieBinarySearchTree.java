@@ -72,21 +72,7 @@ public class MovieBinarySearchTree implements Serializable{
       }
 
   public Movie searchBST(int date){ //search the movie by the release date
-    if (t == null){
-      return null;
-    }
-    //key is found by the release date
-    else if (date == t.getReleaseDate()){
-      return t;
-    }
-    //search left for key
-    else if (date < t.getReleaseDate()){
-      return search2(t.getLeft(), date);
-    }
-    //search right for key
-    else {
-      return search2(t.getRight(), date);
-    }
+    return search2(root,date);
   }
 
   private Movie search2(Movie t, int date){

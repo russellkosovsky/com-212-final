@@ -7,36 +7,27 @@ import java.io.Serializable;
 
 public class MovieQueue implements Serializable{
     private Movie head;
-    private Movie tail;
-    private int size;
 
     public MovieQueue() {
         head = null;
-        tail = null;
-        size = 0;
     }
 
     public void enqueue(Movie newMovie) {
-        if (tail == null) {
+        if (head == null) {
             head = newMovie;
-            tail = newMovie;
         } else {
-            tail.setNext(newMovie);
-            tail = newMovie;
+            Movie temp = head;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            }
+            temp.setNext(newMovie);
         }
-        size++;
     }
 
     public Movie dequeue() {
-        if (head == null) {
-            return null;
-        }
         Movie temp = head;
         head = head.getNext();
-        if (head == null) {
-            tail = null;
-        }
-        size--;
+        temp.setNext(null);
         return temp;
     }
 
@@ -45,18 +36,21 @@ public class MovieQueue implements Serializable{
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return head == null;
     }
 
     public int size() {
+        int size = 0;
+        Movie temp = head;
+        while (temp != null) {
+            size++;
+            temp = temp.getNext();
+        }
         return size;
     }
 
     public void printQueue() {
         Movie temp = head;
-        if (size == 0) {
-            System.out.println("Wishlist is Empty");
-        }
         while (temp != null) {
             System.out.println(temp.getTitle());
             temp = temp.getNext();

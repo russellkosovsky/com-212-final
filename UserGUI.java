@@ -117,8 +117,10 @@ public class UserGUI extends JFrame{
         submit.setBounds(0, 0, 80, 25);
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
                 wishlist.enqueue(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
                 System.out.println("Added Movie");
+                System.out.println(wishlist.front());
                 try{
                     nextMovie.setText(customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
                     } catch (NullPointerException v) {
