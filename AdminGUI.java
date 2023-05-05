@@ -25,6 +25,9 @@ public class AdminGUI extends JFrame{
     private MoviePQ MoviesByScore;
     private CustomerHashTable Customers;
     private MovieBinarySearchTree MoviesByDate;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem lookUpUser;
 
     public AdminGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
 
@@ -167,11 +170,26 @@ public class AdminGUI extends JFrame{
         c.gridwidth = 4;
         panel.add(back, c);
 
+        menuBar = new JMenuBar();
+        menu = new JMenu("User Search");
+        lookUpUser = new JMenuItem("Lookup User");
+        lookUpUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new lookUpUser(Customers);
+            }
+        });
+        menu.add(lookUpUser);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);
+
         frame.pack();
         frame.setVisible(true);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
+                frame.setVisible(false);
                 WelcomeGUI menu = new WelcomeGUI();
                 menu.saveByDate(MoviesByDate);
                 menu.saveByScore(MoviesByScore);

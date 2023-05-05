@@ -11,6 +11,7 @@ public class Customer implements Serializable{
     private String emailAddress;
     private MovieQueue wishlist;
     private Customer next;
+    private watchList watchedList;
 
     // Constructor
     public Customer(String name, int creditCardNumber, String emailAddress, MovieQueue wishlist) {
@@ -18,6 +19,7 @@ public class Customer implements Serializable{
         this.creditCardNumber = creditCardNumber;
         this.emailAddress = emailAddress;
         this.wishlist = wishlist;
+        this.watchedList = new watchList();
 
     }
 
@@ -48,6 +50,14 @@ public class Customer implements Serializable{
 
     public MovieQueue getWishlist() {
         return wishlist;
+    }
+
+    public void watched(Movie movie){
+        watchedList.insert(movie);
+    }
+
+    public watchList getWatched() {
+        return watchedList;
     }
 
     // Wishlist methods

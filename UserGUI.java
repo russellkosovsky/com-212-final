@@ -53,37 +53,55 @@ public class UserGUI extends JFrame{
         nextMovie.setBounds(0, 0, 160, 25);
         nextMovie.setLineWrap(false);
         nextMovie.setEditable(false);
-        try{
-            nextMovie.setText(customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
-            } catch (NullPointerException v) {
-                nextMovie.setText("No Movies In Wishlist");
-            }
+        if (wishlist.isEmpty() == true) {
+            nextMovie.setText("No Movies In Wishlist");
+        } else {
+            nextMovie.setText("No Movie Playing");
+        }
         c.gridx=0;
         c.anchor = GridBagConstraints.NORTH;
         c.gridy=1;
         c.gridwidth=2;
         panel.add(nextMovie, c);
 
-        JButton watchMovie = new JButton("Watch Movie");
-        watchMovie.setBounds(0, 45, 80, 25);
-        watchMovie.addActionListener(new ActionListener() {
+        JButton delMovie = new JButton("Delete Movie");
+        delMovie.setBounds(0, 45, 80, 25);
+        delMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                wishlist.dequeue();
-                try{
-                    nextMovie.setText(customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
-                    } catch (NullPointerException v) {
-                        nextMovie.setText("No Movies In Wishlist");
-                    }
-                textArea.setText("");
-                treeToText();
+                delMovie.setText("Delete Movie");
+                if (wishlist.length() == 0){
+                    delMovie.setText("No Movies In Wishlist");
+                } else {
+                    nextMovie.setText("No Movie Playing");
+                    wishlist.dequeue();
+                }
             }
         });
         c.gridx = 0;
         c.anchor = GridBagConstraints.SOUTH;
         c.gridy = 1;
         c.gridwidth = 2;
-        panel.add(watchMovie, c);
+        panel.add(delMovie, c);
+
+        JButton watchMovie = new JButton("Watch Movie");
+        watchMovie.setBounds(0, 45, 80, 25);
+        watchMovie.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    nextMovie.setText("Playing: " + customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
+                    if (customer.getWatched().searchReturn(customer.getWishlist().front().getUniqueID()) == null) {
+                        customer.getWatched().insert(customer.getWishlist().front());
+                    }
+                    } catch (Exception v) {
+                        nextMovie.setText("No Movies In Wishlist");
+                    }
+            }
+        });
+        c.gridx = 0;
         c.anchor = GridBagConstraints.CENTER;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        panel.add(watchMovie, c);
 
 
         textArea = new JTextArea("", 10, 20);
@@ -117,15 +135,16 @@ public class UserGUI extends JFrame{
         submit.setBounds(0, 0, 80, 25);
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                submit.setText("Submit");
+                try{
                 System.out.println(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
                 wishlist.enqueue(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
                 System.out.println("Added Movie");
                 System.out.println(wishlist.front());
-                try{
-                    nextMovie.setText(customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
-                    } catch (NullPointerException v) {
-                        nextMovie.setText("No Movies In Wishlist");
-                    }
+                nextMovie.setText("Press Watch to View Next Moive");
+                } catch (NullPointerException er){
+                    submit.setText("No ID Found");
+                }
             }
         });
         c.gridx = 3;
@@ -149,10 +168,24 @@ public class UserGUI extends JFrame{
         c.gridwidth = 4;
         panel.add(back, c);
 
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Menu");
+        JMenuItem historyMenu = new JMenuItem("View History");
+        historyMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, customer.getWatched().printList());
+            }
+        });
+        menu.add(historyMenu);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);
+
         frame.pack();
         frame.setVisible(true);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
                 WelcomeGUI menu = new WelcomeGUI();
                 menu.saveByDate(MoviesByDate);
@@ -180,6 +213,5 @@ public class UserGUI extends JFrame{
             printTree2(movie.getRight());
         }
     }
-
     
 }
