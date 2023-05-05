@@ -1,12 +1,14 @@
 package CORE;
 
+import java.io.Serializable;
+
 // Jay Nash 3/8/23
 // Program to impliment Linked List, list is created by creating a pointer to null and int n to 0
 // Customers can be added using the insert function and can be found to be returned or deleted using searchRemove
 // or searchReturn. The entire list can be interated over and printed using printList and it can be found if the
 // list is empty using isEmptyList.
 
-public class List {
+public class List implements Serializable{
 	private Customer head; // Head Pointer
 	private int n; // Number of Customers in List
 

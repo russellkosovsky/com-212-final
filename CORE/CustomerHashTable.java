@@ -22,7 +22,11 @@ public class CustomerHashTable implements Serializable{
     }
 
     public Customer lookUp(int key){
+        try {
         return table[key%hash].searchReturn(key);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Customer delete(int key){

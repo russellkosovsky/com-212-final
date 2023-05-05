@@ -45,9 +45,6 @@ public class UserLoginGUI extends JFrame implements ActionListener {
         frame.add(panel);
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        MovieQueue wishlist = new MovieQueue();
-        Customer temp = new Customer("Test", 1234, "Test", wishlist);
-        Customers.insert(temp);
 
         menuBar = new JMenuBar();
         menu = new JMenu("New User Form");
@@ -63,7 +60,7 @@ public class UserLoginGUI extends JFrame implements ActionListener {
         frame.setJMenuBar(menuBar);
 
         // create jlabel that is a title that says "Welcome to Camel Films"
-        JLabel title = new JLabel("Welcome User, Please Login");
+        JLabel title = new JLabel("Welcome User, Please Login or Add New User From Menu");
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
         c.insets = new Insets(5, 5, 5, 5);
@@ -72,7 +69,7 @@ public class UserLoginGUI extends JFrame implements ActionListener {
         c.gridwidth = 2;
         panel.add(title, c);
         
-        userLabel = new JLabel("Username");
+        userLabel = new JLabel("Email");
         userLabel.setBounds(10, 30, 80, 25);
         c.gridx = 0;
         c.gridy = 1;
@@ -86,7 +83,7 @@ public class UserLoginGUI extends JFrame implements ActionListener {
         c.gridwidth = 1;
         panel.add(userText, c);
 
-        passwordLabel = new JLabel("Password");
+        passwordLabel = new JLabel("Credit Card");
         passwordLabel.setBounds(10, 60, 80, 25);
         c.gridx = 0;
         c.gridy = 2;
@@ -107,12 +104,19 @@ public class UserLoginGUI extends JFrame implements ActionListener {
                 String user = userText.getText();
                 String password = String.valueOf(passwordText.getPassword());
                 System.out.println(user + ", " + password);
-
-                if (user.equals("username") && password.equals("password")) {
-                    loginBTN.setText("Login successful!");
-                }
-                else {
-                    loginBTN.setText("Login failed!");
+                try{
+                Customer temp = Customers.lookUp(Integer.parseInt(password));
+                if (temp != null) {
+                    if (temp.getEmailAddress().equals(user) != true) {
+                        System.out.println(temp.getEmailAddress() + user);
+                        loginBTN.setText("Email Incorrect");
+                    } else {
+                        frame.setVisible(false);
+                        new UserGUI(temp, Customers, MoviesByDate);
+                    }
+                } else {loginBTN.setText("User not found");}
+                } catch (NullPointerException error) {
+                    loginBTN.setText("User not found");
                 }
             }
         });

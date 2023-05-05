@@ -221,7 +221,7 @@ public class WelcomeGUI extends JFrame {
         }
         catch(IOException i){
             i.printStackTrace();
-            Customers = new CustomerHashTable(128);
+            CustomersL = new CustomerHashTable(128);
             return CustomersL;
         }
         catch(ClassNotFoundException v){
