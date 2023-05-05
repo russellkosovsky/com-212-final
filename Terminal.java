@@ -370,9 +370,9 @@ public class Terminal implements java.io.Serializable{
                     System.out.println("\nWhat is the ID of the movie you would like to add?");
                     System.out.println("Please choose from the above list.");
                     int id = scanner.nextInt();
-                    Movie insertMovie = MoviesByDate.searchID(id); 
-                    System.out.println("Adding: ("+insertMovie+") to your wishlist.");
-                    CurrCustomer.getWishlist().enqueue(insertMovie);
+                    //Movie insertMovie = MoviesByDate.searchID(id); 
+                    //System.out.println("Adding: ("+insertMovie+") to your wishlist.");
+                    //CurrCustomer.getWishlist().enqueue(insertMovie);
                     CurrCustomer.getWishlist().printQueue(); //prints the new wishlist
                 }
             }
@@ -429,8 +429,8 @@ public class Terminal implements java.io.Serializable{
                         //asks the admin for the ID of the movie they want to delete
                         System.out.println("\nWhat is the ID of the movie you would like to delete?");
                         int id = scanner.nextInt();
-                        Movie deleteMovie = MoviesByDate.searchID(id);
-                        MoviesByDate.delete(deleteMovie);
+                        //Movie deleteMovie = MoviesByDate.searchID(id);
+                        //MoviesByDate.delete(deleteMovie);
                         System.out.println("\nHere is the updated movie list:");
                         MoviesByDate.traverse(); //prints the updated movie list for the admin
                     }
