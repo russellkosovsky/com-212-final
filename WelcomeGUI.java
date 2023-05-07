@@ -64,6 +64,8 @@ public class WelcomeGUI extends JFrame {
         loginBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(Customers);
+                System.out.println(MoviesByDate);
+                System.out.println(MoviesByScore);
                 new UserLoginGUI(Customers, MoviesByDate, MoviesByScore);
                 frame.setVisible(false);
             }
@@ -78,6 +80,8 @@ public class WelcomeGUI extends JFrame {
         adminBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(MoviesByDate);
+                System.out.println(Customers);
+                System.out.println(MoviesByScore);
                 new AdminLoginGUI(Customers, MoviesByDate, MoviesByScore);
                 frame.setVisible(false);
             }
