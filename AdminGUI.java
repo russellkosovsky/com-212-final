@@ -55,12 +55,11 @@ public class AdminGUI extends JFrame{
         panel.add(title, c);
 
         JTextArea lowMovie = new JTextArea("", 2, 5);
-        lowMovie.setBounds(0, 0, 200, 25);
+        lowMovie.setBounds(0, 0, 160, 25);
         lowMovie.setLineWrap(false);
         lowMovie.setEditable(false);
         try{
-            Movie temp = MoviesByScore.findMin();
-            lowMovie.setText(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility());
+            lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
             } catch (NullPointerException v) {
                 lowMovie.setText("No Movies");
             }
@@ -74,21 +73,16 @@ public class AdminGUI extends JFrame{
         RemMovie.setBounds(0, 45, 80, 25);
         RemMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (MoviesByScore.findMin().Availablility() == false){
-                    Movie temp = MoviesByScore.findMin();
-                    MoviesByDate.delete(temp);
-                    MoviesByScore.deleteMin();
-                    temp = MoviesByScore.findMin();
-                    try{
-                        lowMovie.setText(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility());
-                        } catch (NullPointerException v) {
-                            lowMovie.setText("No Movies");
-                        }
-                    textArea.setText("");
-                    treeToText();
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERROR: Movie must be set as unavalible first");
-                }
+                Movie temp = MoviesByScore.findMin();
+                MoviesByDate.delete(temp);
+                MoviesByScore.deleteMin();
+                try{
+                    lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                    } catch (NullPointerException v) {
+                        lowMovie.setText("No Movies");
+                    }
+                textArea.setText("");
+                treeToText();
             }
         });
         c.gridx = 0;
@@ -144,12 +138,7 @@ public class AdminGUI extends JFrame{
                 //textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "Score: " + newMovie.getRottenTomatoesScore() + "\n");
                 ID++;
                 try{
-                    Movie temp = MoviesByScore.findMin();
-                    try{
-                        lowMovie.setText(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility());
-                        } catch (NullPointerException v) {
-                            lowMovie.setText("No Movies");
-                        }
+                    lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
                     System.out.println(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
                     } catch (NullPointerException v) {
                         lowMovie.setText("No Movies");
@@ -162,45 +151,6 @@ public class AdminGUI extends JFrame{
         c.gridy = 2;
         c.gridwidth = 1;
         panel.add(submit, c);
-
-        JTextField avalField = new JTextField("Change Avalibility By ID",20);
-        avalField.setBounds(0, 0, 65, 25);
-        c.gridx = 1;
-        c.gridy = 3;
-        c.gridwidth = 1;
-        panel.add(avalField, c);
-
-        JButton changeAval = new JButton("Change Avalibility");
-        changeAval.setBounds(10, 100, 80, 25);
-        changeAval.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Movie temp = MoviesByDate.searchBST(Integer.parseInt(avalField.getText()));
-                if (temp.Availablility() == true) {
-                    temp.setAvailablility(false);
-                    changeAval.setText("Movie set Unavalible");
-                    textArea.setText("");
-                    treeToText();
-                    try{
-                        lowMovie.setText(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility());
-                        } catch (NullPointerException v) {
-                            lowMovie.setText("No Movies");
-                        }
-                } else {
-                    temp.setAvailablility(true);
-                    changeAval.setText("Movie set Avalible");
-                    textArea.setText("");
-                    treeToText();
-                    try{
-                        lowMovie.setText(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility());
-                        } catch (NullPointerException v) {
-                            lowMovie.setText("No Movies");
-                        }
-                }
-            }
-        });
-        c.gridx = 2;
-        c.gridy = 3;
-        panel.add(changeAval, c);
 
         back = new JButton("Logout");
         back.setBounds(10, 100, 80, 25);
@@ -216,7 +166,7 @@ public class AdminGUI extends JFrame{
             }
         });
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 3;
         c.gridwidth = 4;
         panel.add(back, c);
 
@@ -263,7 +213,7 @@ public class AdminGUI extends JFrame{
 
     private void printTree2(Movie movie) {
         if (movie != null) {
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "(Avalibility): " + movie.Availablility() +"\n\n");
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n\n");
             printTree2(movie.getLeft());
             printTree2(movie.getRight());
         }
