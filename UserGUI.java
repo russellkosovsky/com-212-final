@@ -186,6 +186,23 @@ public class UserGUI extends JFrame{
         });
         menu.add(wishlistMenu);
 
+        JMenuItem dateMenu = new JMenuItem("Sort By Date (WIP)");
+        dateMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                JOptionPane.showMessageDialog(null, "WIP");
+            }
+        });
+        menu.add(dateMenu);
+
+        JMenuItem IDMenu = new JMenuItem("Sort By ID");
+        IDMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                textArea.setText("");
+                treeToText();
+            }
+        });
+        menu.add(IDMenu);
+
         menuBar.add(menu);
         setJMenuBar(menuBar);
         frame.setJMenuBar(menuBar);
@@ -217,8 +234,8 @@ public class UserGUI extends JFrame{
 
     private void printTree2(Movie movie) {
         if (movie != null) {
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n\n");
             printTree2(movie.getLeft());
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n\n");
             printTree2(movie.getRight());
         }
     }
