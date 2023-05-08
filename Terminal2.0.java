@@ -1,14 +1,11 @@
-
-
 import java.io.*; 
 import java.util.Scanner;
-
-import CORE.*;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import CORE.*;
 
 public class Terminal implements java.io.Serializable{
     
@@ -202,13 +199,53 @@ public class Terminal implements java.io.Serializable{
             return null;
         }
     }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    //////////////////  MAIN  ////////////////////////
     
-    public static void main(String[] args){
+    
+    private Customer login() {
+    
+        System.out.println("Welcome Back!");
+        //the program remebers existing users by their credit card number
+        System.out.println("Enter credit card number.");
+        int card = scanner.nextInt(); //users input for credit card
+        Customer customer = Customers.lookUp(card);
+        return customer;  
+          
+    }
+    
+    private Customer signUp() {
+        
+        //asks new user for their information to create their account
+        System.out.println("Welcome To The Camel Film Database!");
+        System.out.println("Please create a username.");
+        String name = scanner.nextLine();
+            
+        System.out.println("Please enter your email.");
+        String email = scanner.nextLine();
+            
+        System.out.println("Please enter your credit card number.");
+        int card = scanner.nextInt();
+
+        Customer customer = new Customer(name, card, email, Wishlist);
+        Customers.insert(customer);
+        return customer
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//////////////////////////////////////////////////////////////////////////////////////////   
+    
+    
+	public static void main(String[] args){
         
         //creates scanner
         Scanner scanner = new Scanner(System.in);
@@ -233,59 +270,28 @@ public class Terminal implements java.io.Serializable{
         System.out.println("0. Exit");
         int choice = scanner.nextInt(); //users input for choice
         scanner.nextLine(); //clears scanner
-
-        // IF user is returning and its not the first time the program has been run
-        // will only work once we do serialization
-        // will need it to add a check if its not a valid card
-        if (choice == 1){
-
-            //load all info below
+    
+		if (choice == 1){
+			//load all info below
             MoviesByScore = menu.loadByScore();
             MoviesByDate = menu.loadByDate();
             Customers = menu.loadCustomers();
             Wishlist = menu.loadWishList();
             MoviesByID = menu.loadByID();
-
-            System.out.println("Welcome Back!");
-            //the program remebers existing users by their credit card number
-            System.out.println("Enter credit card number.");
-            int card = scanner.nextInt(); //users input for credit card
-            Customer customer = Customers.lookUp(card);
-            System.out.println(customer);
+            
+            CurrCustomer = login();
         }
-
-        //if user is a new customer and its not the first time the program has been run
         else if (choice == 2){
-        
             //load all info below
             MoviesByScore = menu.loadByScore();
             MoviesByDate = menu.loadByDate();
             Customers = menu.loadCustomers();
             MoviesByID = menu.loadByID();
 
-            //asks new user for their information to create their account
-            System.out.println("Welcome To The Camel Film Database!");
-            System.out.println("Please create a username.");
-            String name = scanner.nextLine();
-            
-            System.out.println("Please enter your email.");
-            String email = scanner.nextLine();
-            
-            System.out.println("Please enter your credit card number.");
-            int card = scanner.nextInt();
-
-            Customer customer = new Customer(name, card, email, Wishlist);
-            Customers.insert(customer);
+			CurrCustomer = signUp();
         }
         
         else if (choice == 3){
-            
-            MoviesByID = new MovieBinarySearchTree();
-            MoviesByScore = new MoviePQ();
-            MoviesByDate = new bstByDate();
-            Wishlist = new MovieQueue();
-            Customers = new CustomerHashTable(100);
-
 
             //creates some sample movies for the user
             Movie movie1 = new Movie("The Secret Life of Pets", 2016, 11111, 75, true);
@@ -339,20 +345,7 @@ public class Terminal implements java.io.Serializable{
             Wishlist.enqueue(movie10);
             Wishlist.enqueue(movie7);
 
-            //asks new user for their information to create their account
-            System.out.println("Welcome To The Camel Film Database!");
-            
-            System.out.println("Please enter a username.");
-            String name = scanner.nextLine();
-            
-            System.out.println("Please enter your email.");
-            String email = scanner.nextLine();
-            
-            System.out.println("Please enter your credit card number.");
-            int cardNUM = scanner.nextInt();
-
-            Customer customer = new Customer(name, cardNUM, email, Wishlist);
-            Customers.insert(customer);
+        	CurrCustomer = signUp();
 
         }
         else if (choice == 0){
@@ -364,11 +357,9 @@ public class Terminal implements java.io.Serializable{
             System.exit(0);
         }
         
-        System.out.println("What is your credit card number to proceed?");
-        int card = scanner.nextInt();    
-        Customer CurrCustomer = Customers.lookUp(card);
-        int choice2 = 1;
-        while (choice2 != 0) {
+        
+		while (choice2 != 0) {
+		
             //asks the user if they are a customer or administrator
             System.out.println("\nGreetings, "+CurrCustomer.getName());
             System.out.println("\nWelcome to CamelFilms!\n");
@@ -380,6 +371,10 @@ public class Terminal implements java.io.Serializable{
   
             choice2 = scanner.nextInt();
             
+            
+            
+            //////////////////////////////////////////////////
+            // Customer
             
             if (choice2 == 1) { //then the user is a customer
   
@@ -437,6 +432,10 @@ public class Terminal implements java.io.Serializable{
                 }
             }
             
+            
+            
+            //////////////////////////////////////////////////
+            // ADMIN
             else if (choice2 == 2){ //then the user is an administrator
                 //the program displays the choices for the administrator
                     System.out.println("\nWelcome Administrator!\n");
@@ -500,7 +499,6 @@ public class Terminal implements java.io.Serializable{
         //closing goodbye for the user once they want to exit
         scanner.close();
         System.out.println("Have a great day and come again soon.\n");
-  
         //saves all the information from the other data structures
         menu.saveByScore(MoviesByScore);
         menu.saveByDate(MoviesByDate);
@@ -510,5 +508,38 @@ public class Terminal implements java.io.Serializable{
 
     }
 }
-        
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
