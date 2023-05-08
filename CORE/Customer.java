@@ -1,3 +1,8 @@
+// Computer Science Data Structures Final Project
+// Authors: Russell, Brooke, Jay, and Miles
+// Description: This code implements a custom node for a customer in a movie rental system.
+// The Customer class includes instance variables for the customer's name, credit card number, email address, wishlist,
+// and watched list. It also includes methods for adding and removing movies from the wishlist, getting the next movie in the wishlist,
 package CORE;
 // Customer.java
 // Customer *nodetype? ... idk what to call. custom nodes
