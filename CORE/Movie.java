@@ -27,6 +27,16 @@ public class Movie implements Serializable{
         this.next = null;
     }
 
+    public Movie(Movie other) {
+        this.title = other.title;
+        this.releaseDate = other.releaseDate;
+        this.uniqueID = other.uniqueID;
+        this.rottenTomatoesScore = other.rottenTomatoesScore;
+        this. isAvailable = true;
+
+        this.next = null;
+    }
+
     // Getters and Setters
     public String getTitle() {
         return title;

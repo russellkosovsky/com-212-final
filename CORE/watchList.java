@@ -70,5 +70,27 @@ public class watchList implements Serializable{
 		}
         return buildString.toString();
 	}
+
+	public Movie get(int index) {
+        if (index < 0 || head == null) {
+            return null;
+        }
+        Movie temp = head;
+        int currentIndex = 0;
+
+        while (temp != null) {
+            if (currentIndex == index) {
+                return temp;
+            }
+            temp = temp.getNext();
+            currentIndex++;
+        }
+
+        return null;
+    }
+
+	public Movie getHead() {
+		return head;
+	}
 }
 

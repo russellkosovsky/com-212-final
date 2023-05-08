@@ -189,7 +189,8 @@ public class UserGUI extends JFrame{
         JMenuItem dateMenu = new JMenuItem("Sort By Date (WIP)");
         dateMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
-                JOptionPane.showMessageDialog(null, "WIP");
+                textArea.setText("");
+                compareDates();
             }
         });
         menu.add(dateMenu);
@@ -239,5 +240,54 @@ public class UserGUI extends JFrame{
             printTree2(movie.getRight());
         }
     }
-    
+
+    public void compareDates() {
+        watchList list = traversal();
+        watchList appended = new watchList();
+        System.out.println(list.printList());
+        for (int i = 0; i < list.length(); i++) {
+            System.out.println(list.printList());
+            Movie temp = list.get(i);
+            for (int j = 0; j < list.length(); j++) {
+                System.out.println(list.printList());
+                System.out.println("Comparing: " + list.get(i) + " with " + list.get(j));
+                if (temp != list.get(j)) {
+                    if (temp.getReleaseDate() > list.get(j).getReleaseDate()) {
+                        if (notContained(appended, temp)) {
+                            temp = list.get(j);
+                        }
+                    }
+                }
+            }
+            textArea.append(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "\n\n");
+            Movie aptemp = new Movie(temp);
+            appended.insert(aptemp);
+        }
+    }
+
+    private watchList traversal() {
+        watchList list = new watchList();
+        traversal2(MoviesByDate.getRoot(), list);
+        return list;
+    }
+
+    private void traversal2(Movie movie, watchList list) {
+        if (movie != null) {
+            traversal2(movie.getLeft(), list);
+            list.insert(movie);
+            traversal2(movie.getRight(), list);
+        }
+    }
+
+    public boolean notContained(watchList list, Movie movie) {
+		Movie temp = list.getHead();
+		while (temp != null) {
+			if (temp.getUniqueID() == movie.getUniqueID()) {
+				return false;
+			} else {
+				temp = temp.getNext();
+			}
+		}
+		return true;
+	}
 }
