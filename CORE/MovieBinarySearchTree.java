@@ -80,6 +80,21 @@ public class MovieBinarySearchTree implements Serializable{
     }
   }
 
+  public void traverseDate() {
+    traverseDate2(root);
+    System.out.println();
+  }
+
+  private void traverseDate2(Movie node) {
+    if (node != null) {
+      traverseDate2(node.getLeft());
+      System.out.print(node.getReleaseDate() + " ");
+      traverseDate2(node.getRight());
+    }
+  }
+
+
+
   public Movie searchBST(int id) { 
     return search2(root,id);
   }
@@ -98,6 +113,26 @@ public class MovieBinarySearchTree implements Serializable{
       return search2(root.getRight(), id);
     }
   }
+
+  public Movie searchDate(int date) { 
+    return searchDate2(root,date);
+  }
+
+  private Movie searchDate2(Movie root, int date) {
+    if (root == null){
+      return null;
+    }
+    else if (date == root.getReleaseDate()){
+      return root;
+    }
+    else if (date < root.getReleaseDate()){
+      return searchDate2(root.getLeft(), date);
+    }
+    else {
+      return searchDate2(root.getRight(), date);
+    }
+  }
+
 
   public void printTree(){
     printMovies2(root);
