@@ -106,8 +106,8 @@ public class UserGUI extends JFrame{
 
         textArea = new JTextArea("", 10, 20);
         textArea.setLineWrap(true);
-        textArea.setPreferredSize(new Dimension(200, 100));
         scrollText = new JScrollPane(textArea);
+        scrollText.setPreferredSize(new Dimension(300, 200));
         textArea.setEditable(false);
         scrollText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         c.gridx = 2;
@@ -177,6 +177,15 @@ public class UserGUI extends JFrame{
             }
         });
         menu.add(historyMenu);
+
+        JMenuItem wishlistMenu = new JMenuItem("View Wishlist");
+        wishlistMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                JOptionPane.showMessageDialog(null, customer.getWishlist().printQueueString());
+            }
+        });
+        menu.add(wishlistMenu);
+
         menuBar.add(menu);
         setJMenuBar(menuBar);
         frame.setJMenuBar(menuBar);

@@ -95,8 +95,8 @@ public class AdminGUI extends JFrame{
 
         textArea = new JTextArea("", 10, 20);
         textArea.setLineWrap(true);
-        textArea.setPreferredSize(new Dimension(200, 100));
         scrollText = new JScrollPane(textArea);
+        scrollText.setPreferredSize(new Dimension(300, 200));
         textArea.setEditable(false);
         scrollText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         c.gridx = 2;
