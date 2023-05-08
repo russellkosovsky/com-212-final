@@ -177,6 +177,13 @@ public class UserGUI extends JFrame{
             }
         });
         menu.add(historyMenu);
+
+        JMenuItem wishlistMenu = new JMenuItem("View Wishlist");
+        wishlistMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                JOptionPane.showMessageDialog(null, customer.getWishlist().printQueueString());
+            }
+        });
         menuBar.add(menu);
         setJMenuBar(menuBar);
         frame.setJMenuBar(menuBar);
