@@ -203,10 +203,52 @@ public class Terminal implements java.io.Serializable{
         }
     }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  
+    private void load(Terminal menu) {
     
-    //private void 
+        MoviesByScore = menu.loadByScore();
+        MoviesByDate = menu.loadByDate();
+        Customers = menu.loadCustomers();
+        MoviesByID = menu.loadByID();
+        Wishlist = menu.loadWishList();
+    
+    }
 
+    private Customer login() {
+    
+        System.out.println("Welcome Back!");
+        //the program remebers existing users by their credit card number
+        System.out.println("Enter credit card number.");
+        int card = scanner.nextInt(); //users input for credit card
+        Customer customer = Customers.lookUp(card);
+        System.out.println(customer);
+        return customer;  
+          
+    
+    }
+    
+    private void signUp() {
+    
+        load();
+        
+        //asks new user for their information to create their account
+        System.out.println("Welcome To The Camel Film Database!");
+        System.out.println("Please create a username.");
+        String name = scanner.nextLine();
+            
+        System.out.println("Please enter your email.");
+        String email = scanner.nextLine();
+            
+        System.out.println("Please enter your credit card number.");
+        int card = scanner.nextInt();
 
+        Customer customer = new Customer(name, card, email, Wishlist);
+        Customers.insert(customer);
+    }
 
 
 
@@ -306,16 +348,16 @@ public class Terminal implements java.io.Serializable{
 
 
             //creates some sample movies for the user
-            Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 11111, 75, true);
-            Movie movie2 = new Movie("The Dark Knight", 20080114, 22222, 94, true);
-            Movie movie3 = new Movie("Jurassic Park", 19931229, 33333, 91, false);
-            Movie movie4 = new Movie("The Godfather", 19720817, 44444, 98, true);
-            Movie movie5 = new Movie("Inception", 20100527, 55555, 87, true);
-            Movie movie6 = new Movie("Avatar", 20090320, 66666, 82, true);
-            Movie movie7 = new Movie("The Shawshank Redemption", 19940911, 77777, 91, false);
-            Movie movie8 = new Movie("Pulp Fiction", 19940105, 88888, 94, false);
-            Movie movie9 = new Movie("Forrest Gump", 19940621, 99999, 72, true);
-            Movie movie10 = new Movie("The Matrix", 19991115, 10000, 87, true);
+            Movie movie1 = new Movie("The Secret Life of Pets", 2016, 11111, 75, true);
+            Movie movie2 = new Movie("The Dark Knight", 2008, 22222, 94, true);
+            Movie movie3 = new Movie("Jurassic Park", 1993, 33333, 91, false);
+            Movie movie4 = new Movie("The Godfather", 1972, 44444, 98, true);
+            Movie movie5 = new Movie("Inception", 2010, 55555, 87, true);
+            Movie movie6 = new Movie("Avatar", 2009, 66666, 82, true);
+            Movie movie7 = new Movie("The Shawshank Redemption", 1994, 77777, 91, false);
+            Movie movie8 = new Movie("Pulp Fiction", 1994, 88888, 94, false);
+            Movie movie9 = new Movie("Forrest Gump", 1994, 99999, 72, true);
+            Movie movie10 = new Movie("The Matrix", 1999, 10000, 87, true);
 
             //inserts movies for the admin
             MoviesByScore.insert(movie1);

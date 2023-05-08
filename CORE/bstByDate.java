@@ -10,23 +10,39 @@ public class bstByDate implements Serializable{
     root = null;
   }
 
-  public void dateInsert(Movie node) {
-    root = dateInsert2(root, node);
+
+public void dateInsert(Movie node){
+
+    if ( root == null ) {
+      root = node;
+      return;
+    }
+
+    insertRec(root, node);
+
   }
 
-  private Movie dateInsert2(Movie root, Movie node) {
-    if (root == null) {
-      root = node;
-      return root;
-    }
+  private void insertRec(Movie latestRoot, Movie node){
 
-    if (node.getReleaseDate() < root.getReleaseDate()) {
-      root.setLeft(dateInsert2(root.getLeft(), node));
-    } else if (node.getReleaseDate() > root.getReleaseDate()) {
-        root.setRight(dateInsert2(root.getRight(), node));
-    }
+    if ( latestRoot.getReleaseDate() > node.getReleaseDate()){
 
-    return root;
+      if ( latestRoot.getLeft() == null ){
+        latestRoot.setLeft(node);
+        return;
+      }
+      else{
+        insertRec(latestRoot.getLeft(), node);
+      }
+    }
+    else{
+      if (latestRoot.getRight() == null){
+        latestRoot.setRight(node);
+        return;
+      }
+      else{
+        insertRec(latestRoot.getRight(), node);
+      }
+    }
   }
 
   public void dateDelete(Movie node) {
@@ -49,7 +65,7 @@ public class bstByDate implements Serializable{
         return root.getLeft();
       }
 
-      root.setUniqueID(dateMinValue(root.getRight()));
+      root.setReleaseDate(dateMinValue(root.getRight()));
       root.setRight(dateDeleteR(root.getRight(), root.getReleaseDate()));
     }
 
@@ -73,13 +89,13 @@ public class bstByDate implements Serializable{
   }
 
   private void traverseByDate2(Movie node) {
-    if (node != null) {
+    if (node == null) {
+        return;
+        } else {
       traverseByDate2(node.getLeft());
       System.out.print("Title: " + node.getTitle() + ", ID: " + node.getUniqueID() + ", Score: " + node.getRottenTomatoesScore() + ", Relese Date: " + node.getReleaseDate() + ", Available: " + node.Availablility() + "\n");
       traverseByDate2(node.getRight());
-    } else{
-
-    }
+  }
   }
 
   public Movie searchDate(int date) { 
@@ -117,7 +133,7 @@ public class bstByDate implements Serializable{
       if (tree.getRight() != null)
         System.out.println("Right: " + tree.getRight().getReleaseDate() + " ");
       else
-        System.out.println("Right: null ");
+      System.out.println("Right: null ");
       printDateTree2(tree.getLeft());
       printDateTree2(tree.getRight());
     }
