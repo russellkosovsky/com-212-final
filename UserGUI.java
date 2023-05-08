@@ -186,7 +186,7 @@ public class UserGUI extends JFrame{
         });
         menu.add(wishlistMenu);
 
-        JMenuItem dateMenu = new JMenuItem("Sort By Date (WIP)");
+        JMenuItem dateMenu = new JMenuItem("Sort By Date");
         dateMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 textArea.setText("");
