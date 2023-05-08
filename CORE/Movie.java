@@ -1,5 +1,7 @@
 package CORE;
 // Movie.java
+// Computer Science Data Structures Final Project
+// By Russell, Brooke, Jay, and Miles
 // custom node class to represent the elements of any movie
 
 import java.io.Serializable;
