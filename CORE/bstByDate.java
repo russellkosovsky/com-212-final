@@ -23,7 +23,7 @@ public class bstByDate implements Serializable{
     if (node.getReleaseDate() < root.getReleaseDate()) {
       root.setLeft(dateInsert2(root.getLeft(), node));
     } else if (node.getReleaseDate() > root.getReleaseDate()) {
-      root.setRight(dateInsert2(root.getRight(), node));
+        root.setRight(dateInsert2(root.getRight(), node));
     }
 
     return root;
@@ -75,8 +75,10 @@ public class bstByDate implements Serializable{
   private void traverseByDate2(Movie node) {
     if (node != null) {
       traverseByDate2(node.getLeft());
-      System.out.print(node.getReleaseDate() + " ");
+      System.out.print("Title: " + node.getTitle() + ", ID: " + node.getUniqueID() + ", Score: " + node.getRottenTomatoesScore() + ", Relese Date: " + node.getReleaseDate() + ", Available: " + node.Availablility() + "\n");
       traverseByDate2(node.getRight());
+    } else{
+
     }
   }
 
@@ -205,18 +207,18 @@ public class bstByDate implements Serializable{
         temp = p.getLeft();
       }
 
-      if (findParent(p).getLeft() == p){
-        findParent(p).setLeft(temp);
+      if (dateFindParent(p).getLeft() == p){
+        dateFindParent(p).setLeft(temp);
       }
       else {
-        findParent(p).setRight(temp);
+        dateFindParent(p).setRight(temp);
       }
     }
     else if (p.getLeft() == null && p.getRight() == null){
-      if (findParent(p).getLeft().getReleaseDate() == p.getReleaseDate()){
+      if (dateFindParent(p).getLeft().getReleaseDate() == p.getReleaseDate()){
         p.setLeft(null);
       }
-      else if (findParent(p).getRight().getReleaseDate() == p.getReleaseDate()){
+      else if (dateFindParent(p).getRight().getReleaseDate() == p.getReleaseDate()){
         p.setRight(null);
       }
     }

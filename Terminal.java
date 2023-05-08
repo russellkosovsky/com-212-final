@@ -13,7 +13,8 @@ import java.io.ObjectOutputStream;
 public class Terminal implements java.io.Serializable{
     
     public MoviePQ MoviesByScore;
-    public MovieBinarySearchTree MoviesByDate;
+    public MovieBinarySearchTree MoviesByID;
+    public bstByDate MoviesByDate;
     public MovieQueue Wishlist;
     
     public Terminal(){
@@ -22,6 +23,20 @@ public class Terminal implements java.io.Serializable{
     
     //////////////////  SAVING  ////////////////////////
     
+    //function to save the MoviesByID database
+    public void saveByID(MovieBinarySearchTree MoviesByID){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("MoviesByIDT.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(MoviesByID);
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized object successfully in MoviesByIDT.txt");
+        } 
+        catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
     //function to save the MoviePQ
     public void saveByScore(MoviePQ MoviesByScore){
         try {
@@ -37,7 +52,7 @@ public class Terminal implements java.io.Serializable{
         }
     }
     //function to save the MoviesByDate database
-    public void saveByDate(MovieBinarySearchTree MoviesByDate){
+    public void saveByDate(bstByDate MoviesByDate){
         try {
             FileOutputStream fileOut = new FileOutputStream("MoviesByDateT.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -82,6 +97,27 @@ public class Terminal implements java.io.Serializable{
     
     //////////////////  LOADING  ////////////////////////
     
+    //function to load the movies in the database for the user
+    public MovieBinarySearchTree loadByID(){
+        MovieBinarySearchTree MoviesByID = null;
+        try{
+            FileInputStream fileIn = new FileInputStream("MoviesByIDT.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            MoviesByID = (MovieBinarySearchTree) in.readObject();
+            in.close();
+            fileIn.close();
+            return MoviesByID;
+        }
+        catch(IOException i){
+            i.printStackTrace();
+            return null;
+        }
+        catch(ClassNotFoundException v){
+            System.out.println("MoviesByID class not found");
+            v.printStackTrace();
+            return null;
+        }
+    }
     //function to load the AdminPG so that we have the necessary info
     public MoviePQ loadByScore(){
         MoviePQ MoviesByScore = null;
@@ -104,12 +140,12 @@ public class Terminal implements java.io.Serializable{
         }
     }
     //function to load the movies in the database for the user
-    public MovieBinarySearchTree loadByDate(){
-        MovieBinarySearchTree MoviesByDate = null;
+    public bstByDate loadByDate(){
+        bstByDate MoviesByDate = null;
         try{
             FileInputStream fileIn = new FileInputStream("MoviesByDateT.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            MoviesByDate = (MovieBinarySearchTree) in.readObject();
+            MoviesByDate = (bstByDate) in.readObject();
             in.close();
             fileIn.close();
             return MoviesByDate;
@@ -167,6 +203,27 @@ public class Terminal implements java.io.Serializable{
         }
     }
 
+    
+    //private void 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //////////////////  MAIN  ////////////////////////
     
     public static void main(String[] args){
@@ -175,10 +232,12 @@ public class Terminal implements java.io.Serializable{
         Scanner scanner = new Scanner(System.in);
         Terminal menu = new Terminal();
         
+        // 
+        MovieBinarySearchTree MoviesByID = new MovieBinarySearchTree();
         // movie priority queue to store movies by score(for admin)
         MoviePQ MoviesByScore = new MoviePQ();
         // create a movie bst to store them by date (for user)
-        MovieBinarySearchTree MoviesByDate = new MovieBinarySearchTree();
+        bstByDate MoviesByDate = new bstByDate();
         // Create a movie queue that is the users wishlisht
         MovieQueue Wishlist = new MovieQueue();        
         //crteate Hash table to store customers
@@ -203,6 +262,7 @@ public class Terminal implements java.io.Serializable{
             MoviesByDate = menu.loadByDate();
             Customers = menu.loadCustomers();
             Wishlist = menu.loadWishList();
+            MoviesByID = menu.loadByID();
 
             System.out.println("Welcome Back!");
             //the program remebers existing users by their credit card number
@@ -219,6 +279,7 @@ public class Terminal implements java.io.Serializable{
             MoviesByScore = menu.loadByScore();
             MoviesByDate = menu.loadByDate();
             Customers = menu.loadCustomers();
+            MoviesByID = menu.loadByID();
 
             //asks new user for their information to create their account
             System.out.println("Welcome To The Camel Film Database!");
@@ -237,10 +298,12 @@ public class Terminal implements java.io.Serializable{
         
         else if (choice == 3){
             
+            MoviesByID = new MovieBinarySearchTree();
             MoviesByScore = new MoviePQ();
-            MoviesByDate = new MovieBinarySearchTree();
+            MoviesByDate = new bstByDate();
             Wishlist = new MovieQueue();
             Customers = new CustomerHashTable(100);
+
 
             //creates some sample movies for the user
             Movie movie1 = new Movie("The Secret Life of Pets", 20161011, 11111, 75, true);
@@ -266,16 +329,28 @@ public class Terminal implements java.io.Serializable{
             MoviesByScore.insert(movie9);
             MoviesByScore.insert(movie10);
             //insertmovies for user
-            MoviesByDate.insert(movie1);
-            MoviesByDate.insert(movie2);
-            MoviesByDate.insert(movie3);
-            MoviesByDate.insert(movie4);
-            MoviesByDate.insert(movie5);
-            MoviesByDate.insert(movie6);
-            MoviesByDate.insert(movie7); 
-            MoviesByDate.insert(movie8);
-            MoviesByDate.insert(movie9);
-            MoviesByDate.insert(movie10);
+            MoviesByDate.dateInsert(movie1);
+            MoviesByDate.dateInsert(movie2);
+            MoviesByDate.dateInsert(movie3);
+            MoviesByDate.dateInsert(movie4);
+            MoviesByDate.dateInsert(movie5);
+            MoviesByDate.dateInsert(movie6);
+            MoviesByDate.dateInsert(movie7); 
+            MoviesByDate.dateInsert(movie8);
+            MoviesByDate.dateInsert(movie9);
+            MoviesByDate.dateInsert(movie10);
+
+            MoviesByID.insert(movie1);
+            MoviesByID.insert(movie2);
+            MoviesByID.insert(movie3);
+            MoviesByID.insert(movie4);
+            MoviesByID.insert(movie5);
+            MoviesByID.insert(movie6);
+            MoviesByID.insert(movie7); 
+            MoviesByID.insert(movie8);
+            MoviesByID.insert(movie9);
+            MoviesByID.insert(movie10);
+
             //insert 3 movies to users wishlist by default
             Wishlist.enqueue(movie2);
             Wishlist.enqueue(movie5);
@@ -336,6 +411,8 @@ public class Terminal implements java.io.Serializable{
                 System.out.println("5. Back to main menu");
   
                 int custchoice1 = scanner.nextInt();
+
+
   
                 if (custchoice1 == 1){ //then the user is able to see their wishlist
                     //CurrCustomer.getWishlist().printQueue();
@@ -345,7 +422,7 @@ public class Terminal implements java.io.Serializable{
                 else if (custchoice1 == 2){ //then the user views all movies in order of release date
                     //print all movies in order of release date(BST)
                     System.out.println("Here is all the movies on record in order of release date.");
-                    MoviesByDate.traverse(); //list the movies in order of release date
+                    MoviesByDate.traverseByDate(); //list the movies in order of release date
                 }
                 else if (custchoice1 == 3){ //then the user wants to delete a movie
                     //gets next movie in list for the user to watch
@@ -363,16 +440,17 @@ public class Terminal implements java.io.Serializable{
                     }
                     CurrCustomer.getWishlist().printQueue();
                 } 
+
                 else if (custchoice1 == 4){ //then the user wants to insert a movie
                     //displays the movies in the database
                     System.out.println("Here is the list of movies on record:");
-                    MoviesByScore.printPQ();
+                    MoviesByDate.traverseByDate();
                     System.out.println("\nWhat is the ID of the movie you would like to add?");
                     System.out.println("Please choose from the above list.");
                     int id = scanner.nextInt();
-                    //Movie insertMovie = MoviesByDate.searchID(id); 
-                    //System.out.println("Adding: ("+insertMovie+") to your wishlist.");
-                    //CurrCustomer.getWishlist().enqueue(insertMovie);
+                    Movie insertMovie = MoviesByID.searchBST(id); 
+                    System.out.println("Adding: ("+insertMovie+") to your wishlist.");
+                    CurrCustomer.getWishlist().enqueue(insertMovie);
                     CurrCustomer.getWishlist().printQueue(); //prints the new wishlist
                 }
             }
@@ -406,8 +484,8 @@ public class Terminal implements java.io.Serializable{
                     else if (adminchoice == 3){ //then the admin wants to add a new movie
                         //insert function of priotity queue
                         //asks the admin for the movie's information so it can be added
-                        System.out.println("\nWhat is the title of the movie you would like to add?");
-                        String title = scanner.nextLine();
+                        System.out.println("What is the title of the movie you would like to add?");
+                        String title = scanner.next();
                         System.out.println("What is this movie's release date? Give year month and day. (ex.20230101)");
                         int date = scanner.nextInt();
                         System.out.println("What is this movie's ID code? (ex.11111)");
@@ -416,12 +494,12 @@ public class Terminal implements java.io.Serializable{
                         int score = scanner.nextInt();
   
                         Movie movieName = new Movie(title, date, id, score, true);
-                        MoviesByDate.insert(movieName); //inserts the movie
+                        MoviesByDate.dateInsert(movieName); //inserts the movie
                         MoviesByScore.insert(movieName);
                         System.out.println("\nHere is the updated admin movie list:");
                         MoviesByScore.printPQ(); //prints the updated movie list for the admin
                         System.out.println("\nHere is the updated user movie list:");
-                        MoviesByDate.traverse(); //prints the updated movie list for the user
+                        MoviesByDate.traverseByDate(); //prints the updated movie list for the user
 
                     }
 
@@ -432,10 +510,10 @@ public class Terminal implements java.io.Serializable{
                         //Movie deleteMovie = MoviesByDate.searchID(id);
                         //MoviesByDate.delete(deleteMovie);
                         System.out.println("\nHere is the updated movie list:");
-                        MoviesByDate.traverse(); //prints the updated movie list for the admin
-                    }
+                        MoviesByDate.traverseByDate(); //prints the updated movie list for the admin 
                 }
             }
+        }
   
         //closing goodbye for the user once they want to exit
         scanner.close();
@@ -446,8 +524,9 @@ public class Terminal implements java.io.Serializable{
         menu.saveByDate(MoviesByDate);
         menu.saveWishList(Wishlist);
         menu.saveCustomers(Customers);
-        
-    }   
+        menu.saveByID(MoviesByID);
+
+    }
 }
         
         
