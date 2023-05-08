@@ -172,7 +172,6 @@ public class WelcomeGUI extends JFrame {
             return MoviesByScoreL;
         }
         catch(IOException i){
-            i.printStackTrace();
             MoviesByScoreL = new MoviePQ();
             return MoviesByScoreL;
         }
@@ -197,7 +196,6 @@ public class WelcomeGUI extends JFrame {
             return MoviesByDateL;
         }
         catch(IOException i){
-            i.printStackTrace();
             MoviesByDateL = new MovieBinarySearchTree();
             return MoviesByDateL;
         }
@@ -224,7 +222,6 @@ public class WelcomeGUI extends JFrame {
             return CustomersL;
         }
         catch(IOException i){
-            i.printStackTrace();
             CustomersL = new CustomerHashTable(128);
             return CustomersL;
         }

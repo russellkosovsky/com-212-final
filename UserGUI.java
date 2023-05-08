@@ -88,9 +88,13 @@ public class UserGUI extends JFrame{
         watchMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try{
-                    nextMovie.setText("Playing: " + customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
-                    if (customer.getWatched().searchReturn(customer.getWishlist().front().getUniqueID()) == null) {
-                        customer.getWatched().insert(customer.getWishlist().front());
+                    if (customer.getWishlist().front().Availablility() == true) {
+                        nextMovie.setText("Playing: " + customer.getWishlist().front().getTitle() + " " + customer.getWishlist().front().getReleaseDate());
+                        if (customer.getWatched().searchReturn(customer.getWishlist().front().getUniqueID()) == null) {
+                            customer.getWatched().insert(customer.getWishlist().front());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Movie Unavalible, Removing From Wishlist");
                     }
                     } catch (Exception v) {
                         nextMovie.setText("No Movies In Wishlist");
@@ -137,11 +141,14 @@ public class UserGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 submit.setText("Submit");
                 try{
-                System.out.println(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
+                if (MoviesByDate.searchBST(Integer.parseInt(movieID.getText())) != null && MoviesByDate.searchBST(Integer.parseInt(movieID.getText())).Availablility() == true) {
                 wishlist.enqueue(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
                 System.out.println("Added Movie");
                 System.out.println(wishlist.front());
                 nextMovie.setText("Press Watch to View Next Moive");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Movie Not Avalible or Invalid ID");
+                }
                 } catch (NullPointerException er){
                     submit.setText("No ID Found");
                 }
@@ -236,7 +243,7 @@ public class UserGUI extends JFrame{
     private void printTree2(Movie movie) {
         if (movie != null) {
             printTree2(movie.getLeft());
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n\n");
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "(Avalibility): " + movie.Availablility() + "\n\n");
             printTree2(movie.getRight());
         }
     }
@@ -254,7 +261,7 @@ public class UserGUI extends JFrame{
                 }
             }
             if (notContained(appended, temp)) {
-                textArea.append(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "\n\n");
+                textArea.append(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility() + "\n\n");
                 Movie newMovie = new Movie(temp); 
                 appended.insert(newMovie);
             } else {

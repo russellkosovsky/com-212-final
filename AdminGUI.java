@@ -74,7 +74,7 @@ public class AdminGUI extends JFrame{
         RemMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Movie temp = MoviesByScore.findMin();
-                MoviesByDate.delete(temp);
+                temp.setAvailablility(false);
                 MoviesByScore.deleteMin();
                 try{
                     lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
@@ -213,7 +213,7 @@ public class AdminGUI extends JFrame{
 
     private void printTree2(Movie movie) {
         if (movie != null) {
-            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "\n\n");
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "(Avalibility): " + movie.Availablility() + "\n\n");
             printTree2(movie.getLeft());
             printTree2(movie.getRight());
         }
