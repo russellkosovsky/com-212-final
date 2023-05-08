@@ -245,23 +245,22 @@ public class UserGUI extends JFrame{
         watchList list = traversal();
         watchList appended = new watchList();
         System.out.println(list.printList());
-        for (int i = 0; i < list.length(); i++) {
-            System.out.println(list.printList());
-            Movie temp = list.get(i);
-            for (int j = 0; j < list.length(); j++) {
-                System.out.println(list.printList());
-                System.out.println("Comparing: " + list.get(i) + " with " + list.get(j));
-                if (temp != list.get(j)) {
-                    if (temp.getReleaseDate() > list.get(j).getReleaseDate()) {
-                        if (notContained(appended, temp)) {
-                            temp = list.get(j);
-                        }
-                    }
+        while (list.length() > 0) {
+            Movie temp = list.get(0);
+            for (int i = 1; i < list.length(); i++) {
+                System.out.println("Comparing: " + temp + " with " + list.get(i));
+                if (temp.getReleaseDate() > list.get(i).getReleaseDate()) {
+                    temp = list.get(i);
                 }
             }
-            textArea.append(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "\n\n");
-            Movie aptemp = new Movie(temp);
-            appended.insert(aptemp);
+            if (notContained(appended, temp)) {
+                textArea.append(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "\n\n");
+                Movie newMovie = new Movie(temp); 
+                appended.insert(newMovie);
+            } else {
+                System.out.println("Movie Contained");
+            }
+            list.searchRemove(temp.getUniqueID());
         }
     }
 
