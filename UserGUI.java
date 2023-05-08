@@ -184,6 +184,8 @@ public class UserGUI extends JFrame{
                 JOptionPane.showMessageDialog(null, customer.getWishlist().printQueueString());
             }
         });
+        menu.add(wishlistMenu);
+
         menuBar.add(menu);
         setJMenuBar(menuBar);
         frame.setJMenuBar(menuBar);
