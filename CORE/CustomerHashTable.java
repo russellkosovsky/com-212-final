@@ -1,7 +1,7 @@
 // Computer Science Data Structures Final Project
 // Authors: Russell, Brooke, Jay, and Miles
 // Description: This code implements a hash table in Java for storing customer data
-
+package CORE;
 import java.io.Serializable;
 
 public class CustomerHashTable implements Serializable{
@@ -52,5 +52,6 @@ public void printHash(){
         table[i].printList(); // prints the contents of each linked list in the table
     }
     System.out.println("End Dict Contents");
+}
 }
 
