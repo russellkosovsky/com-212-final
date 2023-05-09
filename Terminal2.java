@@ -7,14 +7,15 @@ import java.io.ObjectOutputStream;
 
 import CORE.*;
 
-public class Terminal implements java.io.Serializable{
+public class Terminal2 implements java.io.Serializable {
     
     public MoviePQ MoviesByScore;
     public MovieBinarySearchTree MoviesByID;
     public bstByDate MoviesByDate;
+    public CustomerHashTable Customers;
     public MovieQueue Wishlist;
     
-    public Terminal(){
+    public Terminal2(){
     
     }
     
@@ -199,47 +200,7 @@ public class Terminal implements java.io.Serializable{
             return null;
         }
     }
-    
-    
-    private Customer login() {
-    
-        System.out.println("Welcome Back!");
-        //the program remebers existing users by their credit card number
-        System.out.println("Enter credit card number.");
-        int card = scanner.nextInt(); //users input for credit card
-        Customer customer = Customers.lookUp(card);
-        return customer;  
-          
-    }
-    
-    private Customer signUp() {
-        
-        //asks new user for their information to create their account
-        System.out.println("Welcome To The Camel Film Database!");
-        System.out.println("Please create a username.");
-        String name = scanner.nextLine();
-            
-        System.out.println("Please enter your email.");
-        String email = scanner.nextLine();
-            
-        System.out.println("Please enter your credit card number.");
-        int card = scanner.nextInt();
 
-        Customer customer = new Customer(name, card, email, Wishlist);
-        Customers.insert(customer);
-        return customer
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 //////////////////////////////////////////////////////////////////////////////////////////   
@@ -278,8 +239,8 @@ public class Terminal implements java.io.Serializable{
             Customers = menu.loadCustomers();
             Wishlist = menu.loadWishList();
             MoviesByID = menu.loadByID();
-            
-            CurrCustomer = login();
+
+
         }
         else if (choice == 2){
             //load all info below
@@ -288,7 +249,21 @@ public class Terminal implements java.io.Serializable{
             Customers = menu.loadCustomers();
             MoviesByID = menu.loadByID();
 
-			CurrCustomer = signUp();
+			//asks new user for their information to create their account
+            System.out.println("Welcome To The Camel Film Database!");
+            System.out.println("Please create a username.");
+            String name = scanner.nextLine();
+            
+            System.out.println("Please enter your email.");
+            String email = scanner.nextLine();
+            
+            System.out.println("Please enter your credit card number.");
+            int card = scanner.nextInt();
+
+            Customer customer = new Customer(name, card, email, Wishlist);
+            Customers.insert(customer);
+            System.out.println("Customer created.");
+
         }
         
         else if (choice == 3){
@@ -345,7 +320,21 @@ public class Terminal implements java.io.Serializable{
             Wishlist.enqueue(movie10);
             Wishlist.enqueue(movie7);
 
-        	CurrCustomer = signUp();
+            //asks new user for their information to create their account
+            System.out.println("Welcome To The Camel Film Database!");
+            System.out.println("Please create a username.");
+            String name = scanner.nextLine();
+            
+            System.out.println("Please enter your email.");
+            String email = scanner.nextLine();
+            
+            System.out.println("Please enter your credit card number.");
+            int card = scanner.nextInt();
+
+            Customer customer = new Customer(name, card, email, Wishlist);
+            Customers.insert(customer);
+            System.out.println("Customer created.");
+
 
         }
         else if (choice == 0){
@@ -356,8 +345,14 @@ public class Terminal implements java.io.Serializable{
             System.out.println("Please enter a valid number.");
             System.exit(0);
         }
-        
-        
+
+
+        System.out.println("Enter credit card number to login.");
+        int card = scanner.nextInt(); //users input for credit card
+        Customer CurrCustomer = Customers.lookUp(card);
+
+
+        int choice2 = 1;
 		while (choice2 != 0) {
 		
             //asks the user if they are a customer or administrator
@@ -375,7 +370,6 @@ public class Terminal implements java.io.Serializable{
             
             //////////////////////////////////////////////////
             // Customer
-            
             if (choice2 == 1) { //then the user is a customer
   
                 //choices the customer has to choose from
@@ -393,14 +387,22 @@ public class Terminal implements java.io.Serializable{
   
                 if (custchoice1 == 1){ //then the user is able to see their wishlist
                     //CurrCustomer.getWishlist().printQueue();
-                    Wishlist.printQueue();
+                    System.out.println("\n\n\n          Your Wishlist: \n");
+                    //Wishlist.printQueue();
+                    CurrCustomer.getWishlist().printQueue();
                 }
                 
+                
+
+
                 else if (custchoice1 == 2){ //then the user views all movies in order of release date
                     //print all movies in order of release date(BST)
                     System.out.println("Here is all the movies on record in order of release date.");
                     MoviesByDate.traverseByDate(); //list the movies in order of release date
                 }
+                
+
+
                 else if (custchoice1 == 3){ //then the user wants to delete a movie
                     //gets next movie in list for the user to watch
                     //ask user if they would like to delete this movie
@@ -417,6 +419,8 @@ public class Terminal implements java.io.Serializable{
                     }
                     CurrCustomer.getWishlist().printQueue();
                 } 
+
+                
 
                 else if (custchoice1 == 4){ //then the user wants to insert a movie
                     //displays the movies in the database
@@ -448,12 +452,16 @@ public class Terminal implements java.io.Serializable{
   
                     int adminchoice = scanner.nextInt();
   
+                    
+
                     if (adminchoice == 1){ //then the admin wants to see the least rated movie
                         //find min in priority queue
                         Movie min = MoviesByScore.findMin();
                         System.out.println("\nLeast Rated Movie: " + min.getTitle() + " Score: " + min.getRottenTomatoesScore());
                     }
                         
+                    
+
                     else if (adminchoice == 2){ //then the admin wants to delete the least rated movie
                         //delete min in priority queue
                         MoviesByScore.deleteMin();
@@ -462,6 +470,8 @@ public class Terminal implements java.io.Serializable{
                         MoviesByScore.printPQ(); //prints the updated list of movies
                     }
                     
+                    
+
                     else if (adminchoice == 3){ //then the admin wants to add a new movie
                         //insert function of priotity queue
                         //asks the admin for the movie's information so it can be added
@@ -484,6 +494,8 @@ public class Terminal implements java.io.Serializable{
 
                     }
 
+                    
+
                     else if (adminchoice == 4){ //then the admin wants to delete a movie by ID
                         //asks the admin for the ID of the movie they want to delete
                         System.out.println("\nWhat is the ID of the movie you would like to delete?");
@@ -494,7 +506,8 @@ public class Terminal implements java.io.Serializable{
                         MoviesByDate.traverseByDate(); //prints the updated movie list for the admin 
                 }
             }
-        }
+
+        } // CLOSE WHILE
   
         //closing goodbye for the user once they want to exit
         scanner.close();
@@ -506,8 +519,8 @@ public class Terminal implements java.io.Serializable{
         menu.saveCustomers(Customers);
         menu.saveByID(MoviesByID);
 
-    }
-}
+    } // CLOSE MAIN
+} // CLOSE CLASS
     
     
     

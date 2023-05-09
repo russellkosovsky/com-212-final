@@ -23,17 +23,17 @@ public class MovieQueue implements Serializable{
         if (front <= tail) { // Checks if the tail is not looped around the array
            for(int i = front; i < tail; i++) {
                 Movie temp = array[i];
-                System.out.println(temp.getTitle() + " Released: " + temp.getReleaseDate());
+                System.out.println("          " + temp.getTitle() + " Released: " + temp.getReleaseDate());
            }
         }
         else { // Sepereate system if it has to loop around array
            for(int i = front; i < 20; i++) {
                 Movie temp = array[i];
-                System.out.println(temp.getTitle() + " Released: " + temp.getReleaseDate());
+                System.out.println("          " + temp.getTitle() + " Released: " + temp.getReleaseDate());
             }        
             for(int i = 0; i < tail; i++) {
                 Movie temp = array[i];
-                System.out.println(temp.getTitle() + " Released: " + temp.getReleaseDate());
+                System.out.println("          " + temp.getTitle() + " Released: " + temp.getReleaseDate());
             }
         }          
     }

@@ -17,8 +17,9 @@ public void dateInsert(Movie node){
       root = node;
       return;
     }
-
+    else {
     insertRec(root, node);
+  }
 
   }
 
@@ -89,13 +90,14 @@ public void dateInsert(Movie node){
   }
 
   private void traverseByDate2(Movie node) {
-    if (node == null) {
-        return;
-        } else {
+    if (node != null) {
       traverseByDate2(node.getLeft());
       System.out.print("Title: " + node.getTitle() + ", ID: " + node.getUniqueID() + ", Score: " + node.getRottenTomatoesScore() + ", Relese Date: " + node.getReleaseDate() + ", Available: " + node.Availablility() + "\n");
       traverseByDate2(node.getRight());
-  }
+    }
+    else {
+        return;
+    }
   }
 
   public Movie searchDate(int date) { 
