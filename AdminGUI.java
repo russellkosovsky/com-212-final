@@ -76,14 +76,22 @@ public class AdminGUI extends JFrame{
         RemMovie.setBounds(0, 45, 80, 25);
         RemMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Movie temp = MoviesByScore.findMin();
-                temp.setAvailablility(false);
-                MoviesByScore.deleteMin();
-                try{
-                    lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
-                    } catch (NullPointerException v) {
-                        lowMovie.setText("No Movies");
+                if (MoviesByScore.isEmptySet() != true){
+                    try{
+                        Movie temp = MoviesByScore.findMin();
+                        temp.setAvailablility(false);
+                        MoviesByScore.deleteMin();
+                        if (MoviesByScore.findMin() != null){
+                        lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                        } else {
+                            lowMovie.setText("No Movies");
+                        }
+                    } catch (Exception v) {
+                            lowMovie.setText("Error");
                     }
+                } else {
+                    lowMovie.setText("No Movies");
+                }
                 textArea.setText("");
                 treeToText();
             }
@@ -202,6 +210,11 @@ public class AdminGUI extends JFrame{
                     MoviesByDate.dateInsert(mulan);
                     MoviesByDate.dateInsert(newgroove);
                     MoviesByDate.dateInsert(spiritedaway);
+                    MoviesByScore.insert(starwars);
+                    MoviesByScore.insert(toystory);
+                    MoviesByScore.insert(mulan);
+                    MoviesByScore.insert(newgroove);
+                    MoviesByScore.insert(spiritedaway);
                     JOptionPane.showMessageDialog(null, "Database Populated");
                     try{
                         lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));

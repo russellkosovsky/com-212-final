@@ -4,7 +4,6 @@ public class MoviePQ implements Serializable{
 
 	private int n;
 	private Movie s [];
-	private MovieBinarySearchTree o;
 
 	public MoviePQ() { //creates the admin priority queue
 		n = 0;
