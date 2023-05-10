@@ -20,7 +20,8 @@ import java.io.*;
 public class WelcomeGUI extends JFrame {
 
     public MoviePQ MoviesByScore;
-    public MovieBinarySearchTree MoviesByDate;
+    public MovieBinarySearchTree MoviesByID;
+    public bstByDate MoviesByDate;
     public CustomerHashTable Customers;
 
     public static void main(String[] args) {
@@ -29,8 +30,9 @@ public class WelcomeGUI extends JFrame {
 
     public WelcomeGUI(){
         MoviesByScore = loadByScore();
-        MoviesByDate = loadByDate();
+        MoviesByID = loadByID();
         Customers = loadCustomers();
+        MoviesByDate = loadByDate();
 
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
@@ -64,9 +66,9 @@ public class WelcomeGUI extends JFrame {
         loginBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(Customers);
-                System.out.println(MoviesByDate);
+                System.out.println(MoviesByID);
                 System.out.println(MoviesByScore);
-                new UserLoginGUI(Customers, MoviesByDate, MoviesByScore);
+                new UserLoginGUI(Customers, MoviesByID, MoviesByScore, MoviesByDate);
                 frame.setVisible(false);
             }
         });
@@ -79,10 +81,10 @@ public class WelcomeGUI extends JFrame {
         adminBTN.setBounds(0, 0, 80, 25);
         adminBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(MoviesByDate);
+                System.out.println(MoviesByID);
                 System.out.println(Customers);
                 System.out.println(MoviesByScore);
-                new AdminLoginGUI(Customers, MoviesByDate, MoviesByScore);
+                new AdminLoginGUI(Customers, MoviesByID, MoviesByScore, MoviesByDate);
                 frame.setVisible(false);
             }
         });
@@ -110,8 +112,23 @@ public class WelcomeGUI extends JFrame {
         i.printStackTrace();
         }
     }
+    //function to save the MoviesByID database
+    public void saveByID(MovieBinarySearchTree MoviesByID){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("MoviesByID.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(MoviesByID);
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized object successfully in MoviesByID.txt");
+        } 
+        catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+
     //function to save the MoviesByDate database
-    public void saveByDate(MovieBinarySearchTree MoviesByDate){
+    public void saveByDate(bstByDate MoviesByDate){
         try {
             FileOutputStream fileOut = new FileOutputStream("MoviesByDate.txt");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -124,6 +141,7 @@ public class WelcomeGUI extends JFrame {
             i.printStackTrace();
         }
     }
+
     //function to save each user's wish list
     public void saveWishList(MovieQueue Wishlist){
         try {
@@ -182,21 +200,45 @@ public class WelcomeGUI extends JFrame {
         }
     }
     //function to load the movies in the database for the user
-    public MovieBinarySearchTree loadByDate(){
-        MovieBinarySearchTree MoviesByDateL = null;
+    public MovieBinarySearchTree loadByID(){
+        MovieBinarySearchTree MoviesByIDL = null;
+        try{
+            FileInputStream fileIn = new FileInputStream("MoviesByID.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            MoviesByIDL = (MovieBinarySearchTree) in.readObject();
+            if (MoviesByIDL == null){
+                MoviesByIDL = new MovieBinarySearchTree();
+            }
+            in.close();
+            fileIn.close();
+            return MoviesByIDL;
+        }
+        catch(IOException i){
+            MoviesByIDL = new MovieBinarySearchTree();
+            return MoviesByIDL;
+        }
+        catch(ClassNotFoundException v){
+            System.out.println("MoviesByID class not found");
+            v.printStackTrace();
+            return null;
+        }
+    }
+
+    public bstByDate loadByDate(){
+        bstByDate MoviesByDateL = null;
         try{
             FileInputStream fileIn = new FileInputStream("MoviesByDate.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            MoviesByDateL = (MovieBinarySearchTree) in.readObject();
+            MoviesByDateL = (bstByDate) in.readObject();
             if (MoviesByDateL == null){
-                MoviesByDateL = new MovieBinarySearchTree();
+                MoviesByDateL = new bstByDate();
             }
             in.close();
             fileIn.close();
             return MoviesByDateL;
         }
         catch(IOException i){
-            MoviesByDateL = new MovieBinarySearchTree();
+            MoviesByDateL = new bstByDate();
             return MoviesByDateL;
         }
         catch(ClassNotFoundException v){

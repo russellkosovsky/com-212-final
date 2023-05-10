@@ -26,12 +26,14 @@ public class AdminLoginGUI implements ActionListener {
     private static JButton loginBTN;
     private MoviePQ MoviesByScore;
     private CustomerHashTable Customers;
-    private MovieBinarySearchTree MoviesByDate;
+    private MovieBinarySearchTree MoviesByID;
+    private bstByDate MoviesByDate;
 
-    public AdminLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
-        this.MoviesByDate = MoviesByDate1;
+    public AdminLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID1, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){
+        this.MoviesByID = MoviesByID1;
         this.Customers = Customers1;
         this.MoviesByScore = MoviesByScore1;
+        this.MoviesByDate = MoviesByDate1;
         
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
@@ -89,7 +91,7 @@ public class AdminLoginGUI implements ActionListener {
 
                 if (user.equals("username") && password.equals("password")) {
                     loginBTN.setText("Login successful!");
-                    new AdminGUI(Customers, MoviesByDate, MoviesByScore);
+                    new AdminGUI(Customers, MoviesByID, MoviesByScore, MoviesByDate);
                     frame.setVisible(false);
                 }
                 else {

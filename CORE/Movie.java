@@ -15,6 +15,8 @@ public class Movie implements Serializable{
     private boolean isAvailable;
     private Movie left;
     private Movie right;
+    private Movie leftDate;
+    private Movie rightDate;
     private Movie next;
 
     // Constructor
@@ -94,6 +96,22 @@ public class Movie implements Serializable{
 
     public void setRight(Movie right) {
         this.right = right;
+    }
+
+    public Movie getLeftDate() {
+        return leftDate;
+    }
+
+    public void setLeftDate(Movie left) {
+        this.leftDate = left;
+    }
+
+    public Movie getRightDate() {
+        return rightDate;
+    }
+
+    public void setRightDate(Movie right) {
+        this.rightDate = right;
     }
     public Movie getNext() {
         return next;

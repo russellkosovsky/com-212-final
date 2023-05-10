@@ -20,12 +20,14 @@ public class UserGUI extends JFrame{
     private JLabel addMovie;
     private JTextField movieID;
     private MovieQueue wishlist;
-    private MovieBinarySearchTree MoviesByDate;
+    private MovieBinarySearchTree MoviesByID;
+    private bstByDate MoviesByDate;
     private Customer customer;
     private CustomerHashTable customers;
 
-    public UserGUI(Customer customer1, CustomerHashTable customers1, MovieBinarySearchTree MoviesByDate1){
+    public UserGUI(Customer customer1, CustomerHashTable customers1, MovieBinarySearchTree MoviesByID1, bstByDate MoviesByDate1){
 
+        this.MoviesByID = MoviesByID1;
         this.MoviesByDate = MoviesByDate1;
         this.customer = customer1;
         this.customers = customers1;
@@ -38,7 +40,7 @@ public class UserGUI extends JFrame{
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // create jlabel that is MoviesByDate title that says "Welcome to Camel Films"
+        // create jlabel that is MoviesByID title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Welcome " + customer.getName());
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
@@ -141,8 +143,8 @@ public class UserGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 submit.setText("Submit");
                 try{
-                if (MoviesByDate.searchBST(Integer.parseInt(movieID.getText())) != null && MoviesByDate.searchBST(Integer.parseInt(movieID.getText())).Availablility() == true) {
-                wishlist.enqueue(MoviesByDate.searchBST(Integer.parseInt(movieID.getText())));
+                if (MoviesByID.searchBST(Integer.parseInt(movieID.getText())) != null && MoviesByID.searchBST(Integer.parseInt(movieID.getText())).Availablility() == true) {
+                wishlist.enqueue(MoviesByID.searchBST(Integer.parseInt(movieID.getText())));
                 System.out.println("Added Movie");
                 System.out.println(wishlist.front());
                 nextMovie.setText("Press Watch to View Next Moive");
@@ -165,8 +167,9 @@ public class UserGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 WelcomeGUI menu = new WelcomeGUI();
-                menu.saveByDate(MoviesByDate);
+                menu.saveByID(MoviesByID);
                 menu.saveCustomers(customers);
+                menu.saveByDate(MoviesByDate);
                 System.exit(0);
             }
         });
@@ -197,7 +200,7 @@ public class UserGUI extends JFrame{
         dateMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 textArea.setText("");
-                compareDates();
+                treeToDate();
             }
         });
         menu.add(dateMenu);
@@ -222,8 +225,9 @@ public class UserGUI extends JFrame{
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
                 WelcomeGUI menu = new WelcomeGUI();
-                menu.saveByDate(MoviesByDate);
+                menu.saveByID(MoviesByID);
                 menu.saveCustomers(customers);
+                menu.saveByDate(MoviesByDate);
                 System.exit(0);
             }
         });
@@ -231,7 +235,7 @@ public class UserGUI extends JFrame{
 
     public void treeToText() {
         try{
-        printTree2(MoviesByDate.getRoot());
+        printTree2(MoviesByID.getRoot());
         System.out.println("Updated Movies Successfully");
         } catch (NullPointerException e) {
             System.out.println("Updated Movies Failed");
@@ -248,52 +252,22 @@ public class UserGUI extends JFrame{
         }
     }
 
-    public void compareDates() {
-        watchList list = traversal();
-        watchList appended = new watchList();
-        System.out.println(list.printList());
-        while (list.length() > 0) {
-            Movie temp = list.get(0);
-            for (int i = 1; i < list.length(); i++) {
-                System.out.println("Comparing: " + temp + " with " + list.get(i));
-                if (temp.getReleaseDate() > list.get(i).getReleaseDate()) {
-                    temp = list.get(i);
-                }
-            }
-            if (notContained(appended, temp)) {
-                textArea.append(temp.getTitle() + " (" + temp.getReleaseDate() + ") " + "(ID): " + temp.getUniqueID() + " (Score): " + temp.getRottenTomatoesScore() + "(Avalibility): " + temp.Availablility() + "\n\n");
-                Movie newMovie = new Movie(temp); 
-                appended.insert(newMovie);
-            } else {
-                System.out.println("Movie Contained");
-            }
-            list.searchRemove(temp.getUniqueID());
+    public void treeToDate() {
+        try{
+        printTree2Date(MoviesByDate.getRoot());
+        System.out.println("Updated Movies Successfully");
+        } catch (NullPointerException e) {
+            System.out.println("Updated Movies Failed");
+            e.printStackTrace();
+            textArea.setText("No Movies :(");
         }
     }
 
-    private watchList traversal() {
-        watchList list = new watchList();
-        traversal2(MoviesByDate.getRoot(), list);
-        return list;
-    }
-
-    private void traversal2(Movie movie, watchList list) {
+    private void printTree2Date(Movie movie) {
         if (movie != null) {
-            traversal2(movie.getLeft(), list);
-            list.insert(movie);
-            traversal2(movie.getRight(), list);
+            printTree2Date(movie.getLeftDate());
+            textArea.append(movie.getTitle() + " (" + movie.getReleaseDate() + ") " + "(ID): " + movie.getUniqueID() + " (Score): " + movie.getRottenTomatoesScore() + "(Avalibility): " + movie.Availablility() + "\n\n");
+            printTree2Date(movie.getRightDate());
         }
     }
-
-    public boolean notContained(watchList list, Movie movie) {
-		Movie temp = list.getHead();
-		while (temp != null) {
-			if (temp.getUniqueID() == movie.getUniqueID()) {
-				return false;
-			} else {
-				temp = temp.getNext();
-			}
-		}
-		return true;
-	}
 }

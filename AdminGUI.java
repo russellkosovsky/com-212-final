@@ -24,16 +24,19 @@ public class AdminGUI extends JFrame{
     private int ID;
     private MoviePQ MoviesByScore;
     private CustomerHashTable Customers;
-    private MovieBinarySearchTree MoviesByDate;
+    private MovieBinarySearchTree MoviesByID;
+    private bstByDate MoviesByDate;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem lookUpUser;
+    private JMenuItem generateData;
 
-    public AdminGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
+    public AdminGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID1, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){
 
-        this.MoviesByDate = MoviesByDate1;
+        this.MoviesByID = MoviesByID1;
         this.Customers = Customers1;
         this.MoviesByScore = MoviesByScore1;
+        this.MoviesByDate = MoviesByDate1;
         loadID();
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
@@ -43,7 +46,7 @@ public class AdminGUI extends JFrame{
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // create jlabel that is MoviesByDate title that says "Welcome to Camel Films"
+        // create jlabel that is MoviesByID title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Administrator Control Panel");
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
@@ -132,7 +135,8 @@ public class AdminGUI extends JFrame{
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Movie newMovie = new Movie(movieTitle.getText(), Integer.parseInt(date.getText()), ID, Integer.parseInt(tomatos.getText()), true);
-                MoviesByDate.insert(newMovie);
+                MoviesByID.insert(newMovie);
+                MoviesByDate.dateInsert(newMovie);
                 MoviesByScore.insert(newMovie);
                 System.out.println("Added Movie");
                 //textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "Score: " + newMovie.getRottenTomatoesScore() + "\n");
@@ -158,9 +162,10 @@ public class AdminGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 WelcomeGUI menu = new WelcomeGUI();
-                menu.saveByDate(MoviesByDate);
+                menu.saveByID(MoviesByID);
                 menu.saveByScore(MoviesByScore);
                 menu.saveCustomers(Customers);
+                menu.saveByDate(MoviesByDate);
                 saveID(ID);
                 System.exit(0);
             }
@@ -178,6 +183,41 @@ public class AdminGUI extends JFrame{
                 new lookUpUser(Customers);
             }
         });
+        generateData = new JMenuItem("Generate Database");
+        generateData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (MoviesByID.getRoot() == null) {
+                    Movie starwars = new Movie("Star Wars", 1977, 4, 100, true);
+                    Movie toystory = new Movie("Toy Story", 1995, 5, 98, true);
+                    Movie mulan = new Movie("Mulan", 1996, 1, 93, true);
+                    Movie newgroove = new Movie("The Emperor's New Groove", 2000, 3, 99, true);
+                    Movie spiritedaway = new Movie("Spirited Away", 2002, 2, 97, true);
+                    MoviesByID.insert(starwars);
+                    MoviesByID.insert(toystory);
+                    MoviesByID.insert(mulan);
+                    MoviesByID.insert(newgroove);
+                    MoviesByID.insert(spiritedaway);
+                    MoviesByDate.dateInsert(starwars);
+                    MoviesByDate.dateInsert(toystory);
+                    MoviesByDate.dateInsert(mulan);
+                    MoviesByDate.dateInsert(newgroove);
+                    MoviesByDate.dateInsert(spiritedaway);
+                    JOptionPane.showMessageDialog(null, "Database Populated");
+                    try{
+                        lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                        System.out.println(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
+                        } catch (NullPointerException v) {
+                            lowMovie.setText("No Movies");
+                        }
+                    textArea.setText("");
+                    treeToText();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "You cannot use this command on a database that has movies already added to it");
+                }
+            }
+        });
+        menu.add(generateData);
         menu.add(lookUpUser);
         menuBar.add(menu);
         setJMenuBar(menuBar);
@@ -191,9 +231,10 @@ public class AdminGUI extends JFrame{
             public void windowClosing(java.awt.event.WindowEvent e) {
                 frame.setVisible(false);
                 WelcomeGUI menu = new WelcomeGUI();
-                menu.saveByDate(MoviesByDate);
+                menu.saveByID(MoviesByID);
                 menu.saveByScore(MoviesByScore);
                 menu.saveCustomers(Customers);
+                menu.saveByDate(MoviesByDate);
                 saveID(ID);
                 System.exit(0);
             }
@@ -202,7 +243,7 @@ public class AdminGUI extends JFrame{
 
     public void treeToText() {
         try{
-        printTree2(MoviesByDate.getRoot());
+        printTree2(MoviesByID.getRoot());
         System.out.println("Updated Movies Successfully");
         } catch (NullPointerException e) {
             System.out.println("Updated Movies Failed");

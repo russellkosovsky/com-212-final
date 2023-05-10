@@ -30,13 +30,16 @@ public class UserLoginGUI extends JFrame implements ActionListener {
     private static JMenuItem newUserMenu;
     private MoviePQ MoviesByScore;
     private CustomerHashTable Customers;
-    private MovieBinarySearchTree MoviesByDate;
+    private MovieBinarySearchTree MoviesByID;
+    private bstByDate MoviesByDate;
+    
 
-    public UserLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByDate1, MoviePQ MoviesByScore1){
+    public UserLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){
         
-        this.MoviesByDate = MoviesByDate1;
+        this.MoviesByID = MoviesByID;
         this.Customers = Customers1;
         this.MoviesByScore = MoviesByScore1;
+        this.MoviesByDate = MoviesByDate1;
 
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
@@ -112,7 +115,7 @@ public class UserLoginGUI extends JFrame implements ActionListener {
                         loginBTN.setText("Email Incorrect");
                     } else {
                         frame.setVisible(false);
-                        new UserGUI(temp, Customers, MoviesByDate);
+                        new UserGUI(temp, Customers, MoviesByID, MoviesByDate);
                     }
                 } else {loginBTN.setText("User not found");}
                 } catch (NullPointerException error) {

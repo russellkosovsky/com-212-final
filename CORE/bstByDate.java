@@ -27,21 +27,21 @@ public void dateInsert(Movie node){
 
     if ( latestRoot.getReleaseDate() > node.getReleaseDate()){
 
-      if ( latestRoot.getLeft() == null ){
-        latestRoot.setLeft(node);
+      if ( latestRoot.getLeftDate() == null ){
+        latestRoot.setLeftDate(node);
         return;
       }
       else{
-        insertRec(latestRoot.getLeft(), node);
+        insertRec(latestRoot.getLeftDate(), node);
       }
     }
     else{
-      if (latestRoot.getRight() == null){
-        latestRoot.setRight(node);
+      if (latestRoot.getRightDate() == null){
+        latestRoot.setRightDate(node);
         return;
       }
       else{
-        insertRec(latestRoot.getRight(), node);
+        insertRec(latestRoot.getRightDate(), node);
       }
     }
   }
@@ -56,18 +56,18 @@ public void dateInsert(Movie node){
     }
 
     if (key < root.getReleaseDate()) {
-      root.setLeft(dateDeleteR(root.getLeft(), key));
+      root.setLeftDate(dateDeleteR(root.getLeftDate(), key));
     } else if (key > root.getReleaseDate()) {
-      root.setRight(dateDeleteR(root.getRight(), key));
+      root.setRightDate(dateDeleteR(root.getRightDate(), key));
     } else {
-      if (root.getLeft() == null) {
-        return root.getRight();
-      } else if (root.getRight() == null) {
-        return root.getLeft();
+      if (root.getLeftDate() == null) {
+        return root.getRightDate();
+      } else if (root.getRightDate() == null) {
+        return root.getLeftDate();
       }
 
-      root.setReleaseDate(dateMinValue(root.getRight()));
-      root.setRight(dateDeleteR(root.getRight(), root.getReleaseDate()));
+      root.setReleaseDate(dateMinValue(root.getRightDate()));
+      root.setRightDate(dateDeleteR(root.getRightDate(), root.getReleaseDate()));
     }
 
     return root;
@@ -76,9 +76,9 @@ public void dateInsert(Movie node){
   private int dateMinValue(Movie root) {
     int dateMinValue = root.getReleaseDate();
 
-    while (root.getLeft() != null) {
-      dateMinValue = root.getLeft().getReleaseDate();
-      root = root.getLeft();
+    while (root.getLeftDate() != null) {
+      dateMinValue = root.getLeftDate().getReleaseDate();
+      root = root.getLeftDate();
     }
 
     return dateMinValue;
@@ -91,9 +91,9 @@ public void dateInsert(Movie node){
 
   private void traverseByDate2(Movie node) {
     if (node != null) {
-      traverseByDate2(node.getLeft());
+      traverseByDate2(node.getLeftDate());
       System.out.print("Title: " + node.getTitle() + ", ID: " + node.getUniqueID() + ", Score: " + node.getRottenTomatoesScore() + ", Relese Date: " + node.getReleaseDate() + ", Available: " + node.Availablility() + "\n");
-      traverseByDate2(node.getRight());
+      traverseByDate2(node.getRightDate());
     }
     else {
         return;
@@ -112,10 +112,10 @@ public void dateInsert(Movie node){
       return root;
     }
     else if (date < root.getReleaseDate()){
-      return searchDate2(root.getLeft(), date);
+      return searchDate2(root.getLeftDate(), date);
     }
     else {
-      return searchDate2(root.getRight(), date);
+      return searchDate2(root.getRightDate(), date);
     }
   }
 
@@ -128,28 +128,28 @@ public void dateInsert(Movie node){
   private void printDateTree2(Movie tree) {
     if (tree != null) {
       System.out.print(tree.getReleaseDate() + " ");
-      if (tree.getLeft() != null)
-        System.out.print("Left: " + tree.getLeft().getReleaseDate() + " ");
+      if (tree.getLeftDate() != null)
+        System.out.print("Left: " + tree.getLeftDate().getReleaseDate() + " ");
       else
         System.out.print("Left: null ");
-      if (tree.getRight() != null)
-        System.out.println("Right: " + tree.getRight().getReleaseDate() + " ");
+      if (tree.getRightDate() != null)
+        System.out.println("Right: " + tree.getRightDate().getReleaseDate() + " ");
       else
       System.out.println("Right: null ");
-      printDateTree2(tree.getLeft());
-      printDateTree2(tree.getRight());
+      printDateTree2(tree.getLeftDate());
+      printDateTree2(tree.getRightDate());
     }
   }
 
   private Movie dateFindParent(Movie p){
     Movie temp = root;
 
-    while (temp.getLeft() != p && temp.getRight() != p){
+    while (temp.getLeftDate() != p && temp.getRightDate() != p){
       if (p.getReleaseDate() < temp.getReleaseDate()){
-        temp = temp.getLeft();
+        temp = temp.getLeftDate();
       }
       else{
-        temp = temp.getRight();
+        temp = temp.getRightDate();
       }
     }
     return temp;
@@ -159,56 +159,56 @@ public void dateInsert(Movie node){
     Movie temp = p;
     Movie temp2 = temp;
 
-    if (p.getLeft() != null && p.getRight() !=null){
-      temp = temp.getRight();
-      while (temp.getLeft() != null){
-        temp = temp.getLeft();
+    if (p.getLeftDate() != null && p.getRightDate() !=null){
+      temp = temp.getRightDate();
+      while (temp.getLeftDate() != null){
+        temp = temp.getLeftDate();
       }
 
-      if (temp.getLeft() == null && temp.getRight() != null){
-        temp2 = temp.getRight();
+      if (temp.getLeftDate() == null && temp.getRightDate() != null){
+        temp2 = temp.getRightDate();
       }
       else{
-        temp2 = temp.getLeft();
+        temp2 = temp.getLeftDate();
       }
       
-      if (temp.getLeft() != null){
-        if (dateFindParent(temp).getLeft() == temp){
+      if (temp.getLeftDate() != null){
+        if (dateFindParent(temp).getLeftDate() == temp){
           p.setTitle(temp.getTitle());
           p.setReleaseDate(temp.getReleaseDate());
           p = temp;
-          dateFindParent(temp).setLeft(temp2);
+          dateFindParent(temp).setLeftDate(temp2);
         }
         else {
           p.setTitle(temp.getTitle());
           p.setReleaseDate(temp.getReleaseDate());
           p = temp;
-          dateFindParent(temp).setRight(temp2);
+          dateFindParent(temp).setRightDate(temp2);
         }
       }
       else{
-        if (dateFindParent(temp).getLeft() == temp){
+        if (dateFindParent(temp).getLeftDate() == temp){
           p.setTitle(temp.getTitle());
           p.setReleaseDate(temp.getReleaseDate());
           p = temp;
-          dateFindParent(temp).setLeft(temp2);
-          temp.setRight(null);
+          dateFindParent(temp).setLeftDate(temp2);
+          temp.setRightDate(null);
         }
         else {
           p.setTitle(temp.getTitle());
           p.setReleaseDate(temp.getReleaseDate());
           p = temp;
-          dateFindParent(temp).setRight(temp2);
+          dateFindParent(temp).setRightDate(temp2);
         }
       }
     }
   }
 
   private void deleteRoot(Movie p){
-    if (root.getLeft() == null){
-      root = root.getRight();
-      root.setLeft(root.getLeft());
-      root.setRight(root.getRight());
+    if (root.getLeftDate() == null){
+      root = root.getRightDate();
+      root.setLeftDate(root.getLeftDate());
+      root.setRightDate(root.getRightDate());
     }
     else {
       successor(root);
@@ -217,27 +217,27 @@ public void dateInsert(Movie node){
 
   private void delete2(Movie root, Movie p){
     Movie temp = root;
-    if (p.getLeft() == null || p.getRight() == null){
-      if (p.getLeft() == null){
-        temp = p.getRight();
+    if (p.getLeftDate() == null || p.getRightDate() == null){
+      if (p.getLeftDate() == null){
+        temp = p.getRightDate();
       }
       else {
-        temp = p.getLeft();
+        temp = p.getLeftDate();
       }
 
-      if (dateFindParent(p).getLeft() == p){
-        dateFindParent(p).setLeft(temp);
+      if (dateFindParent(p).getLeftDate() == p){
+        dateFindParent(p).setLeftDate(temp);
       }
       else {
-        dateFindParent(p).setRight(temp);
+        dateFindParent(p).setRightDate(temp);
       }
     }
-    else if (p.getLeft() == null && p.getRight() == null){
-      if (dateFindParent(p).getLeft().getReleaseDate() == p.getReleaseDate()){
-        p.setLeft(null);
+    else if (p.getLeftDate() == null && p.getRightDate() == null){
+      if (dateFindParent(p).getLeftDate().getReleaseDate() == p.getReleaseDate()){
+        p.setLeftDate(null);
       }
-      else if (dateFindParent(p).getRight().getReleaseDate() == p.getReleaseDate()){
-        p.setRight(null);
+      else if (dateFindParent(p).getRightDate().getReleaseDate() == p.getReleaseDate()){
+        p.setRightDate(null);
       }
     }
     else {
