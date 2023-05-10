@@ -81,7 +81,7 @@ public class AdminGUI extends JFrame{
                         Movie temp = MoviesByScore.findMin();
                         temp.setAvailablility(false);
                         MoviesByScore.deleteMin();
-                        if (MoviesByScore.findMin() != null){
+                        if (MoviesByScore.isEmptySet() != true){
                         lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
                         } else {
                             lowMovie.setText("No Movies");
