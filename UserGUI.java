@@ -214,6 +214,14 @@ public class UserGUI extends JFrame{
         });
         menu.add(IDMenu);
 
+        JMenuItem SearchMenu = new JMenuItem("Search");
+        SearchMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                new search(MoviesByID);
+            }
+        });
+        menu.add(SearchMenu);
+
         menuBar.add(menu);
         setJMenuBar(menuBar);
         frame.setJMenuBar(menuBar);
