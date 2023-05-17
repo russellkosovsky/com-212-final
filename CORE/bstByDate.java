@@ -2,16 +2,20 @@ package CORE;
 
 import java.io.Serializable;
 
+// Computer Science Data Structures Final Project
+// By Russell, Brooke, Jay, and Miles
+// BST used to sort movies by date
+
 public class bstByDate implements Serializable{
 
   private Movie root;
 
-  public bstByDate() {
+  public bstByDate() { // Constructor
     root = null;
   }
 
 
-public void dateInsert(Movie node){
+public void dateInsert(Movie node){ // Inserts movie by date into BST
 
     if ( root == null ) {
       root = node;
@@ -23,7 +27,7 @@ public void dateInsert(Movie node){
 
   }
 
-  private void insertRec(Movie latestRoot, Movie node){
+  private void insertRec(Movie latestRoot, Movie node){ // Recursive insert by date
 
     if ( latestRoot.getReleaseDate() > node.getReleaseDate()){
 
@@ -46,11 +50,11 @@ public void dateInsert(Movie node){
     }
   }
 
-  public void dateDelete(Movie node) {
+  public void dateDelete(Movie node) { // Delete BST function
     root = dateDeleteR(root, node.getReleaseDate());
   }
 
-  private Movie dateDeleteR(Movie root, int key) {
+  private Movie dateDeleteR(Movie root, int key) { // Recursive BST delete functions
     if (root == null) {
       return root;
     }
@@ -73,7 +77,7 @@ public void dateInsert(Movie node){
     return root;
   }
 
-  private int dateMinValue(Movie root) {
+  private int dateMinValue(Movie root) { // finds min date value for delete function
     int dateMinValue = root.getReleaseDate();
 
     while (root.getLeftDate() != null) {
@@ -84,7 +88,7 @@ public void dateInsert(Movie node){
     return dateMinValue;
   }
 
-  public void traverseByDate() {
+  public void traverseByDate() { // traverse tree and print
     traverseByDate2(root);
     System.out.println();
   }
@@ -100,11 +104,11 @@ public void dateInsert(Movie node){
     }
   }
 
-  public Movie searchDate(int date) { 
+  public Movie searchDate(int date) { // search function
     return searchDate2(root,date);
   }
 
-  private Movie searchDate2(Movie root, int date) {
+  private Movie searchDate2(Movie root, int date) { // recursive part of search function
     if (root == null){
       return null;
     }
@@ -120,7 +124,7 @@ public void dateInsert(Movie node){
   }
 
 
-  public void printDateTree(){
+  public void printDateTree(){ // prints tree
     printDateTree2(root);
     System.out.println();
   }
@@ -140,112 +144,8 @@ public void dateInsert(Movie node){
       printDateTree2(tree.getRightDate());
     }
   }
-
-  private Movie dateFindParent(Movie p){
-    Movie temp = root;
-
-    while (temp.getLeftDate() != p && temp.getRightDate() != p){
-      if (p.getReleaseDate() < temp.getReleaseDate()){
-        temp = temp.getLeftDate();
-      }
-      else{
-        temp = temp.getRightDate();
-      }
-    }
-    return temp;
-  }
-
-  private void successor( Movie p){
-    Movie temp = p;
-    Movie temp2 = temp;
-
-    if (p.getLeftDate() != null && p.getRightDate() !=null){
-      temp = temp.getRightDate();
-      while (temp.getLeftDate() != null){
-        temp = temp.getLeftDate();
-      }
-
-      if (temp.getLeftDate() == null && temp.getRightDate() != null){
-        temp2 = temp.getRightDate();
-      }
-      else{
-        temp2 = temp.getLeftDate();
-      }
-      
-      if (temp.getLeftDate() != null){
-        if (dateFindParent(temp).getLeftDate() == temp){
-          p.setTitle(temp.getTitle());
-          p.setReleaseDate(temp.getReleaseDate());
-          p = temp;
-          dateFindParent(temp).setLeftDate(temp2);
-        }
-        else {
-          p.setTitle(temp.getTitle());
-          p.setReleaseDate(temp.getReleaseDate());
-          p = temp;
-          dateFindParent(temp).setRightDate(temp2);
-        }
-      }
-      else{
-        if (dateFindParent(temp).getLeftDate() == temp){
-          p.setTitle(temp.getTitle());
-          p.setReleaseDate(temp.getReleaseDate());
-          p = temp;
-          dateFindParent(temp).setLeftDate(temp2);
-          temp.setRightDate(null);
-        }
-        else {
-          p.setTitle(temp.getTitle());
-          p.setReleaseDate(temp.getReleaseDate());
-          p = temp;
-          dateFindParent(temp).setRightDate(temp2);
-        }
-      }
-    }
-  }
-
-  private void deleteRoot(Movie p){
-    if (root.getLeftDate() == null){
-      root = root.getRightDate();
-      root.setLeftDate(root.getLeftDate());
-      root.setRightDate(root.getRightDate());
-    }
-    else {
-      successor(root);
-    }
-  }
-
-  private void delete2(Movie root, Movie p){
-    Movie temp = root;
-    if (p.getLeftDate() == null || p.getRightDate() == null){
-      if (p.getLeftDate() == null){
-        temp = p.getRightDate();
-      }
-      else {
-        temp = p.getLeftDate();
-      }
-
-      if (dateFindParent(p).getLeftDate() == p){
-        dateFindParent(p).setLeftDate(temp);
-      }
-      else {
-        dateFindParent(p).setRightDate(temp);
-      }
-    }
-    else if (p.getLeftDate() == null && p.getRightDate() == null){
-      if (dateFindParent(p).getLeftDate().getReleaseDate() == p.getReleaseDate()){
-        p.setLeftDate(null);
-      }
-      else if (dateFindParent(p).getRightDate().getReleaseDate() == p.getReleaseDate()){
-        p.setRightDate(null);
-      }
-    }
-    else {
-      successor(p);
-    }
-  }
   
-  public boolean isEmptyTree(){
+  public boolean isEmptyTree(){ // returns tree empty T/F
     if (root == null){
       return true;
     }
@@ -254,7 +154,7 @@ public void dateInsert(Movie node){
     }
   }
 
-  public Movie getRoot() {
+  public Movie getRoot() { // returns tree root
     return root;
   }
 }

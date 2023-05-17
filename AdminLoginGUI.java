@@ -1,5 +1,6 @@
-// LOGIN GUI
-// technichally extra credit but we will get it looking nice
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+// GUI for admin login, very simple as there is only one admin account
 
 
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ import CORE.*;
 
 
 public class AdminLoginGUI implements ActionListener {
-
+    // Declarations
     private static JLabel userLabel;
     private static JTextField userText;
     private static JLabel passwordLabel;
@@ -29,12 +30,12 @@ public class AdminLoginGUI implements ActionListener {
     private MovieBinarySearchTree MoviesByID;
     private bstByDate MoviesByDate;
 
-    public AdminLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID1, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){
+    public AdminLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID1, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){ // Constructor
         this.MoviesByID = MoviesByID1;
         this.Customers = Customers1;
         this.MoviesByScore = MoviesByScore1;
         this.MoviesByDate = MoviesByDate1;
-        
+        //GUI is built
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
@@ -80,7 +81,7 @@ public class AdminLoginGUI implements ActionListener {
         c.gridy = 2;
         c.gridwidth = 1;
         panel.add(passwordText, c);
-
+        //Login button checks user inputs to username/password and then lets admin login
         loginBTN = new JButton("Login");
         loginBTN.setBounds(10, 100, 80, 25);
         loginBTN.addActionListener(new ActionListener() {

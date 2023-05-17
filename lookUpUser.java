@@ -1,3 +1,7 @@
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+//GUI to input user CreditCard to look up file, when submitted the GUI calls a user file and passes the customer data to it
+
 import CORE.*;
 import javax.swing.*;
 
@@ -45,7 +49,6 @@ public class lookUpUser extends javax.swing.JFrame{
 		submit.addActionListener(new ActionListener(){ // If submit button pressed, create new node from inputs and append to tree, then close window with message that node was added
 			@Override
 			public void actionPerformed(ActionEvent e){
-			//int intCRN = parseInt(bookCRN.getText(),5);
             try {
                 new userFile(Customers, Integer.parseInt(CreditCard.getText()));
                 dispose();

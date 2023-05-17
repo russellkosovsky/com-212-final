@@ -1,5 +1,6 @@
-// LOGIN GUI
-// technichally extra credit but we will get it looking nice
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+// User login GUI, if user not found prompts user to create new profile
 
 
 import javax.swing.JFrame;
@@ -34,7 +35,7 @@ public class UserLoginGUI extends JFrame implements ActionListener {
     private bstByDate MoviesByDate;
     
 
-    public UserLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){
+    public UserLoginGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){ // Constructor
         
         this.MoviesByID = MoviesByID;
         this.Customers = Customers1;
@@ -62,7 +63,6 @@ public class UserLoginGUI extends JFrame implements ActionListener {
         setJMenuBar(menuBar);
         frame.setJMenuBar(menuBar);
 
-        // create jlabel that is a title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Welcome User, Please Login or Add New User From Menu");
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
@@ -100,7 +100,7 @@ public class UserLoginGUI extends JFrame implements ActionListener {
         c.gridwidth = 1;
         panel.add(passwordText, c);
 
-        loginBTN = new JButton("Login");
+        loginBTN = new JButton("Login"); // Tries to find user based on credit card #, then tries to match email, if either one doesnt work it tells you why
         loginBTN.setBounds(10, 100, 80, 25);
         loginBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

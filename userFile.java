@@ -1,5 +1,6 @@
-// LOGIN GUI
-// technichally extra credit but we will get it looking nice
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+// GUI element that is called by lookupUser, displays customer info and lets admins edit name and email (CC cannot be edited)
 
 import javax.swing.*;
 import CORE.*;
@@ -35,7 +36,6 @@ public class userFile extends JFrame{
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // create jlabel that is MoviesByDate title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Customer File");
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
@@ -90,7 +90,7 @@ public class userFile extends JFrame{
         c.gridy=3;
         c.gridwidth=2;
         panel.add(creditCard, c);
-
+        // Exits and saves userfile
         back = new JButton("Exit File");
         back.setBounds(0, 45, 80, 25);
         back.addActionListener(new ActionListener() {
@@ -109,7 +109,7 @@ public class userFile extends JFrame{
         c.gridy = 4;
         c.gridwidth = 1;
         panel.add(back, c);
-
+        // Text areas start as uneditable so they have to be unlocked by this button
         edit = new JButton("Edit File");
         edit.setBounds(0, 45, 80, 25);
         edit.addActionListener(new ActionListener() {
@@ -125,7 +125,7 @@ public class userFile extends JFrame{
         c.gridy = 4;
         c.gridwidth = 1;
         panel.add(edit, c);
-
+        //Prints the wishlist of the user if admins wish to view it
         printWishlist = new JButton("Print Wishlist");
         printWishlist.setBounds(0, 45, 80, 25);
         printWishlist.addActionListener(new ActionListener() {

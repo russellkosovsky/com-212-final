@@ -1,6 +1,7 @@
 package CORE;
 // Queue class implementation using a linked list
-// QueueLL.java
+// Computer Science Data Structures Final Project
+// By Russell, Brooke, Jay, and Miles
 // for storing userses top 20 movies (a watchlist??)
 
 import java.io.Serializable;

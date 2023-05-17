@@ -1,5 +1,9 @@
 package CORE;
 import java.io.Serializable;
+
+// Computer Science Data Structures Final Project
+// By Russell, Brooke, Jay, and Miles
+// Movie Priority Queue used to impliement minRating moive functions in the admin panel
 public class MoviePQ implements Serializable{
 
 	private int n;

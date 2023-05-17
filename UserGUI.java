@@ -1,5 +1,8 @@
-// LOGIN GUI
-// technichally extra credit but we will get it looking nice
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+// UserGUI, user can view movies and has options to sort by date or by ID, user can search by ID specifically, 
+// user can view their wishlist, watch next movie, delete movie from wishlist, and view watch history
+// Wishlist will detect if movies have been set unavalible and will inform the user if they try to access an unavalible movie
 
 import javax.swing.*;
 import CORE.*;
@@ -25,7 +28,7 @@ public class UserGUI extends JFrame{
     private Customer customer;
     private CustomerHashTable customers;
 
-    public UserGUI(Customer customer1, CustomerHashTable customers1, MovieBinarySearchTree MoviesByID1, bstByDate MoviesByDate1){
+    public UserGUI(Customer customer1, CustomerHashTable customers1, MovieBinarySearchTree MoviesByID1, bstByDate MoviesByDate1){ // Constructor
 
         this.MoviesByID = MoviesByID1;
         this.MoviesByDate = MoviesByDate1;
@@ -40,7 +43,6 @@ public class UserGUI extends JFrame{
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // create jlabel that is MoviesByID title that says "Welcome to Camel Films"
         JLabel title = new JLabel("Welcome " + customer.getName());
         title.setBounds(10, 0, 300, 25);
         c.fill = GridBagConstraints.NONE;
@@ -66,7 +68,7 @@ public class UserGUI extends JFrame{
         c.gridwidth=2;
         panel.add(nextMovie, c);
 
-        JButton delMovie = new JButton("Delete Movie");
+        JButton delMovie = new JButton("Delete Movie"); // Deletes Movie from wishlist
         delMovie.setBounds(0, 45, 80, 25);
         delMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +87,7 @@ public class UserGUI extends JFrame{
         c.gridwidth = 2;
         panel.add(delMovie, c);
 
-        JButton watchMovie = new JButton("Watch Movie");
+        JButton watchMovie = new JButton("Watch Movie"); // Accesses next movie
         watchMovie.setBounds(0, 45, 80, 25);
         watchMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -110,7 +112,7 @@ public class UserGUI extends JFrame{
         panel.add(watchMovie, c);
 
 
-        textArea = new JTextArea("", 10, 20);
+        textArea = new JTextArea("", 10, 20); // Text area to display movies by ID or date
         textArea.setLineWrap(true);
         scrollText = new JScrollPane(textArea);
         scrollText.setPreferredSize(new Dimension(300, 200));
@@ -137,7 +139,7 @@ public class UserGUI extends JFrame{
         c.gridwidth = 2;
         panel.add(movieID, c);
 
-        submit = new JButton("Submit");
+        submit = new JButton("Submit"); // Submits new movie by ID to wishlist
         submit.setBounds(0, 0, 80, 25);
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -161,7 +163,7 @@ public class UserGUI extends JFrame{
         c.gridwidth = 1;
         panel.add(submit, c);
 
-        back = new JButton("Logout");
+        back = new JButton("Logout"); // Logs user out and saves
         back.setBounds(10, 100, 80, 25);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -178,7 +180,7 @@ public class UserGUI extends JFrame{
         c.gridwidth = 4;
         panel.add(back, c);
 
-        JMenuBar menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar(); // Views moive watch history
         JMenu menu = new JMenu("Menu");
         JMenuItem historyMenu = new JMenuItem("View History");
         historyMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +190,7 @@ public class UserGUI extends JFrame{
         });
         menu.add(historyMenu);
 
-        JMenuItem wishlistMenu = new JMenuItem("View Wishlist");
+        JMenuItem wishlistMenu = new JMenuItem("View Wishlist"); // View wishlist buttons
         wishlistMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 JOptionPane.showMessageDialog(null, customer.getWishlist().printQueueString());
@@ -196,7 +198,7 @@ public class UserGUI extends JFrame{
         });
         menu.add(wishlistMenu);
 
-        JMenuItem dateMenu = new JMenuItem("Sort By Date");
+        JMenuItem dateMenu = new JMenuItem("Sort By Date"); // Sorts movies by date in text field
         dateMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 textArea.setText("");
@@ -205,7 +207,7 @@ public class UserGUI extends JFrame{
         });
         menu.add(dateMenu);
 
-        JMenuItem IDMenu = new JMenuItem("Sort By ID");
+        JMenuItem IDMenu = new JMenuItem("Sort By ID"); // Sorts movies by ID in text field
         IDMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 textArea.setText("");
@@ -214,7 +216,7 @@ public class UserGUI extends JFrame{
         });
         menu.add(IDMenu);
 
-        JMenuItem SearchMenu = new JMenuItem("Search");
+        JMenuItem SearchMenu = new JMenuItem("Search"); // Searches for moive by ID, calls another file to do so
         SearchMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 new search(MoviesByID);
@@ -241,7 +243,7 @@ public class UserGUI extends JFrame{
         });
     }
 
-    public void treeToText() {
+    public void treeToText() { // Prints tree to textArea by ID
         try{
         printTree2(MoviesByID.getRoot());
         System.out.println("Updated Movies Successfully");
@@ -260,7 +262,7 @@ public class UserGUI extends JFrame{
         }
     }
 
-    public void treeToDate() {
+    public void treeToDate() { // Prints tree to textarea by Date
         try{
         printTree2Date(MoviesByDate.getRoot());
         System.out.println("Updated Movies Successfully");

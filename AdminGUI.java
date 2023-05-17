@@ -1,5 +1,6 @@
-// LOGIN GUI
-// technichally extra credit but we will get it looking nice
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+// Admin GUI panel with list of movies by ID, ability to add movie/set movie unavalible, and to access and edit user profiles
 
 import javax.swing.*;
 import CORE.*;
@@ -14,6 +15,7 @@ import java.io.*;
 import java.lang.Integer;
 
 public class AdminGUI extends JFrame{
+    // Bunch of declarations
     private JTextArea textArea;
     private JScrollPane scrollText;
     private JButton back;
@@ -29,15 +31,13 @@ public class AdminGUI extends JFrame{
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem lookUpUser;
-    private JMenuItem generateData;
-
-    public AdminGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID1, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){
+    public AdminGUI(CustomerHashTable Customers1, MovieBinarySearchTree MoviesByID1, MoviePQ MoviesByScore1, bstByDate MoviesByDate1){ // Constructor takes all serialized info from adminLogin
 
         this.MoviesByID = MoviesByID1;
         this.Customers = Customers1;
         this.MoviesByScore = MoviesByScore1;
         this.MoviesByDate = MoviesByDate1;
-        loadID();
+        loadID(); //Loads current ID from File
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
@@ -57,6 +57,7 @@ public class AdminGUI extends JFrame{
         c.gridwidth = 4;
         panel.add(title, c);
 
+        // GUI building code
         JTextArea lowMovie = new JTextArea("", 2, 5);
         lowMovie.setBounds(0, 0, 160, 25);
         lowMovie.setLineWrap(false);
@@ -71,12 +72,12 @@ public class AdminGUI extends JFrame{
         c.gridy=1;
         c.gridwidth=2;
         panel.add(lowMovie, c);
-
+        // Button to remove Moive
         JButton RemMovie = new JButton("Remove Movie");
         RemMovie.setBounds(0, 45, 80, 25);
         RemMovie.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (MoviesByScore.isEmptySet() != true){
+                if (MoviesByScore.isEmptySet() != true){ // Bunch of checks here
                     try{
                         Movie temp = MoviesByScore.findMin();
                         temp.setAvailablility(false);
@@ -116,7 +117,7 @@ public class AdminGUI extends JFrame{
         treeToText();
         scrollText.setViewportView(textArea);
         panel.add(scrollText, c);
-
+        // Moive textfields for new movie inputs
         movieTitle = new JTextField("Movie Title",20);
         movieTitle.setBounds(0, 0, 65, 25);
         c.gridx = 0;
@@ -137,7 +138,7 @@ public class AdminGUI extends JFrame{
         c.gridy = 2;
         c.gridwidth = 1;
         panel.add(tomatos, c);
-
+        // Submit button to create new movie from inputs
         submit = new JButton("Submit");
         submit.setBounds(0, 0, 80, 25);
         submit.addActionListener(new ActionListener() {
@@ -147,7 +148,6 @@ public class AdminGUI extends JFrame{
                 MoviesByDate.dateInsert(newMovie);
                 MoviesByScore.insert(newMovie);
                 System.out.println("Added Movie");
-                //textArea.append(newMovie.getTitle() + " (" + newMovie.getReleaseDate() + ") " + "ID: " + newMovie.getUniqueID() + "Score: " + newMovie.getRottenTomatoesScore() + "\n");
                 ID++;
                 try{
                     lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
@@ -163,7 +163,7 @@ public class AdminGUI extends JFrame{
         c.gridy = 2;
         c.gridwidth = 1;
         panel.add(submit, c);
-
+        // Logout button that saves all data
         back = new JButton("Logout");
         back.setBounds(10, 100, 80, 25);
         back.addActionListener(new ActionListener() {
@@ -191,46 +191,7 @@ public class AdminGUI extends JFrame{
                 new lookUpUser(Customers);
             }
         });
-        generateData = new JMenuItem("Generate Database");
-        generateData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (MoviesByID.getRoot() == null) {
-                    Movie starwars = new Movie("Star Wars", 1977, 4, 100, true);
-                    Movie toystory = new Movie("Toy Story", 1995, 5, 98, true);
-                    Movie mulan = new Movie("Mulan", 1996, 1, 93, true);
-                    Movie newgroove = new Movie("The Emperor's New Groove", 2000, 3, 99, true);
-                    Movie spiritedaway = new Movie("Spirited Away", 2002, 2, 97, true);
-                    MoviesByID.insert(starwars);
-                    MoviesByID.insert(toystory);
-                    MoviesByID.insert(mulan);
-                    MoviesByID.insert(newgroove);
-                    MoviesByID.insert(spiritedaway);
-                    MoviesByDate.dateInsert(starwars);
-                    MoviesByDate.dateInsert(toystory);
-                    MoviesByDate.dateInsert(mulan);
-                    MoviesByDate.dateInsert(newgroove);
-                    MoviesByDate.dateInsert(spiritedaway);
-                    MoviesByScore.insert(starwars);
-                    MoviesByScore.insert(toystory);
-                    MoviesByScore.insert(mulan);
-                    MoviesByScore.insert(newgroove);
-                    MoviesByScore.insert(spiritedaway);
-                    JOptionPane.showMessageDialog(null, "Database Populated");
-                    try{
-                        lowMovie.setText(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
-                        System.out.println(MoviesByScore.findMin().getTitle() + " : " + String.valueOf(MoviesByScore.findMin().getRottenTomatoesScore()));
-                        } catch (NullPointerException v) {
-                            lowMovie.setText("No Movies");
-                        }
-                    textArea.setText("");
-                    treeToText();
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "You cannot use this command on a database that has movies already added to it");
-                }
-            }
-        });
-        menu.add(generateData);
+        
         menu.add(lookUpUser);
         menuBar.add(menu);
         setJMenuBar(menuBar);
@@ -238,7 +199,7 @@ public class AdminGUI extends JFrame{
 
         frame.pack();
         frame.setVisible(true);
-
+        // Windowlistener unfortunately doesnt work, admin must press logout for changes to be saved
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -253,7 +214,7 @@ public class AdminGUI extends JFrame{
             }
         });
     }
-
+    // Seperate recursive function to print tree contents to a java swing text area, here instead of in BST for ease of simply using .append instead of StringBuilder in the BST
     public void treeToText() {
         try{
         printTree2(MoviesByID.getRoot());
@@ -272,7 +233,7 @@ public class AdminGUI extends JFrame{
             printTree2(movie.getRight());
         }
     }
-
+    // fucntion to save ID to text file
     public void saveID(int ID){
         try {
             PrintWriter out = new PrintWriter(new FileOutputStream("CurrentID.txt", false));
@@ -286,7 +247,7 @@ public class AdminGUI extends JFrame{
         }
     }
     
-    //function to load the AdminPG so that we have the necessary info
+    //function to load ID
     public void loadID(){
         try{
             BufferedReader in = new BufferedReader(new FileReader("CurrentID.txt"));

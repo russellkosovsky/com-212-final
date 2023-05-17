@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.awt.Image;
 import java.io.*;
 
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+// Welcome GUI to seperate users and admins, also saves and loads data and passes it to other GUI windows
 
 public class WelcomeGUI extends JFrame {
 
@@ -24,11 +27,11 @@ public class WelcomeGUI extends JFrame {
     public bstByDate MoviesByDate;
     public CustomerHashTable Customers;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // Main starts GUIs
         new WelcomeGUI();
     }
 
-    public WelcomeGUI(){
+    public WelcomeGUI(){ // Constructor
         MoviesByScore = loadByScore();
         MoviesByID = loadByID();
         Customers = loadCustomers();
@@ -44,7 +47,7 @@ public class WelcomeGUI extends JFrame {
 
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("resources/CLOGO3.png"));
+            img = ImageIO.read(new File("resources/CLOGO3.png")); // Logo!
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -223,7 +226,7 @@ public class WelcomeGUI extends JFrame {
             return null;
         }
     }
-
+    // Loads BST by date
     public bstByDate loadByDate(){
         bstByDate MoviesByDateL = null;
         try{

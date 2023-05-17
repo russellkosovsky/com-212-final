@@ -1,4 +1,6 @@
-
+// Computer Science Data Structures Final Project
+// By Russell, Brooke, Jay, and Miles
+// Terminal for testing, unconnected to GUI
 
 import java.io.*; 
 import java.util.Scanner;

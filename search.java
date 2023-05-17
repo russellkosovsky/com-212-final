@@ -1,3 +1,7 @@
+// Computer Science Data Structures Final Project
+// By Jay, Russell, Brooke, and Miles
+//Small GUI element to let the users search movies by ID specifically
+
 import CORE.*;
 import javax.swing.*;
 

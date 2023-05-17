@@ -2,19 +2,23 @@ package CORE;
 
 import java.io.Serializable;
 
+// Computer Science Data Structures Final Project
+// By Russell, Brooke, Jay, and Miles
+//BST Tree used for sorting movies by ID in average O(ln(n)) time with worst case of O(n)
+
 public class MovieBinarySearchTree implements Serializable{
 
   private Movie root;
 
-  public MovieBinarySearchTree() {
+  public MovieBinarySearchTree() { // Constructor
     root = null;
   }
 
-  public void insert(Movie node) {
+  public void insert(Movie node) { // Insert function for BST
     root = insert2(root, node);
   }
 
-  private Movie insert2(Movie root, Movie node) {
+  private Movie insert2(Movie root, Movie node) { // Recursive insert to insert movie at proper location
     if (root == null) {
       root = node;
       return root;
@@ -29,11 +33,11 @@ public class MovieBinarySearchTree implements Serializable{
     return root;
   }
 
-  public void delete(Movie node) {
+  public void delete(Movie node) { // Delete function of BST
     root = deleter(root, node.getUniqueID());
   }
 
-  private Movie deleter(Movie root, int key) {
+  private Movie deleter(Movie root, int key) { // Recursive delete to delete movie and right subtree to replace if needed
     if (root == null) {
       return root;
     }
@@ -56,7 +60,7 @@ public class MovieBinarySearchTree implements Serializable{
     return root;
   }
 
-  private int minValue(Movie root) {
+  private int minValue(Movie root) { // Finds the minimum value of a given subtree, used for deletions
     int minValue = root.getUniqueID();
 
     while (root.getLeft() != null) {
@@ -67,7 +71,7 @@ public class MovieBinarySearchTree implements Serializable{
     return minValue;
   }
 
-  public void traverse() {
+  public void traverse() { // Traverses and prints BST
     traverse2(root);
     System.out.println();
   }
@@ -80,11 +84,11 @@ public class MovieBinarySearchTree implements Serializable{
     }
   }
 
-  public Movie searchBST(int id) { 
+  public Movie searchBST(int id) { // Search function for BST
     return search2(root,id);
   }
 
-  private Movie search2(Movie root, int id) {
+  private Movie search2(Movie root, int id) { // Recursive search function for BST
     if (root == null){
       return null;
     }
@@ -99,7 +103,7 @@ public class MovieBinarySearchTree implements Serializable{
     }
   }
 
-  public void printTree(){
+  public void printTree(){ // Prints BST 
     printMovies2(root);
     System.out.println();
   }
@@ -119,112 +123,8 @@ public class MovieBinarySearchTree implements Serializable{
       printMovies2(tree.getRight());
     }
   }
-
-  private Movie findParent(Movie p){
-    Movie temp = root;
-
-    while (temp.getLeft() != p && temp.getRight() != p){
-      if (p.getUniqueID() < temp.getUniqueID()){
-        temp = temp.getLeft();
-      }
-      else{
-        temp = temp.getRight();
-      }
-    }
-    return temp;
-  }
-
-  private void successor( Movie p){
-    Movie temp = p;
-    Movie temp2 = temp;
-
-    if (p.getLeft() != null && p.getRight() !=null){
-      temp = temp.getRight();
-      while (temp.getLeft() != null){
-        temp = temp.getLeft();
-      }
-
-      if (temp.getLeft() == null && temp.getRight() != null){
-        temp2 = temp.getRight();
-      }
-      else{
-        temp2 = temp.getLeft();
-      }
-      
-      if (temp.getLeft() != null){
-        if (findParent(temp).getLeft() == temp){
-          p.setTitle(temp.getTitle());
-          p.setUniqueID(temp.getUniqueID());
-          p = temp;
-          findParent(temp).setLeft(temp2);
-        }
-        else {
-          p.setTitle(temp.getTitle());
-          p.setUniqueID(temp.getUniqueID());
-          p = temp;
-          findParent(temp).setRight(temp2);
-        }
-      }
-      else{
-        if (findParent(temp).getLeft() == temp){
-          p.setTitle(temp.getTitle());
-          p.setUniqueID(temp.getUniqueID());
-          p = temp;
-          findParent(temp).setLeft(temp2);
-          temp.setRight(null);
-        }
-        else {
-          p.setTitle(temp.getTitle());
-          p.setUniqueID(temp.getUniqueID());
-          p = temp;
-          findParent(temp).setRight(temp2);
-        }
-      }
-    }
-  }
-
-  private void deleteRoot(Movie p){
-    if (root.getLeft() == null){
-      root = root.getRight();
-      root.setLeft(root.getLeft());
-      root.setRight(root.getRight());
-    }
-    else {
-      successor(root);
-    }
-  }
-
-  private void delete2(Movie root, Movie p){
-    Movie temp = root;
-    if (p.getLeft() == null || p.getRight() == null){
-      if (p.getLeft() == null){
-        temp = p.getRight();
-      }
-      else {
-        temp = p.getLeft();
-      }
-
-      if (findParent(p).getLeft() == p){
-        findParent(p).setLeft(temp);
-      }
-      else {
-        findParent(p).setRight(temp);
-      }
-    }
-    else if (p.getLeft() == null && p.getRight() == null){
-      if (findParent(p).getLeft().getUniqueID() == p.getUniqueID()){
-        p.setLeft(null);
-      }
-      else if (findParent(p).getRight().getUniqueID() == p.getUniqueID()){
-        p.setRight(null);
-      }
-    }
-    else {
-      successor(p);
-    }
-  }
   
-  public boolean isEmptyTree(){
+  public boolean isEmptyTree(){ // Returns if tree is empty
     if (root == null){
       return true;
     }
@@ -233,7 +133,7 @@ public class MovieBinarySearchTree implements Serializable{
     }
   }
 
-  public Movie getRoot() {
+  public Movie getRoot() { // Returns root of trees
     return root;
   }
 }
