@@ -18,5 +18,8 @@ and remove movies from avaliblity based on the lowest scored movies.
 To run this program, please fork and clone the repo, run javac \*.java and then java WelcomeGUI, if you create a user, you need to login before closing and 
 always remember to press logout in both admin and user GUI, otherwise things will not save.
 
+Please note than the terminal files, while vauely functional, are not intended to be used as the main product, they are mainly a testbed for new functions and ideas.
+They do not interact with the same serialized files so information will not be carried from the CLI to GUI interfaces.
+
 Thanks for checking out our program!
 - Jay, Russell, Brooke, Miles
